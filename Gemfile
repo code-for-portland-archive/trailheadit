@@ -14,12 +14,14 @@ gem 'figaro', :github=>"laserlemon/figaro"
 gem 'haml-rails'
 gem 'simple_form'
 gem 'pg'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'rails_12factor'
 end
 
 group :development do    
+  gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_20]
   gem 'guard-bundler'
