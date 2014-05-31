@@ -13,7 +13,8 @@ gem 'bootstrap-sass'
 gem 'figaro', :github=>"laserlemon/figaro"
 gem 'haml-rails'
 gem 'simple_form'
-group :development do
+group :development do  
+  gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_20]
   gem 'guard-bundler'
