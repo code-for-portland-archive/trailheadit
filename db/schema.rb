@@ -11,6 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140531220257) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "phones", force: true do |t|
+    t.string   "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "phones", ["number"], name: "index_phones_on_number", using: :btree
+
+  create_table "trailheads", force: true do |t|
+    t.integer  "phone_id"
+    t.string   "name"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "photo"
+    t.boolean  "parking"
+    t.boolean  "drinking_water"
+    t.boolean  "restrooms"
+    t.boolean  "kiosk"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email"
+  end
+
+  add_index "trailheads", ["phone_id"], name: "index_trailheads_on_phone_id", using: :btree
 
 end

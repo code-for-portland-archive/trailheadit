@@ -1,0 +1,16 @@
+= simple_form_for(@trailhead) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :phone
+    = f.input :name
+    = f.input :latitude
+    = f.input :longitude
+    = f.input :photo
+    = f.input :parking
+    = f.input :drinking_water
+    = f.input :restrooms
+    = f.input :kiosk
+
+  .form-actions
+    = f.button :submit

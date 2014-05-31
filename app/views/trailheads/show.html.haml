@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b Phone:
+  = @trailhead.phone
+%p
+  %b Name:
+  = @trailhead.name
+%p
+  %b Latitude:
+  = @trailhead.latitude
+%p
+  %b Longitude:
+  = @trailhead.longitude
+%p
+  %b Photo:
+  = @trailhead.photo
+%p
+  %b Parking:
+  = @trailhead.parking
+%p
+  %b Drinking water:
+  = @trailhead.drinking_water
+%p
+  %b Restrooms:
+  = @trailhead.restrooms
+%p
+  %b Kiosk:
+  = @trailhead.kiosk
+
+= link_to 'Edit', edit_trailhead_path(@trailhead)
+\|
+= link_to 'Back', trailheads_path

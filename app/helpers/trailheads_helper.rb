@@ -1,0 +1,2 @@
+module TrailheadsHelper
+end

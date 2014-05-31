@@ -1,0 +1,19 @@
+%h1 Listing phones
+
+%table
+  %tr
+    %th Number
+    %th
+    %th
+    %th
+
+  - @phones.each do |phone|
+    %tr
+      %td= phone.number
+      %td= link_to 'Show', phone
+      %td= link_to 'Edit', edit_phone_path(phone)
+      %td= link_to 'Destroy', phone, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Phone', new_phone_path
