@@ -15,6 +15,10 @@ gem 'haml-rails'
 gem 'simple_form'
 gem 'pg'
 
+group :production do
+  gem 'rails_12factor'
+end
+
 group :development do    
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_20]
