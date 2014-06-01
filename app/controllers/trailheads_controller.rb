@@ -1,6 +1,6 @@
 class TrailheadsController < ApplicationController
   before_action :set_trailhead, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :verify_authenticity_token, only[:post]
+  skip_before_filter :verify_authenticity_token, only: [:post]
 
   def email
 
@@ -18,8 +18,10 @@ class TrailheadsController < ApplicationController
       stream = params["attachment-#{i+1}"]
       filename = stream.original_filename
       data = stream.read()
+      # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
-   
+    
+    # Trailhead.create(name:@subject, email:@sender)
   end
 
   # GET /trailheads

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :trailheads do
-    member do
-      get "email"
+    collection do
+      post "email"
     end
   end
 
