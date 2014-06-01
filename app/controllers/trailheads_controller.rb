@@ -1,5 +1,28 @@
 class TrailheadsController < ApplicationController
   before_action :set_trailhead, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token, only: [:email]
+
+  def email
+
+    # process various message parameters:
+    @sender  = params['from']
+    @subject = params['subject']
+
+    # get the "stripped" body of the message, i.e. without
+    # the quoted part
+    @actual_body = params["stripped-text"]
+
+    # process all attachments:
+    count = params['attachment-count'].to_i
+    count.times do |i|
+      stream = params["attachment-#{i+1}"]
+      filename = stream.original_filename
+      data = stream.read()
+      # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
+    end     
+    
+    @trailhead = Trailhead.create(name:@subject, email:@sender)    
+  end
 
   # GET /trailheads
   # GET /trailheads.json
