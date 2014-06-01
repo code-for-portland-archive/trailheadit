@@ -13,7 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20140601185209) do
 
+  create_table "phones", force: true do |t|
+    t.string   "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "phones", ["number"], name: "index_phones_on_number"
+
   create_table "trailheads", force: true do |t|
+    t.integer  "phone_id"
     t.string   "name"
     t.float    "latitude"
     t.float    "longitude"
@@ -33,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140601185209) do
     t.integer  "user_id"
   end
 
+  add_index "trailheads", ["phone_id"], name: "index_trailheads_on_phone_id"
   add_index "trailheads", ["user_id"], name: "index_trailheads_on_user_id"
 
   create_table "users", force: true do |t|

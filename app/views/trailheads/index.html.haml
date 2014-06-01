@@ -1,33 +1,52 @@
-%row.col-md-12
-  %h1 Trailheads You've Photographed
+%row.col-md-12.container
 
-  %div.col-md-4
-    %h2 Trailhead Photo
-  %div.col-md-4
-    %h2 Details
-  %div.col-md-4
-    %h2 Actions
+  %div.col-md-12.headline.container-fix
+    %h1 Trailheads You've Photographed
+
+  %div.col-md-12.headline.container-fix
+    %div.btn-group.actions
+      %div.btn.btn-primary Button
+      %div.btn.btn-primary Button
+      %div.btn.btn-primary
+        = link_to 'Document a new Trailhead', new_trailhead_path
+
+  %div.col-md-12.container-fix
+    %div.col-md-4.column-header
+      %h2.h3 Trailhead Photo
+    %div.col-md-3.column-header
+      %h2.h3 Details
+
 
   - @trailheads.each do |trailhead|
-    %div.col-md-12
+    %div.col-md-12.trailhead-box.container-fix
       %div.col-md-4.photo-box
         = trailhead.photo
-      %div.col-md-4.details-box
+        %h3.h4
+          = trailhead.created_at
+      %div.col-md-3.details-box
         %ul
           %li
-            = trailhead.restrooms
+            - if trailhead.restrooms
+              ="Restrooms available on site"
+            - else
+              ="No restrooms available here"
           %li
-            = trailhead.drinking_water
+            - if trailhead.drinking_water
+              ="There is drinking water on site"
+            - else
+              ="No drinking water is available here"
           %li
-            = trailhead.parking
+            - if trailhead.parking
+              ="There is parking on site"
+            - else
+              ="No parking is available here"
           %li
-            = trailhead.kiosk
-      %div.col-md-4.actions-box
-        %button.btn-lg.btn-primary.btn-block
+            - if trailhead.kiosk
+              ="There is trail information present on site"
+            - else
+              ="No information is available here"
+        %button.btn.btn-primary.btn-block
           = link_to 'Edit', "#"
-        %button.btn-lg.btn-danger.btn-block
-          = link_to 'Destroy', "#"
-
+        %button.btn.btn-danger.btn-block
+          = link_to 'Delete', "#"
   %br
-
-  = link_to 'Document a new Trailhead', new_trailhead_path

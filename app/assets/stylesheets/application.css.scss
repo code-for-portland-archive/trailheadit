@@ -36,6 +36,27 @@ body {
 
 /* P R I M A R I L Y   T R A I L H E A D S . I N D E X */
 
+/* padding on top to allow for header*/
+.container {
+	padding-top: 75px;
+	background-color: white;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.container-fix {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.headline {
+	min-height: 100px;
+}
+
+.actions {
+	margin-top: 20px;
+}
+
 /* left padding over-ride to align with table */
 .navbar-brand {
 	padding-left: 30px;
@@ -44,17 +65,23 @@ body {
 	margin-bottom: .5em;
 }
 
+.column-header {
+	padding: 0;
+}
+
+.trailhead-box {
+	background-color: #f6f6f6;
+
+}
+
 .photo-box {
 	min-height: 200px;
-	background-color: #f6f6f6;
+	background-color: #e5e5e5;
 	margin: 15px 0;
+	padding: 0;
 }
 
 .details-box {
-	margin: 15px 0;
-}
-
-.actions-box {
 	margin: 15px 0;
 }
 
