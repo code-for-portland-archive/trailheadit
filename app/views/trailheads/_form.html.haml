@@ -5,7 +5,10 @@
     = f.input :name
     = f.input :latitude
     = f.input :longitude
-    = f.input :photo
+    = image_tag(@trailhead.photo_url) if @trailhead.photo?
+    = f.input :photo, as: :file
+    = f.check_box :remove_photo
+    Remove photo
     = f.input :parking
     = f.input :drinking_water
     = f.input :restrooms

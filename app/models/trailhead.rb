@@ -1,3 +1,3 @@
 class Trailhead < ActiveRecord::Base
-  mount_uploader :trailheadphoto, TrailheadphotoUploader
+  mount_uploader :photo, TrailheadphotoUploader
 end
