@@ -62,6 +62,9 @@ class TrailheadsController < ApplicationController
 
   # GET /trailheads/1/edit
   def edit
+    unless @trailhead.viewed_at
+      @trailhead.update_attributes(:viewed_at => Time.now)  
+    end
   end
 
   # POST /trailheads

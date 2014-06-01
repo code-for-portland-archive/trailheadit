@@ -11,18 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601064233) do
-
-  create_table "phones", force: true do |t|
-    t.string   "number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "phones", ["number"], name: "index_phones_on_number"
+ActiveRecord::Schema.define(version: 20140601185209) do
 
   create_table "trailheads", force: true do |t|
-    t.integer  "phone_id"
     t.string   "name"
     t.float    "latitude"
     t.float    "longitude"
@@ -37,8 +28,17 @@ ActiveRecord::Schema.define(version: 20140601064233) do
     t.float    "heading"
     t.datetime "taken_at"
     t.float    "altitude"
+    t.datetime "viewed_at"
+    t.string   "email_url"
+    t.integer  "user_id"
   end
 
-  add_index "trailheads", ["phone_id"], name: "index_trailheads_on_phone_id"
+  add_index "trailheads", ["user_id"], name: "index_trailheads_on_user_id"
+
+  create_table "users", force: true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
