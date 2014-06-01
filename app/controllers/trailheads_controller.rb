@@ -28,6 +28,7 @@ class TrailheadsController < ApplicationController
         url = a['url']
         # url.gsub!('https://',"https://api:#{api_key}@")
         test = open(url,:http_basic_authentication=>['api','key-7vasqtc4mg9w645w5w86za-3kay2co66'])        
+
         @trailhead = Trailhead.create(name:@subject, email:@sender, photo:File.open(test.path))                  
         @exif = @trailhead.exifXtractr(test.path)
                 
@@ -82,6 +83,7 @@ class TrailheadsController < ApplicationController
   # POST /trailheads
   # POST /trailheads.json
   def create
+    
     @trailhead = Trailhead.new(trailhead_params)
 
     respond_to do |format|
