@@ -12,19 +12,21 @@ class TrailheadsController < ApplicationController
     # the quoted part
     @actual_body = params["stripped-text"]
 
-    # process all attachments:
-    count = params['attachment-count'].to_i
-    count.times do |i|
-      puts "ATTACHMENT #{i}"
-      stream = params["attachment-#{i+1}"]
-      filename = stream.original_filename
-      data = stream.read() 
-      puts data.length     
-      @trailhead.photo.file = data
+    attachments = params['attachments']
+    if attachments
+      attachments.each do |a|
+      puts "ATTACHMENT #{a}"
+      
+      # stream = params["attachment-#{i+1}"]
+      # filename = stream.original_filename
+      # data = stream.read() 
+      # puts data.length     
+      @trailhead.remote_photo_url = a['url']
+      @trailhead = Trailhead.create(name:@subject, email:@sender)    
+
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
     
-    @trailhead = Trailhead.create(name:@subject, email:@sender)    
 
     @exif = @trailhead.exifXtractr(@trailhead.photo.path)
     @trailhead.update_attributes(
