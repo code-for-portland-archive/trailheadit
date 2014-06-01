@@ -29,7 +29,7 @@ class TrailheadsController < ApplicationController
         puts "URL"
         puts url
         test = open(url,:http_basic_authentication=>['api','key-7vasqtc4mg9w645w5w86za-3kay2co66'])        
-
+        puts test.path
         @trailhead = Trailhead.create(name:@subject, email:@sender, photo:File.open(test.path))                  
         puts "PATH"
         puts @trailhead.photo.url
