@@ -4,6 +4,7 @@
     %th Name
     %th Latitude
     %th Longitude
+    %lh Altitude
     %th Photo
     %th Parking
     %th Drinking water
@@ -28,10 +29,10 @@
 
     - @trailheads.each do |trailhead|
       %tr
-        %td= trailhead.phone
         %td= trailhead.name
         %td= trailhead.latitude
         %td= trailhead.longitude
+        %td= trailhead.altitude
         %td= trailhead.photo
         %td= trailhead.parking
         %td= trailhead.drinking_water
