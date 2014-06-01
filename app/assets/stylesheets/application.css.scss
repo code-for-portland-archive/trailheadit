@@ -23,11 +23,25 @@ body {
 	height: 100%;
 }
 
+/* P R I M A R I L Y   H O M E. I N D E X */
+
+.banner {
+	width: 100%;
+	min-height: 350px;
+	background-repeat:no-repeat;
+	background-size: 100%;
+	background-position:center;
+	background-image: url(image_path("trailhead_banner.jpg"));
+}
+
 /* P R I M A R I L Y   T R A I L H E A D S . I N D E X */
 
 /* left padding over-ride to align with table */
 .navbar-brand {
 	padding-left: 30px;
+	font-size: 2em;
+	margin-top: .5em;
+	margin-bottom: .5em;
 }
 
 /* Additional height limit added to img-responsive bootstrap class */
