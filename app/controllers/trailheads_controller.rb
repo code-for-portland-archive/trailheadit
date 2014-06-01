@@ -41,7 +41,7 @@ class TrailheadsController < ApplicationController
     end     
     
   rescue Exception => e
-    render e.message
+    render plain: e.message
   end
 
   # GET /trailheads
