@@ -44,7 +44,7 @@ class TrailheadsController < ApplicationController
           @user = User.find_by(email: @sender)
         else
           puts "USER NOT FOUND"
-          @user = User.create(email: email)          
+          @user = User.create(email: @sender)          
         end
       end
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
