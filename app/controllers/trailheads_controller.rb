@@ -26,7 +26,7 @@ class TrailheadsController < ApplicationController
         api_key = ENV['MAILGUN_API_KEY']
         url = a['url']
         url.gsub!('https://',"https://api:#{api_key}@")
-        puts url
+        rails.logger.info url
         @trailhead = Trailhead.create(name:@subject, email:@sender, remote_photo_url:url)          
         @trailhead.photo.store!
         @exif = @trailhead.exifXtractr(@trailhead.photo.path)
@@ -35,7 +35,7 @@ class TrailheadsController < ApplicationController
           longitude:@exif.gps.longitude||@trailhead.longitude,
           taken_at:@exif.date_time,
           altitude:@exif.gps.altitude)
-
+        Rails.logger.info @trailhead
       end
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
