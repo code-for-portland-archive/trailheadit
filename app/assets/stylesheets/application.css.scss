@@ -38,7 +38,7 @@ body {
 
 /* padding on top to allow for header*/
 .container {
-	padding-top: 75px;
+	padding-top: 30px;
 	background-color: white;
 	padding-left: 0;
 	padding-right: 0;
@@ -53,29 +53,46 @@ body {
 	min-height: 100px;
 }
 
+.dashboard {
+
+}
 .actions {
-	margin-top: 20px;
+	width: 100%;
+}
+
+.actions .btn {
+	width: 33%;
+	background-color: #f6f6f6;
+	color: #333333;
+	border-color: #dddddd;
+}
+
+.actions .btn:hover {
+	background-color: #dddddd;
+}
+
+.actions .btn a {
+	color: #333333;
+}
+.actions .btn a:hover {
+	color: #333333;
+	text-decoration: none;
+	background-color: inherit;
 }
 
 /* left padding over-ride to align with table */
 .navbar-brand {
 	padding-left: 30px;
-	font-size: 2em;
-	margin-top: .5em;
-	margin-bottom: .5em;
+	font-size: 1.5em;
 }
 
 .column-header {
 	padding: 0;
-}
-
-.trailhead-box {
-	background-color: #f6f6f6;
-
+	text-align: center
 }
 
 .photo-box {
-	min-height: 200px;
+	min-height: 160px;
 	background-color: #e5e5e5;
 	margin: 15px 0;
 	padding: 0;

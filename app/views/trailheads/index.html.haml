@@ -3,24 +3,34 @@
   %div.col-md-12.headline.container-fix
     %h1 Trailheads You've Photographed
 
-  %div.col-md-12.headline.container-fix
+  %div.col-md-12.dashboard.container-fix
     %div.btn-group.actions
-      %div.btn.btn-primary Button
-      %div.btn.btn-primary Button
+      %div.btn.btn-primary Download OpenTrails Data (GeoJSON)
+      %div.btn.btn-primary Share Trailheads with Park Agencies
       %div.btn.btn-primary
         = link_to 'Document a new Trailhead', new_trailhead_path
 
   %div.col-md-12.container-fix
     %div.col-md-4.column-header
       %h2.h3 Trailhead Photo
-    %div.col-md-3.column-header
-      %h2.h3 Details
+    %div.col-md-4.column-header
+      %h2.h3 Location
+    %div.col-md-4.column-header
+      %h2.h3 Attributes
 
 
   - @trailheads.each do |trailhead|
     %div.col-md-12.trailhead-box.container-fix
       %div.col-md-4.photo-box
         = image_tag (trailhead.photo.url || "trailheadit_hq.jpg"), class: "img-responsive"
+      %div.col-md-4.location-box
+        %ul
+          %li
+            =trailhead.latitude
+          %li
+            =trailhead.longitude
+          %li
+            =trailhead.altitude
       %div.col-md-4.details-box
         %ul
           %li
@@ -44,7 +54,7 @@
             - else
               ="No information is available here"
         %button.btn.btn-primary.btn-block
-          = link_to 'Edit', "#"
+          = link_to 'Edit', edit_trailhead_path(trailhead)
         %button.btn.btn-danger.btn-block
-          = link_to 'Delete', "#"
+          = link_to 'Delete', trailhead, :method => :delete
   %br

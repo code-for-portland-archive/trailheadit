@@ -21,24 +21,6 @@ ActiveRecord::Schema.define(version: 20140601192831) do
 
   add_index "phones", ["number"], name: "index_phones_on_number"
 
-  create_table "trailheads", force: true do |t|
-    t.integer  "phone_id"
-    t.string   "name"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "photo"
-    t.boolean  "parking"
-    t.boolean  "drinking_water"
-    t.boolean  "restrooms"
-    t.boolean  "kiosk"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "trailheads", ["phone_id"], name: "index_trailheads_on_phone_id"
-  add_index "trailheads", ["user_id"], name: "index_trailheads_on_user_id"
-  add_index "phones", ["number"], name: "index_phones_on_number"
-
 # Could not dump table "trailheads" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
 
