@@ -13,8 +13,9 @@ class TrailheadsController < ApplicationController
     @actual_body = params["stripped-text"]
 
     attachments = JSON.parse params['attachments']
-    puts attachments
+    puts "ATTACHMENTS"
     if attachments.present?
+      puts attachments.count
       attachments.each do |a|
         puts "ATTACHMENT #{a}"
         
@@ -40,11 +41,8 @@ class TrailheadsController < ApplicationController
         # find or create the user
         if User.exists?(email: @sender)
           @user = User.find_by(email: @sender)
-
         else
-          @user = User.create(email: email)
-
-          
+          @user = User.create(email: email)          
         end
       end
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
