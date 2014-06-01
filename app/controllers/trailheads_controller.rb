@@ -12,7 +12,7 @@ class TrailheadsController < ApplicationController
     # the quoted part
     @actual_body = params["stripped-text"]
 
-    attachments = params['attachments']
+    attachments = JSON.parse params['attachments']
     puts attachments
     if attachments.present?
       attachments.each do |a|
