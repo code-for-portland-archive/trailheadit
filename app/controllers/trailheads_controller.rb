@@ -52,6 +52,7 @@ class TrailheadsController < ApplicationController
           @user = user.create(email: email)
           UserMailer.welcome_email(@user).deliver
           @user.trailheads << @trailhead
+        end
       end
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
