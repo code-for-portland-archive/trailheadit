@@ -3,7 +3,7 @@ class TrailheadsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:email]
 
   def email
-
+    
     # process various message parameters:
     @sender  = params['from']
     @subject = params['subject']
@@ -26,8 +26,6 @@ class TrailheadsController < ApplicationController
         api_key = ENV['MAILGUN_API_KEY']
         url = a['url']
         # url.gsub!('https://',"https://api:#{api_key}@")
-        puts "URL"
-        puts url
         test = open(url,:http_basic_authentication=>['api','key-7vasqtc4mg9w645w5w86za-3kay2co66'])        
         puts test.path
         @trailhead = Trailhead.create(name:@subject, email:@sender, photo:File.open(test.path))                  
