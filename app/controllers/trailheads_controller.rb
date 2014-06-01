@@ -18,7 +18,7 @@ class TrailheadsController < ApplicationController
       stream = params["attachment-#{i+1}"]
       filename = stream.original_filename
       data = stream.read()
-      # @trailhead.photo = data
+      @trailhead.photo = data
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
     
