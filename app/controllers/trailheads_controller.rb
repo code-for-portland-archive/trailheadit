@@ -40,8 +40,10 @@ class TrailheadsController < ApplicationController
         
         # find or create the user
         if User.exists?(email: @sender)
+          puts "USER FOUND"
           @user = User.find_by(email: @sender)
         else
+          puts "USER NOT FOUND"
           @user = User.create(email: email)          
         end
       end
