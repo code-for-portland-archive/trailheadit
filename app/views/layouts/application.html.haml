@@ -4,13 +4,13 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
     %title= content_for?(:title) ? yield(:title) : 'Trailheadit!'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Trailheadit'}"}
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    %link{href: "http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700", rel: "stylesheet", type: "text/css"}/
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
   %body
     %header
       = render 'layouts/navigation'
-    %main{:role => "main"}
+    %main.container-fluid{:role => "main"}
       = render 'layouts/messages'
-      .container
-        = yield
+      = yield

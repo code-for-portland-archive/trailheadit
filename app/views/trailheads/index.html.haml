@@ -1,35 +1,36 @@
-%h1 Listing trailheads
 
-%table.table.table-striped
-  %tr
-    %th Phone
-    %th Name
-    %th Latitude
-    %th Longitude
-    %th Photo
-    %th Parking
-    %th Drinking water
-    %th Restrooms
-    %th Kiosk
-    %th
-    %th
-    %th
+%row.col-xs-12
+  %h1 Trailheads You've Photographed
 
-  - @trailheads.each do |trailhead|
+  %table.table.table-striped
     %tr
-      %td= trailhead.phone
-      %td= trailhead.name
-      %td= trailhead.latitude
-      %td= trailhead.longitude
-      %td= trailhead.photo
-      %td= trailhead.parking
-      %td= trailhead.drinking_water
-      %td= trailhead.restrooms
-      %td= trailhead.kiosk
-      %td= link_to 'Show', trailhead
-      %td= link_to 'Edit', edit_trailhead_path(trailhead)
-      %td= link_to 'Destroy', trailhead, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th Photo
+      %th Action 1
+      %th Action 2
+    %tr
+      %td
+        =image_tag "trailhead.jpg", class:"img-responsive"
+      %td
+        =link_to 'Edit', "#", :class =>"btn btn-primary table-btn"
+      %td
+        =link_to 'Destroy', "#", :method => :delete, :data => { :confirm => 'Are you sure?' }, :class =>"btn btn-danger table-btn"
 
-%br
 
-= link_to 'New Trailhead', new_trailhead_path
+    - @trailheads.each do |trailhead|
+      %tr
+        %td= trailhead.phone
+        %td= trailhead.name
+        %td= trailhead.latitude
+        %td= trailhead.longitude
+        %td= trailhead.photo
+        %td= trailhead.parking
+        %td= trailhead.drinking_water
+        %td= trailhead.restrooms
+        %td= trailhead.kiosk
+        %td= link_to 'Show', trailhead
+        %td= link_to 'Edit', edit_trailhead_path(trailhead)
+        %td= link_to 'Destroy', trailhead, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  %br
+
+  = link_to 'Document a new Trailhead', new_trailhead_path

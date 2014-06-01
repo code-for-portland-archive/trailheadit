@@ -13,3 +13,48 @@
  *= require_tree .
  *= require_self
  */
+
+
+* {
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+body {
+	height: 100%;
+}
+
+/* P R I M A R I L Y   T R A I L H E A D S . I N D E X */
+
+/* left padding over-ride to align with table */
+.navbar-brand {
+	padding-left: 30px;
+}
+
+/* Additional height limit added to img-responsive bootstrap class */
+.img-responsive {
+	max-height: 250px;
+}
+
+/* Table  Borders and Buttons */
+.table > tbody > tr {
+	border: 1px solid gray;
+}
+
+.table > tbody > tr > th {
+	border: 1px solid gray;
+}
+
+.table-btn {
+	width: 100%;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+
+/* P R I M A R I L Y   T R A I L H E A D S / N E W  */
+
+.checkbox input[type="checkbox"] {
+	margin-left: 0;
+}
+
+.back-btn {
+	margin-top: 30px;
+}
