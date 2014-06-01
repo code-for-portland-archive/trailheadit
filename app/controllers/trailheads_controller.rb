@@ -12,16 +12,36 @@ class TrailheadsController < ApplicationController
     # the quoted part
     @actual_body = params["stripped-text"]
 
-    # process all attachments:
-    count = params['attachment-count'].to_i
-    count.times do |i|
-      stream = params["attachment-#{i+1}"]
-      filename = stream.original_filename
-      data = stream.read()
+    attachments = JSON.parse params['attachments']
+    puts attachments
+    if attachments.present?
+      attachments.each do |a|
+        puts "ATTACHMENT #{a}"
+        
+        # stream = params["attachment-#{i+1}"]
+        # filename = stream.original_filename
+        # data = stream.read() 
+        # puts data.length     
+
+        api_key = ENV['MAILGUN_API_KEY']
+        url = a['url']
+        url.gsub!('https://',"https://api:#{api_key}@")
+        puts url
+        @trailhead = Trailhead.create(name:@subject, email:@sender, remote_photo_url:url)          
+        @trailhead.photo.store!
+        @exif = @trailhead.exifXtractr(@trailhead.photo.path)
+        @trailhead.update_attributes(
+          latitude:@exif.gps.latitude||@trailhead.latitude,
+          longitude:@exif.gps.longitude||@trailhead.longitude,
+          taken_at:@exif.date_time,
+          altitude:@exif.gps.altitude)
+
+      end
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
     
-    @trailhead = Trailhead.create(name:@subject, email:@sender)    
+  rescue Exception => e
+    render plain: e.message
   end
 
   # GET /trailheads
@@ -51,6 +71,14 @@ class TrailheadsController < ApplicationController
 
     respond_to do |format|
       if @trailhead.save
+        @exif = @trailhead.exifXtractr(@trailhead.photo.path)
+        @trailhead.update_attributes(
+          latitude:@exif.gps.latitude||@trailhead.latitude,
+          longitude:@exif.gps.longitude||@trailhead.longitude,
+          taken_at:@exif.date_time,
+          altitude:@exif.gps.altitude)
+
+
         format.html { redirect_to @trailhead, notice: 'Trailhead was successfully created.' }
         format.json { render :show, status: :created, location: @trailhead }
       else
@@ -92,6 +120,6 @@ class TrailheadsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trailhead_params
-      params.require(:trailhead).permit(:phone_id, :name, :latitude, :longitude, :photo, :parking, :drinking_water, :restrooms, :kiosk)
+      params.require(:trailhead).permit(:name, :latitude, :longitude, :photo, :parking, :drinking_water, :restrooms, :kiosk)
     end
 end

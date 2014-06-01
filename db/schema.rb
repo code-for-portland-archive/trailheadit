@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140531220257) do
+ActiveRecord::Schema.define(version: 20140601064233) do
 
   create_table "phones", force: true do |t|
     t.string   "number"
@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(version: 20140531220257) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email"
+    t.float    "heading"
+    t.datetime "taken_at"
+    t.float    "altitude"
   end
 
   add_index "trailheads", ["phone_id"], name: "index_trailheads_on_phone_id"

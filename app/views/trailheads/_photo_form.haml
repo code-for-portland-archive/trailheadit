@@ -1,0 +1,9 @@
+= form_for @trailhead, :html => {:multipart => true} do |f|
+  %p
+    %label Trailhead Upload
+    = image_tag(@trailhead.trailheadphoto_url) if @trailhead.trailheadphoto?
+    = f.file_field :trailheadphoto
+  %p
+    %label
+      = f.check_box :remove_trailheadphoto
+      Remove photo

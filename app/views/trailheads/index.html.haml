@@ -1,4 +1,3 @@
-
 %row.col-xs-12.col-lg-6
   %h1 Trailheads You've Photographed
 
@@ -6,17 +5,19 @@
     %tr
       %th Photo
       %th Actions
-
-
+      %th Debug
 
     - @trailheads.each do |trailhead|
       %tr
-        %td= image_tag "trailhead.jpg", class:"img-responsive"
+        %td= trailhead.photo, class:"img-responsive"
         %td.action-col
           %button.btn-lg.btn-primary.btn-block
             = link_to 'Edit', "#"
           %button.btn-lg.btn-danger.btn-block
             = link_to 'Destroy', "#", :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          %pre
+            = JSON.pretty_generate JSON.parse(trailhead.to_json)
 
   %br
 

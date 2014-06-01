@@ -15,6 +15,10 @@ gem 'haml-rails'
 gem 'simple_form'
 gem 'pg'
 gem 'newrelic_rpm'
+gem 'carrierwave'
+gem "fog", "~> 1.3.1"
+gem "mini_magick"
+gem "exifr"
 
 group :production do
   gem 'rails_12factor'
