@@ -42,14 +42,13 @@ class TrailheadsController < ApplicationController
           altitude:@exif.gps.altitude,
           email_properties:params)
         puts @trailhead
-        puts @trailhead
         
         # find or create the user
         if User.exists?(email: @sender)
           @user = User.find_by(email: @sender)
           @user.trailheads << @trailhead
         else
-          @user = user.create(email: email)
+          @user = User.create(email: email)
           UserMailer.welcome_email(@user).deliver
           @user.trailheads << @trailhead
         end
