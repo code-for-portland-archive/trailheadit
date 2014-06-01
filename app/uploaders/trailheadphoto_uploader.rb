@@ -1,5 +1,6 @@
 class TrailheadphotoUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
+
   storage :file
 
   def cache_dir
@@ -13,7 +14,7 @@ class TrailheadphotoUploader < CarrierWave::Uploader::Base
   end
 
   # Process files as they are uploaded:
-  process :scale => [800, 800]
+  # process :scale => [800, 800]
 
   # Create different versions of your uploaded files:
   version :thumb do
