@@ -27,31 +27,25 @@ class TrailheadsController < ApplicationController
         url = a['url']
         # url.gsub!('https://',"https://api:#{api_key}@")
         test = open(url,:http_basic_authentication=>['api','key-7vasqtc4mg9w645w5w86za-3kay2co66'])        
-        puts test.path
         @trailhead = Trailhead.create(name:@subject, email:@sender, photo:File.open(test.path))                  
-        puts "PATH"
-        puts @trailhead.photo.url
-        puts @trailhead.photo.path
         @exif = @trailhead.exifXtractr(test.path)
-        puts "EXIF"        
-        
+                
         @trailhead.update_attributes(
           latitude:@exif.gps.latitude||@trailhead.latitude,
           longitude:@exif.gps.longitude||@trailhead.longitude,
           taken_at:@exif.date_time,
           altitude:@exif.gps.altitude,
           email_properties:params)
-        puts @trailhead
         
-        # # find or create the user
-        # if User.exists?(email: @sender)
-        #   @user = User.find_by(email: @sender)
-        #   @user.trailheads << @trailhead
-        # else
-        #   @user = User.create(email: email)
-        #   UserMailer.welcome_email(@user).deliver
-        #   @user.trailheads << @trailhead
-        # end
+        # find or create the user
+        if User.exists?(email: @sender)
+          @user = User.find_by(email: @sender)
+          @user.trailheads << @trailhead
+        else
+          @user = User.create(email: email)
+          UserMailer.welcome_email(@user).deliver
+          @user.trailheads << @trailhead
+        end
       end
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
