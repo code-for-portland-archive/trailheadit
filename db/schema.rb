@@ -11,29 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601185209) do
+ActiveRecord::Schema.define(version: 20140601192831) do
 
-  create_table "trailheads", force: true do |t|
-    t.string   "name"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.string   "photo"
-    t.boolean  "parking"
-    t.boolean  "drinking_water"
-    t.boolean  "restrooms"
-    t.boolean  "kiosk"
+  create_table "phones", force: true do |t|
+    t.string   "number"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email"
-    t.float    "heading"
-    t.datetime "taken_at"
-    t.float    "altitude"
-    t.datetime "viewed_at"
-    t.string   "email_url"
-    t.integer  "user_id"
   end
 
-  add_index "trailheads", ["user_id"], name: "index_trailheads_on_user_id"
+  add_index "phones", ["number"], name: "index_phones_on_number"
+
+# Could not dump table "trailheads" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "users", force: true do |t|
     t.string   "email"

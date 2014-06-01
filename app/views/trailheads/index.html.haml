@@ -11,7 +11,7 @@
   - @trailheads.each do |trailhead|
     %div.col-md-12
       %div.col-md-4.photo-box
-        = trailhead.photo
+        = image_tag (trailhead.photo.url || "trailheadit_hq.jpg"), class: "img-responsive"
       %div.col-md-4.details-box
         %ul
           %li
@@ -23,10 +23,10 @@
           %li
             = trailhead.kiosk
       %div.col-md-4.actions-box
-        %button.btn-lg.btn-primary.btn-block
-          = link_to 'Edit', "#"
-        %button.btn-lg.btn-danger.btn-block
-          = link_to 'Destroy', "#"
+        
+        = link_to 'Edit', edit_trailhead_path(trailhead), class: "btn btn-lg btn-primary btn-block"
+        
+        = link_to 'Destroy', trailhead, :method => :delete, class: "btn btn-lg btn-danger btn-block"
 
   %br
 

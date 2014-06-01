@@ -5,7 +5,7 @@ class TrailheadsController < ApplicationController
   def email
     
     # process various message parameters:
-    @sender  = params['from']
+    @sender  = params['sender']
     @subject = params['subject']
 
     # get the "stripped" body of the message, i.e. without
@@ -33,14 +33,14 @@ class TrailheadsController < ApplicationController
         puts @trailhead.photo.url
         puts @trailhead.photo.path
         @exif = @trailhead.exifXtractr(test.path)
-        puts "EXIF"
-        puts @exif
+        puts "EXIF"        
         
         @trailhead.update_attributes(
           latitude:@exif.gps.latitude||@trailhead.latitude,
           longitude:@exif.gps.longitude||@trailhead.longitude,
           taken_at:@exif.date_time,
-          altitude:@exif.gps.altitude)
+          altitude:@exif.gps.altitude,
+          email_properties:params)
         puts @trailhead
         puts @trailhead
         
