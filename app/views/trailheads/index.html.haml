@@ -1,35 +1,22 @@
 
-%row.col-xs-12
+%row.col-xs-12.col-lg-6
   %h1 Trailheads You've Photographed
 
   %table.table.table-striped
     %tr
       %th Photo
-      %th Action 1
-      %th Action 2
-    %tr
-      %td
-        =image_tag "trailhead.jpg", class:"img-responsive"
-      %td
-        =link_to 'Edit', "#", :class =>"btn btn-primary table-btn"
-      %td
-        =link_to 'Destroy', "#", :method => :delete, :data => { :confirm => 'Are you sure?' }, :class =>"btn btn-danger table-btn"
+      %th Actions
+
 
 
     - @trailheads.each do |trailhead|
       %tr
-        %td= trailhead.phone
-        %td= trailhead.name
-        %td= trailhead.latitude
-        %td= trailhead.longitude
-        %td= trailhead.photo
-        %td= trailhead.parking
-        %td= trailhead.drinking_water
-        %td= trailhead.restrooms
-        %td= trailhead.kiosk
-        %td= link_to 'Show', trailhead
-        %td= link_to 'Edit', edit_trailhead_path(trailhead)
-        %td= link_to 'Destroy', trailhead, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= image_tag "trailhead.jpg", class:"img-responsive"
+        %td.action-col
+          %button.btn-lg.btn-primary.btn-block
+            = link_to 'Edit', "#"
+          %button.btn-lg.btn-danger.btn-block
+            = link_to 'Destroy', "#", :method => :delete, :data => { :confirm => 'Are you sure?' }
 
   %br
 

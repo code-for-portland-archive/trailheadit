@@ -44,9 +44,22 @@ body {
 	border: 1px solid gray;
 }
 
-.table-btn {
+.action-col {
+	width: 20%;
+}
+
+/*.table-btn {
 	width: 100%;
 	font-family: 'Open Sans Condensed', sans-serif;
+}*/
+
+button a {
+	color: white;
+}
+
+button a:hover {
+	text-decoration: none;
+	background-color: inherit;
 }
 
 /* P R I M A R I L Y   T R A I L H E A D S / N E W  */
