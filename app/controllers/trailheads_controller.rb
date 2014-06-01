@@ -21,19 +21,19 @@ class TrailheadsController < ApplicationController
       # filename = stream.original_filename
       # data = stream.read() 
       # puts data.length     
-      @trailhead.remote_photo_url = a['url']
-      @trailhead = Trailhead.create(name:@subject, email:@sender)    
+
+      @trailhead = Trailhead.create(name:@subject, email:@sender, remote_photo_url:a['url'])          
+      @exif = @trailhead.exifXtractr(@trailhead.photo.path)
+      @trailhead.update_attributes(
+        latitude:@exif.gps.latitude||@trailhead.latitude,
+        longitude:@exif.gps.longitude||@trailhead.longitude,
+        taken_at:@exif.date_time,
+        altitude:@exif.gps.altitude)
+
 
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
     
-
-    @exif = @trailhead.exifXtractr(@trailhead.photo.path)
-    @trailhead.update_attributes(
-      latitude:@exif.gps.latitude||@trailhead.latitude,
-      longitude:@exif.gps.longitude||@trailhead.longitude,
-      taken_at:@exif.date_time,
-      altitude:@exif.gps.altitude)
 
   end
 
