@@ -22,7 +22,12 @@ class TrailheadsController < ApplicationController
         # data = stream.read() 
         # puts data.length     
 
-        @trailhead = Trailhead.create(name:@subject, email:@sender, remote_photo_url:a['url'])          
+        api_key = ENV['MAILGUN_API_KEY']
+        url = a['url']
+        url.gsub!('https://',"https://api:#{api_ky}@")
+        puts url
+        @trailhead = Trailhead.create(name:@subject, email:@sender, remote_photo_url:url)          
+        @trailhead.photo.store!
         @exif = @trailhead.exifXtractr(@trailhead.photo.path)
         @trailhead.update_attributes(
           latitude:@exif.gps.latitude||@trailhead.latitude,
