@@ -32,7 +32,7 @@
       %tr
         %td= trailhead.photo
         %td= link_to 'Edit', edit_trailhead_path(trailhead), class: "btn btn-primary table-btn"
-        %td= link_to 'Destroy', trailhead, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'Destroy', trailhead, :method => :delete, :class =>"btn btn-danger table-btn"
         %td 
           %pre
             = JSON.pretty_generate JSON.parse(trailhead.to_json)
