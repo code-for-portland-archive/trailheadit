@@ -66,6 +66,12 @@ class TrailheadsController < ApplicationController
   # GET /trailheads/1
   # GET /trailheads/1.json
   def show
+    respond_to do |format|
+      format.html{}        
+      format.js do
+        render json: @trailhead
+      end
+    end
   end
 
   # GET /trailheads/new
@@ -83,7 +89,7 @@ class TrailheadsController < ApplicationController
   # POST /trailheads
   # POST /trailheads.json
   def create
-    
+
     @trailhead = Trailhead.new(trailhead_params)
 
     respond_to do |format|

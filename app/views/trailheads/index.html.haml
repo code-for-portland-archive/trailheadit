@@ -26,7 +26,8 @@
       %div.col-md-4.location-box
         %ul
           %li
-            =user.email
+            - if trailhead.user
+              = trailhead.user.email
           %li
             =trailhead.latitude
           %li

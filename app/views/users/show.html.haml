@@ -24,13 +24,11 @@
       %div.col-md-4.photo-box
         = image_tag (trailhead.photo.url || "trailheadit_hq.jpg"), class: "img-responsive"
       %div.col-md-4.location-box
-        %ul
-          %li
-            =trailhead.latitude
-          %li
-            =trailhead.longitude
-          %li
-            =trailhead.altitude
+        .trailhead-map(id="trailhead-map-#{trailhead.id}")
+        :javascript
+          var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
+          myMap.setView([#{trailhead.latitude}, #{trailhead.longitude}], 18);
+          var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
       %div.col-md-4.details-box
         %ul
           %li
