@@ -1,6 +1,10 @@
 %p#notice= notice
 
 %p
+  %b Exif:
+  %pre
+    = @exif.to_json
+%p
   %b Name:
   = @trailhead.name
 %p
@@ -9,6 +13,13 @@
 %p
   %b Longitude:
   = @trailhead.longitude
+%p
+  %b Altitude:
+  = @trailhead.altitude
+%p
+  %b Taken at:
+  = @trailhead.taken_at
+
 %p
   %b Photo:
   = @trailhead.photo
