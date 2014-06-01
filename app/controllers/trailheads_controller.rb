@@ -25,16 +25,18 @@ class TrailheadsController < ApplicationController
 
         api_key = ENV['MAILGUN_API_KEY']
         url = a['url']
-        url.gsub!('https://',"https://api:#{api_key}@")
+        # url.gsub!('https://',"https://api:#{api_key}@")
         puts "URL"
         puts url
-        @trailhead = Trailhead.create(name:@subject, email:@sender, remote_photo_url:url)          
-        @trailhead.photo.store!
+        test = open(url,:http_basic_authentication=>['api','key-7vasqtc4mg9w645w5w86za-3kay2co66'])
+        @trailhead = Trailhead.create(name:@subject, email:@sender, photo:File.open(test.path))                  
         puts "PATH"
         puts @trailhead.photo.url
+        puts @trailhead.photo.path
         @exif = @trailhead.exifXtractr(@trailhead.photo.path)
         PUTS "EXIF"
         puts @exif
+        
         @trailhead.update_attributes(
           latitude:@exif.gps.latitude||@trailhead.latitude,
           longitude:@exif.gps.longitude||@trailhead.longitude,
@@ -42,6 +44,8 @@ class TrailheadsController < ApplicationController
           altitude:@exif.gps.altitude)
         puts @trailhead
         puts @trailhead
+        
+
       end
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
