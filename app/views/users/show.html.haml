@@ -1,46 +1,60 @@
-%row.col-xs-12
-  %tr
-    %th Name
-    %th Latitude
-    %th Longitude
-    %lh Altitude
-    %th Photo
-    %th Parking
-    %th Drinking water
-    %th Restrooms
-    %th Kiosk
-    %th
-  %h1 Trailheads You've Photographed
+%row.col-md-12.container
 
-  %table.table.table-striped
-    %tr
-      %th Photo
-      %th Action 1
-      %th Action 2
-    %tr
-      %td
-        =image_tag "trailhead.jpg", class:"img-responsive"
-      %td
-        =link_to 'Edit', "#", :class =>"btn btn-primary table-btn"
-      %td
-        =link_to 'Destroy', "#", :method => :delete, :data => { :confirm => 'Are you sure?' }, :class =>"btn btn-danger table-btn"
+  %div.col-md-12.headline.container-fix
+    %h1 Trailheads You've Photographed
+
+  %div.col-md-12.dashboard.container-fix
+    %div.btn-group.actions
+      %div.btn.btn-primary Download OpenTrails Data (GeoJSON)
+      %div.btn.btn-primary Share Trailheads with Park Agencies
+      %div.btn.btn-primary
+        = link_to 'Document a new Trailhead', new_trailhead_path
+
+  %div.col-md-12.container-fix
+    %div.col-md-4.column-header
+      %h2.h3 Trailhead Photo
+    %div.col-md-4.column-header
+      %h2.h3 Location
+    %div.col-md-4.column-header
+      %h2.h3 Attributes
 
 
-    - @trailheads.each do |trailhead|
-      %tr
-        %td= trailhead.name
-        %td= trailhead.latitude
-        %td= trailhead.longitude
-        %td= trailhead.altitude
-        %td= trailhead.photo
-        %td= trailhead.parking
-        %td= trailhead.drinking_water
-        %td= trailhead.restrooms
-        %td= trailhead.kiosk
-        %td= link_to 'Show', trailhead
-        %td= link_to 'Edit', edit_trailhead_path(trailhead)
-        %td= link_to 'Destroy', trailhead, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+  - @trailheads.each do |trailhead|
+    %div.col-md-12.trailhead-box.container-fix
+      %div.col-md-4.photo-box
+        = image_tag (trailhead.photo.url || "trailheadit_hq.jpg"), class: "img-responsive"
+      %div.col-md-4.location-box
+        %ul
+          %li
+            =trailhead.latitude
+          %li
+            =trailhead.longitude
+          %li
+            =trailhead.altitude
+      %div.col-md-4.details-box
+        %ul
+          %li
+            - if trailhead.restrooms
+              ="Restrooms available on site"
+            - else
+              ="No restrooms available here"
+          %li
+            - if trailhead.drinking_water
+              ="There is drinking water on site"
+            - else
+              ="No drinking water is available here"
+          %li
+            - if trailhead.parking
+              ="There is parking on site"
+            - else
+              ="No parking is available here"
+          %li
+            - if trailhead.kiosk
+              ="There is trail information present on site"
+            - else
+              ="No information is available here"
+        %button.btn.btn-primary.btn-block
+          = link_to 'Edit', edit_trailhead_path(trailhead)
+        %button.btn.btn-danger.btn-block
+          = link_to 'Delete', trailhead, :method => :delete
   %br
-
-  = link_to 'Document a new Trailhead', new_trailhead_path
