@@ -1,6 +1,10 @@
 class TrailheadsController < ApplicationController
   before_action :set_trailhead, only: [:show, :edit, :update, :destroy]
 
+  def email
+    
+  end
+
   # GET /trailheads
   # GET /trailheads.json
   def index

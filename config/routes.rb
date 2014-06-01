@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :trailheads
+  resources :trailheads do
+    member do
+      post "email"
+    end
+  end
 
   resources :phones
 
