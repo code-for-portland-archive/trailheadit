@@ -40,7 +40,8 @@ class TrailheadsController < ApplicationController
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
     
-
+  rescue Exception => e
+    render e.message
   end
 
   # GET /trailheads
