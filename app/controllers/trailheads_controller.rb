@@ -21,7 +21,7 @@ class TrailheadsController < ApplicationController
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
     
-    # Trailhead.create(name:@subject, email:@sender)
+    @trailhead = Trailhead.create(name:@subject, email:@sender)    
   end
 
   # GET /trailheads
