@@ -23,6 +23,14 @@ class TrailheadsController < ApplicationController
     end     
     
     @trailhead = Trailhead.create(name:@subject, email:@sender)    
+
+    @exif = @trailhead.exifXtractr(@trailhead.photo.path)
+    @trailhead.update_attributes(
+      latitude:@exif.gps.latitude||@trailhead.latitude,
+      longitude:@exif.gps.longitude||@trailhead.longitude,
+      taken_at:@exif.date_time,
+      altitude:@exif.gps.altitude)
+    
   end
 
   # GET /trailheads
