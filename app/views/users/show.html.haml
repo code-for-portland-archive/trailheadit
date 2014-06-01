@@ -52,9 +52,7 @@
             - if trailhead.kiosk
               ="There is trail information present on site"
             - else
-              ="No information is available here"
-        %button.btn.btn-primary.btn-block
-          = link_to 'Edit', edit_trailhead_path(trailhead)
-        %button.btn.btn-danger.btn-block
-          = link_to 'Delete', trailhead, :method => :delete
+              ="No information is available here"        
+        = link_to 'Edit', edit_trailhead_path(trailhead), class: "btn btn-primary btn-block"
+        = link_to 'Delete', trailhead, :method => :delete, class: "btn btn-danger btn-block"
   %br
