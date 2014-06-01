@@ -34,7 +34,7 @@ class TrailheadsController < ApplicationController
         puts "PATH"
         puts @trailhead.photo.url
         puts @trailhead.photo.path
-        @exif = @trailhead.exifXtractr(@trailhead.photo.path)
+        @exif = @trailhead.exifXtractr(test.path)
         puts "EXIF"
         puts @exif
         
