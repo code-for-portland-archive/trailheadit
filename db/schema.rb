@@ -13,14 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140601192831) do
 
-  create_table "phones", force: true do |t|
-    t.string   "number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "phones", ["number"], name: "index_phones_on_number"
-
 # Could not dump table "trailheads" because of following NoMethodError
 #   undefined method `[]' for nil:NilClass
 
