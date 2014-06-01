@@ -15,6 +15,7 @@ class TrailheadsController < ApplicationController
     # process all attachments:
     count = params['attachment-count'].to_i
     count.times do |i|
+      puts "ATTACHMENT #{i}"
       stream = params["attachment-#{i+1}"]
       filename = stream.original_filename
       data = stream.read()
@@ -30,7 +31,7 @@ class TrailheadsController < ApplicationController
       longitude:@exif.gps.longitude||@trailhead.longitude,
       taken_at:@exif.date_time,
       altitude:@exif.gps.altitude)
-    
+
   end
 
   # GET /trailheads
