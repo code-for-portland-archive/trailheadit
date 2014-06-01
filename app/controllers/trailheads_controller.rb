@@ -43,7 +43,7 @@ class TrailheadsController < ApplicationController
           @user.trailheads << @trailhead
         else
           @user = User.create(email: email)
-          UserMailer.welcome_email(@user).deliver
+          # UserMailer.welcome_email(@user).deliver
           @user.trailheads << @trailhead
         end
       end
