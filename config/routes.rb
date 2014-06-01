@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :users
+
   resources :trailheads do
     collection do
       post "email"
@@ -6,4 +8,4 @@ Rails.application.routes.draw do
   end
 
   root :to => "home#index"
-end
+  end

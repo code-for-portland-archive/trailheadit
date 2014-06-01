@@ -23,11 +23,39 @@ body {
 	height: 100%;
 }
 
+/* P R I M A R I L Y   H O M E. I N D E X */
+
+.banner {
+	width: 100%;
+	min-height: 350px;
+	background-repeat:no-repeat;
+	background-size: 100%;
+	background-position:center;
+	background-image: url(image_path("trailhead_banner.jpg"));
+}
+
 /* P R I M A R I L Y   T R A I L H E A D S . I N D E X */
 
 /* left padding over-ride to align with table */
 .navbar-brand {
 	padding-left: 30px;
+	font-size: 2em;
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+
+.photo-box {
+	min-height: 200px;
+	background-color: #f6f6f6;
+	margin: 15px 0;
+}
+
+.details-box {
+	margin: 15px 0;
+}
+
+.actions-box {
+	margin: 15px 0;
 }
 
 /* Additional height limit added to img-responsive bootstrap class */
@@ -44,9 +72,22 @@ body {
 	border: 1px solid gray;
 }
 
-.table-btn {
+.action-col {
+	width: 20%;
+}
+
+/*.table-btn {
 	width: 100%;
 	font-family: 'Open Sans Condensed', sans-serif;
+}*/
+
+button a {
+	color: white;
+}
+
+button a:hover {
+	text-decoration: none;
+	background-color: inherit;
 }
 
 /* P R I M A R I L Y   T R A I L H E A D S / N E W  */
