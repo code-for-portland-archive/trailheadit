@@ -44,6 +44,20 @@ body {
 	margin-bottom: .5em;
 }
 
+.photo-box {
+	min-height: 200px;
+	background-color: #f6f6f6;
+	margin: 15px 0;
+}
+
+.details-box {
+	margin: 15px 0;
+}
+
+.actions-box {
+	margin: 15px 0;
+}
+
 /* Additional height limit added to img-responsive bootstrap class */
 .img-responsive {
 	max-height: 250px;

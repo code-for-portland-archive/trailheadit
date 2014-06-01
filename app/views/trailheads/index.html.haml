@@ -1,23 +1,32 @@
-%row.col-xs-12.col-lg-6
+%row.col-md-12
   %h1 Trailheads You've Photographed
 
-  %table.table.table-striped
-    %tr
-      %th Photo
-      %th Actions
-      %th Debug
+  %div.col-md-4
+    %h2 Trailhead Photo
+  %div.col-md-4
+    %h2 Details
+  %div.col-md-4
+    %h2 Actions
 
-    - @trailheads.each do |trailhead|
-      %tr
-        %td= trailhead.photo, class:"img-responsive"
-        %td.action-col
-          %button.btn-lg.btn-primary.btn-block
-            = link_to 'Edit', "#"
-          %button.btn-lg.btn-danger.btn-block
-            = link_to 'Destroy', "#", :method => :delete, :data => { :confirm => 'Are you sure?' }
-        %td
-          %pre
-            = JSON.pretty_generate JSON.parse(trailhead.to_json)
+  - @trailheads.each do |trailhead|
+    %div.col-md-12
+      %div.col-md-4.photo-box
+        = trailhead.photo
+      %div.col-md-4.details-box
+        %ul
+          %li
+            = trailhead.restrooms
+          %li
+            = trailhead.drinking_water
+          %li
+            = trailhead.parking
+          %li
+            = trailhead.kiosk
+      %div.col-md-4.actions-box
+        %button.btn-lg.btn-primary.btn-block
+          = link_to 'Edit', "#"
+        %button.btn-lg.btn-danger.btn-block
+          = link_to 'Destroy', "#"
 
   %br
 
