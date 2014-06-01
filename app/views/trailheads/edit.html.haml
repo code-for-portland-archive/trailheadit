@@ -1,7 +1,15 @@
-%h1 Editing trailhead
+.container
+  .row
+    .col-md-12
+      %h1 Editing trailhead
 
-= render 'form'
+      = render 'form'
 
-= link_to 'Show', @trailhead
-\|
-= link_to 'Back', trailheads_path
+      %h3
+        Debug
+      %pre
+        = JSON.pretty_generate JSON.parse(@trailhead.to_json)
+
+      = link_to 'Show', @trailhead
+      \|
+      = link_to 'Back', trailheads_path

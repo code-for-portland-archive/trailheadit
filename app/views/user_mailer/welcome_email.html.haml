@@ -4,10 +4,11 @@
     %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
     %h1
-      Welcome to trailheadit, #{@user.name}
+      Welcome to trailheadit,
     %p
       You have successfully signed up to trailheadit,
       %br/
     %p
-      To view your contributions, just follow this link: #{@url}.
+      = link_to "Click here to see your contributions.", @user
+      
     %p Thanks for contributing!

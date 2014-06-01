@@ -33,3 +33,4 @@ module Trailheadit
     # config.i18n.default_locale = :de
   end
 end
+

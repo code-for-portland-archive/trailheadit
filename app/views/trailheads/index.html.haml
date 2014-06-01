@@ -20,10 +20,8 @@
   - @trailheads.each do |trailhead|
     %div.col-md-12.trailhead-box.container-fix
       %div.col-md-4.photo-box
-        = trailhead.photo
-        %h3.h4
-          = trailhead.created_at
-      %div.col-md-3.details-box
+        = image_tag (trailhead.photo.url || "trailheadit_hq.jpg"), class: "img-responsive"
+      %div.col-md-4.details-box
         %ul
           %li
             - if trailhead.restrooms

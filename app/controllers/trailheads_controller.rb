@@ -5,7 +5,7 @@ class TrailheadsController < ApplicationController
   def email
     
     # process various message parameters:
-    @sender  = params['from']
+    @sender  = params['sender']
     @subject = params['subject']
 
     # get the "stripped" body of the message, i.e. without
@@ -13,8 +13,9 @@ class TrailheadsController < ApplicationController
     @actual_body = params["stripped-text"]
 
     attachments = JSON.parse params['attachments']
-    puts attachments
+    puts "ATTACHMENTS"
     if attachments.present?
+      puts attachments.count
       attachments.each do |a|
         puts "ATTACHMENT #{a}"
         
@@ -27,38 +28,38 @@ class TrailheadsController < ApplicationController
         url = a['url']
         # url.gsub!('https://',"https://api:#{api_key}@")
         test = open(url,:http_basic_authentication=>['api','key-7vasqtc4mg9w645w5w86za-3kay2co66'])        
-        puts test.path
         @trailhead = Trailhead.create(name:@subject, email:@sender, photo:File.open(test.path))                  
-        puts "PATH"
-        puts @trailhead.photo.url
-        puts @trailhead.photo.path
         @exif = @trailhead.exifXtractr(test.path)
-        puts "EXIF"
-        puts @exif
-        
+                
         @trailhead.update_attributes(
           latitude:@exif.gps.latitude||@trailhead.latitude,
           longitude:@exif.gps.longitude||@trailhead.longitude,
           taken_at:@exif.date_time,
-          altitude:@exif.gps.altitude)
-        puts @trailhead
-        puts @trailhead
+          altitude:@exif.gps.altitude,
+          email_properties:params)
         
-
+        # find or create the user
+        if User.exists?(email: @sender)
+          puts "USER FOUND"
+          @user = User.find_by(email: @sender)
+          @user.trailheads << @trailhead
+        else
+          puts "USER NOT FOUND"
+          @user = User.create(email: @sender)          
+          @user.trailheads << @trailhead
+          UserMailer.welcome_email(@user).deliver
+        end
       end
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
-    
-  rescue Exception => e
-    puts "ERROR"
-    puts e.message
-    render plain: e.message
+    puts "END OF EMAIL"
+    render plain: "DONE"
   end
 
   # GET /trailheads
   # GET /trailheads.json
   def index
-    @trailheads = Trailhead.all
+    @trailheads = Trailhead.order('id desc').all
   end
 
   # GET /trailheads/1
