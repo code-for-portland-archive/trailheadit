@@ -30,6 +30,8 @@ class TrailheadsController < ApplicationController
         puts url
         @trailhead = Trailhead.create(name:@subject, email:@sender, remote_photo_url:url)          
         @trailhead.photo.store!
+        puts "PATH"
+        puts @trailhead.photo.url
         @exif = @trailhead.exifXtractr(@trailhead.photo.path)
         PUTS "EXIF"
         puts @exif
