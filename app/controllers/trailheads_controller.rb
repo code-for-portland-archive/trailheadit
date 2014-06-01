@@ -33,15 +33,13 @@ class TrailheadsController < ApplicationController
         puts @trailhead.photo.url
         puts @trailhead.photo.path
         @exif = @trailhead.exifXtractr(test.path)
-        puts "EXIF"
-        puts @exif.gps
+        puts "EXIF"        
         
         @trailhead.update_attributes(
           latitude:@exif.gps.latitude||@trailhead.latitude,
           longitude:@exif.gps.longitude||@trailhead.longitude,
           taken_at:@exif.date_time,
           altitude:@exif.gps.altitude,
-          exif_properties:@exif,
           email_properties:params)
         puts @trailhead
         puts @trailhead
