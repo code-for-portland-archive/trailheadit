@@ -18,6 +18,7 @@
       %th Photo
       %th Action 1
       %th Action 2
+      %th
     %tr
       %td
         =image_tag "trailhead.jpg", class:"img-responsive"
@@ -29,18 +30,13 @@
 
     - @trailheads.each do |trailhead|
       %tr
-        %td= trailhead.name
-        %td= trailhead.latitude
-        %td= trailhead.longitude
-        %td= trailhead.altitude
         %td= trailhead.photo
-        %td= trailhead.parking
-        %td= trailhead.drinking_water
-        %td= trailhead.restrooms
-        %td= trailhead.kiosk
-        %td= link_to 'Show', trailhead
-        %td= link_to 'Edit', edit_trailhead_path(trailhead)
+        %td= link_to 'Edit', edit_trailhead_path(trailhead), class: "btn btn-primary table-btn"
         %td= link_to 'Destroy', trailhead, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td 
+          %pre
+            = JSON.pretty_generate trailhead.to_json
+        
 
   %br
 
