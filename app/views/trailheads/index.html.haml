@@ -18,7 +18,7 @@
       %th Photo
       %th Action 1
       %th Action 2
-      %th
+      %th Debug
     %tr
       %td
         =image_tag "trailhead.jpg", class:"img-responsive"
@@ -35,7 +35,7 @@
         %td= link_to 'Destroy', trailhead, :method => :delete, :data => { :confirm => 'Are you sure?' }
         %td 
           %pre
-            = JSON.pretty_generate trailhead.to_json
+            = JSON.pretty_generate JSON.parse(trailhead.to_json)
         
 
   %br
