@@ -5,7 +5,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :phones
-
   root :to => "home#index"
 end
