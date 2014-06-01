@@ -30,7 +30,8 @@
 
     - @trailheads.each do |trailhead|
       %tr
-        %td= image_tag(trailhead.photo.url), class: 'img-responsive'
+        %td
+          = image_tag trailhead.photo.url, class: 'img-responsive'
         %td= link_to 'Edit', edit_trailhead_path(trailhead), class: "btn btn-primary table-btn"
         %td= link_to 'Destroy', trailhead, :method => :delete, :class =>"btn btn-danger table-btn"
         %td 
