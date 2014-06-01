@@ -13,7 +13,8 @@ class TrailheadsController < ApplicationController
     @actual_body = params["stripped-text"]
 
     attachments = params['attachments']
-    if attachments
+    puts attachments
+    if attachments.present?
       attachments.each do |a|
         puts "ATTACHMENT #{a}"
         
