@@ -25,7 +25,7 @@ class TrailheadsController < ApplicationController
 
         api_key = ENV['MAILGUN_API_KEY']
         url = a['url']
-        url.gsub!('https://',"https://api:#{api_ky}@")
+        url.gsub!('https://',"https://api:#{api_key}@")
         puts url
         @trailhead = Trailhead.create(name:@subject, email:@sender, remote_photo_url:url)          
         @trailhead.photo.store!
