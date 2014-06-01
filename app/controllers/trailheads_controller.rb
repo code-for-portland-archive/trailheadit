@@ -49,7 +49,7 @@ class TrailheadsController < ApplicationController
       end
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
     end     
-    
+    puts "END OF EMAIL"
   rescue Exception => e
     puts "ERROR"
     puts e.message
@@ -59,7 +59,7 @@ class TrailheadsController < ApplicationController
   # GET /trailheads
   # GET /trailheads.json
   def index
-    @trailheads = Trailhead.all
+    @trailheads = Trailhead.order('id desc').all
   end
 
   # GET /trailheads/1
