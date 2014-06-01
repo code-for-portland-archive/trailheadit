@@ -1,3 +1,3 @@
 class Trailhead < ActiveRecord::Base
-  belongs_to :phone
+  mount_uploader :trailheadphoto, TrailheadphotoUploader
 end

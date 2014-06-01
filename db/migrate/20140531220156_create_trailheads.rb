@@ -1,7 +1,6 @@
 class CreateTrailheads < ActiveRecord::Migration
   def change
     create_table :trailheads do |t|
-      t.references :phone, index: true
       t.string :name
       t.float :latitude
       t.float :longitude
