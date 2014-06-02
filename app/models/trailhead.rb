@@ -14,7 +14,8 @@ class Trailhead < ActiveRecord::Base
   end
 
   def exif_data
-    img_exif = EXIFR::JPEG.new(photo.path)
+    test = open(photo.url)        
+    img_exif = EXIFR::JPEG.new(test.path)
     return img_exif
   end
 
