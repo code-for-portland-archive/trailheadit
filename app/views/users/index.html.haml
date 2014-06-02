@@ -1,19 +1,20 @@
-%h1 Listing users
+.row
+  .col-md12
+    %h3 Users
 
-%table
-  %tr
-    %th Email
-    %th
-    %th
-    %th
+    %table.table.table-striped
+      %tr
+        %th Email
+        %th    
+        
 
-  - @users.each do |user|
-    %tr
-      %td= user.email
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      - @users.each do |user|
+        %tr
+          %td= link_to user.email, user
+          %td.text-right
+            = link_to 'Edit', edit_user_path(user), class: 'btn-edit'
+            = link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn-delete'
 
-%br
+    %br
 
-= link_to 'New User', new_user_path
+    = link_to 'New User', new_user_path, class: 'btn-new'

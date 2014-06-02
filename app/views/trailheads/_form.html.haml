@@ -1,18 +1,24 @@
-= simple_form_for(@trailhead) do |f|
+= simple_form_for(@trailhead, role: 'form') do |f|
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.input :latitude
-    = f.input :longitude
-    = image_tag(@trailhead.photo_url) if @trailhead.photo?
-    = f.input :photo, as: :file
-    = f.check_box :remove_photo
-    Remove photo
-    = f.input :parking
-    = f.input :drinking_water
-    = f.input :restrooms
-    = f.input :kiosk
+    .form-group
+      = f.association :user
+    .form-group
+      = f.input :name
+    .form-group
+      = f.input :latitude
+      = f.input :longitude
+    .form-group   
+      = image_tag(@trailhead.photo_url) if @trailhead.photo?
+      = f.input :photo, as: :file
+      .attribute
+        = f.input :remove_photo, as: :boolean, label: false, inline_label: true
+    .form-group.attribute
+      = f.input :parking, inline_label: true, label: false
+      = f.input :drinking_water, label: false, inline_label: true
+      = f.input :restrooms, label: false, inline_label: true
+      = f.input :kiosk, label: false, inline_label: true
 
   .form-actions
     = f.button :submit, class: 'btn btn-primary'

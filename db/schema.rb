@@ -11,10 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601192831) do
+ActiveRecord::Schema.define(version: 20140602195715) do
 
-# Could not dump table "trailheads" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "trailheads", force: true do |t|
+    t.string   "name"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "photo"
+    t.boolean  "parking"
+    t.boolean  "drinking_water"
+    t.boolean  "restrooms"
+    t.boolean  "kiosk"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email"
+    t.float    "heading"
+    t.datetime "taken_at"
+    t.float    "altitude"
+    t.datetime "viewed_at"
+    t.string   "email_url"
+    t.integer  "user_id"
+    t.text     "email_properties"
+    t.text     "exif_properties"
+  end
+
+  add_index "trailheads", ["user_id"], name: "index_trailheads_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"

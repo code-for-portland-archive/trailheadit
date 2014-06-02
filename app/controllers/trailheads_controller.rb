@@ -48,7 +48,6 @@ class TrailheadsController < ApplicationController
           puts "USER NOT FOUND"
           @user = User.create(email: @sender)          
           @user.trailheads << @trailhead
-          UserMailer.welcome_email(@user).deliver
         end
       end
       # now data needs to be parsed for lat lng and then attached to the carrier wave uploader

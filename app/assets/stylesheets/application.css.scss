@@ -14,13 +14,43 @@
  *= require_self
  */
 
+@import "bootstrap";
 
 * {
 	font-family: 'Open Sans Condensed', sans-serif;
 }
 
+.attribute {
+	input[type='checkbox'] {
+		margin-right:10px;
+		height: 21px;
+	}
+	label{
+		font-size:20px;		
+	}
+	label:hover{
+		color: #555;
+		cursor: pointer;
+	}
+}
+
 body {
 	height: 100%;
+}
+
+.btn-edit {	
+	@extend .btn;
+	@extend .btn-primary;
+}
+
+.btn-delete {	
+	@extend .btn;
+	@extend .btn-danger;
+}
+
+.btn-new{
+	@extend .btn;
+	@extend .btn-primary;
 }
 
 .trailhead-map{
@@ -63,7 +93,9 @@ body {
 .actions {
 	width: 100%;
 }
-
+.main{
+	margin-top:20px;
+}
 .actions .btn {
 	width: 33%;
 	background-color: #f6f6f6;
@@ -78,6 +110,7 @@ body {
 .actions .btn a {
 	color: #333333;
 }
+
 .actions .btn a:hover {
 	color: #333333;
 	text-decoration: none;
