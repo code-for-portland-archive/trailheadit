@@ -1,41 +1,43 @@
-%p#notice= notice
+.container
+  .row
+    .col-md-12
+      .row
+        .col-md-12
+          .pull-left.h3 Trailhead
+          .pull-right
+            %br
+            = link_to 'Edit', edit_trailhead_path(@trailhead), class: 'btn-edit'
+            
+            = link_to 'Back', trailheads_path, class: "btn btn-inverse"
 
-%p
-  %b Exif:
-  %pre
-    = @exif.to_json
-%p
-  %b Name:
-  = @trailhead.name
-%p
-  %b Latitude:
-  = @trailhead.latitude
-%p
-  %b Longitude:
-  = @trailhead.longitude
-%p
-  %b Altitude:
-  = @trailhead.altitude
-%p
-  %b Taken at:
-  = @trailhead.taken_at
+      .row
+        .col-md-6
+          %h4 User
+          = @trailhead.user.email if @trailhead.user
+          %h4 Name
+          = @trailhead.name
+          %h4 Latitude
+          = @trailhead.latitude
+          %h4 Longitude
+          = @trailhead.longitude
+          %h4 Altitude
+          = @trailhead.altitude
+        .col-md-6
+          %h4 Parking
+          = @trailhead.parking
+          %h4 Drinking water
+          = @trailhead.drinking_water 
+          %h4 Restrooms
+          = @trailhead.restrooms
+          %h4 Kiosk
+          = @trailhead.kiosk
+          %h4 Taken at
+          = @trailhead.taken_at
+                    
+      %h4 Photo
+      = image_tag @trailhead.photo.url
 
-%p
-  %b Photo:
-  = @trailhead.photo
-%p
-  %b Parking:
-  = @trailhead.parking
-%p
-  %b Drinking water:
-  = @trailhead.drinking_water
-%p
-  %b Restrooms:
-  = @trailhead.restrooms
-%p
-  %b Kiosk:
-  = @trailhead.kiosk
+      %h4 EXIF
+      %pre
+        = pretty_json @trailhead.exif_data.to_json    
 
-= link_to 'Edit', edit_trailhead_path(@trailhead)
-\|
-= link_to 'Back', trailheads_path

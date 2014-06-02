@@ -27,7 +27,7 @@
         %ul
           %li
             - if trailhead.user
-              = trailhead.user.email
+              = link_to trailhead.user.email, trailhead.user
           %li
             =trailhead.latitude
           %li

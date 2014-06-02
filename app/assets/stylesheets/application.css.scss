@@ -63,7 +63,7 @@ body {
 	width: 100%;
 	min-height: 350px;
 	background-repeat:no-repeat;
-	background-size: 100%;
+	background-size: cover;
 	background-position:center;
 	background-image: url(image_path("trailhead_banner.jpg"));
 }
@@ -74,8 +74,6 @@ body {
 .container {
 	padding-top: 30px;
 	background-color: white;
-	padding-left: 0;
-	padding-right: 0;
 }
 
 .container-fix {
