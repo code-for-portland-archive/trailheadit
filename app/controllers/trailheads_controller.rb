@@ -55,6 +55,9 @@ class TrailheadsController < ApplicationController
     end     
     puts "END OF EMAIL"
     render plain: "DONE"
+  rescue
+    puts "ERROR"
+    render plain: "DONE"
   end
 
   # GET /trailheads
