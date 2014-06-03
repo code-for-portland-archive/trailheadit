@@ -12,6 +12,15 @@ class TrailheadsController < ApplicationController
     # the quoted part
     @actual_body = params["stripped-text"]
 
+    # find or create the user
+    if User.exists?(email: @sender)
+      puts "USER FOUND"
+      @user = User.find_by(email: @sender)
+    else
+      puts "USER NOT FOUND"
+      @user = User.create(email: @sender)                
+    end
+
     attachments = JSON.parse params['attachments']
     puts "ATTACHMENTS"
     if attachments.present?
@@ -30,6 +39,7 @@ class TrailheadsController < ApplicationController
         test = open(url,:http_basic_authentication=>['api',ENV['MAILGUN_API_KEY']])        
 
         @trailhead = Trailhead.create(name:@subject, email:@sender, photo:File.open(test.path))                  
+        @user.trailheads << @trailhead
         @exif = @trailhead.exifXtractr(test.path)
                 
         @trailhead.update_attributes(
@@ -39,25 +49,16 @@ class TrailheadsController < ApplicationController
           altitude:@exif.gps.altitude,
           email_properties:params)
         
-        # find or create the user
-        if User.exists?(email: @sender)
-          puts "USER FOUND"
-          @user = User.find_by(email: @sender)
-          @user.trailheads << @trailhead
-        else
-          puts "USER NOT FOUND"
-          @user = User.create(email: @sender)          
-          @user.trailheads << @trailhead
-        end
       end
-      # now data needs to be parsed for lat lng and then attached to the carrier wave uploader
+      
     end     
     puts "END OF EMAIL"
     render plain: "DONE"
   rescue Exception => e
-    puts "ERROR"
-    Rails.logger.error e
-    render plain: "DONE"
+    Rails.logger.error "ERROR"
+    Rails.logger.error e.message
+    e.backtrace.each { |line| Rails.logger.error line }
+    render plain: "ERROR"
   end
 
   # GET /trailheads
