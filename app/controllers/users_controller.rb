@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @trailheads = @user.trailheads
+    @trailheads = @user.trailheads.order('id desc')
   end
 
   # GET /users/new
