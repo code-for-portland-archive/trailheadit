@@ -27,7 +27,7 @@ class TrailheadsController < ApplicationController
         api_key = ENV['MAILGUN_API_KEY']
         url = a['url']
         # url.gsub!('https://',"https://api:#{api_key}@")
-        test = open(url,:http_basic_authentication=>['api','key-7vasqtc4mg9w645w5w86za-3kay2co66'])        
+        test = open(url,:http_basic_authentication=>['api',ENV['MAILGUN_API_KEY']])        
 
         @trailhead = Trailhead.create(name:@subject, email:@sender, photo:File.open(test.path))                  
         @exif = @trailhead.exifXtractr(test.path)
