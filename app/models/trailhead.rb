@@ -2,6 +2,8 @@ class Trailhead < ActiveRecord::Base
   mount_uploader :photo, TrailheadphotoUploader
   belongs_to :user
 
+  serialize :exif_properties, :email_properies
+
   #This method returns the GPS Latitude, Longitude, Timestamp
   #For a specified image.
   #Input: Image path for local JPG copy

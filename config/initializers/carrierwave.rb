@@ -7,8 +7,10 @@ CarrierWave.configure do |config|
   }
   if Rails.env.production?
     config.fog_directory  = 'trailheadit'
-  else
+  elsif Rails.env.staging?    
     config.fog_directory  = 'trailheadit-dev'
+  else
+    config.fog_directory  = 'trailheadit-local'
     config.storage = :file
     config.enable_processing = false
   end
