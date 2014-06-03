@@ -47,7 +47,7 @@ class Trailhead < ActiveRecord::Base
   end
 
   def self.to_geojson    
-    features = self.all.collect do |c|                   
+    features = self.all.select{|c| c.latitude && c.longitude}.collect do |c|                   
       c.to_geojson
     end
 
