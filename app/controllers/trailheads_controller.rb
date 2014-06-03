@@ -54,8 +54,9 @@ class TrailheadsController < ApplicationController
     end     
     puts "END OF EMAIL"
     render plain: "DONE"
-  rescue
+  rescue Exception => e
     puts "ERROR"
+    Rails.logger.error e
     render plain: "DONE"
   end
 
