@@ -21,79 +21,40 @@ class Trailhead < ActiveRecord::Base
 
   def save_exif
     update_attributes(exif_properties:JSON.parse(exif_data.to_json))
+  end  
+
+  def to_geojson
+    properties = {
+        # trailIds:c.trails.collect(&:plats_id).join("; "),
+        name:name,              
+        kiosk:kiosk,
+        parking:parking,
+        restrooms:restrooms,
+        drinkwater:drinking_water
+        # address: address.to_s        
+    }
+
+    geometry = {
+      type: "Point",
+      coordinates: [longitude,latitude]
+    }
+
+    { 
+      type:"Feature",
+      properties:properties,
+      geometry: geometry
+    }
   end
 
-  def to_plats_trailhead_geojson
-    features = all_trailheads.collect do |c|             
-      stewardId = c.plats_steward_id || self.plats_id.to_s
-      properties = {
-        # trailIds:c.trails.collect(&:plats_id).join("; "),
-        name:c.name,      
-        steward_id:stewardId,        
-        address: c.address.to_s        
-      }
-
-      prop_tags = ['kiosk','parking','drinkwater','restrooms']
-      osm_hash = []
-      c.osm_tags.order('value').each do |osm_tag|
-        if prop_tags.include? osm_tag.key
-          properties[osm_tag.key] = osm_tag.value
-        else
-          osm_hash << [osm_tag.key,osm_tag.value]
-        end
-      end
-
-      properties[:trail_ids] = c.trails.collect(&:plats_id).sort.join(";")
-      properties[:osm_tags] = osm_hash.collect{|c| "#{c[0]}=#{c[1]}"}.join(";")
-
-      { 
-        type:"Feature",
-        properties:properties,
-        geometry:Yajl::Parser.new.parse(c.geojson)
-      }
+  def self.to_geojson    
+    features = self.all.collect do |c|                   
+      c.to_geojson
     end
 
     geojson = {
       type: "FeatureCollection", 
       features: features 
-    }.to_json
-
-  end
-
-  def self.to_plats_trailhead_geojson
-    features = all_trailheads.collect do |c|             
-      stewardId = c.plats_steward_id || self.plats_id.to_s
-      properties = {
-        # trailIds:c.trails.collect(&:plats_id).join("; "),
-        name:c.name,      
-        steward_id:stewardId,        
-        address: c.address.to_s        
-      }
-
-      prop_tags = ['kiosk','parking','drinkwater','restrooms']
-      osm_hash = []
-      c.osm_tags.order('value').each do |osm_tag|
-        if prop_tags.include? osm_tag.key
-          properties[osm_tag.key] = osm_tag.value
-        else
-          osm_hash << [osm_tag.key,osm_tag.value]
-        end
-      end
-
-      properties[:trail_ids] = c.trails.collect(&:plats_id).sort.join(";")
-      properties[:osm_tags] = osm_hash.collect{|c| "#{c[0]}=#{c[1]}"}.join(";")
-
-      { 
-        type:"Feature",
-        properties:properties,
-        geometry:Yajl::Parser.new.parse(c.geojson)
-      }
-    end
-
-    geojson = {
-      type: "FeatureCollection", 
-      features: features 
-    }.to_json
+    }
 
   end
     

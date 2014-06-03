@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :users
+  
+  resources :users do
+    resources :trailheads
+  end
 
   resources :trailheads do
     collection do

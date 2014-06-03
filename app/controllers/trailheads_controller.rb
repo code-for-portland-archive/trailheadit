@@ -63,6 +63,19 @@ class TrailheadsController < ApplicationController
   # GET /trailheads.json
   def index
     @trailheads = Trailhead.order('id desc').all
+    if @user = params[:user_id]
+      @user = User.find(params[:user_id])
+      @trailheads = @user.trailheads
+    end
+    respond_to do |format|
+      format.html{}        
+      format.json do
+        render json: @trailheads.to_geojson
+      end
+      format.js do
+        render json: @trailheads.to_geojson
+      end
+    end
   end
 
   # GET /trailheads/1
@@ -71,7 +84,7 @@ class TrailheadsController < ApplicationController
     respond_to do |format|
       format.html{}        
       format.js do
-        render json: @trailhead
+        render json: @trailhead.to_geojson
       end
     end
   end
