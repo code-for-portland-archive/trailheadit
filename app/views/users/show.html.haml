@@ -31,6 +31,7 @@
           var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
       %div.col-md-4.details-box
         %ul
+          %li= trailhead.name
           %li
             - if trailhead.restrooms
               ="Restrooms available on site"
