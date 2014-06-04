@@ -16,19 +16,20 @@ class TrailheadsController < ApplicationController
 
     # find or create the user
     if User.exists?(email: @sender)
-      puts "USER FOUND"
+      Rails.logger.info "USER FOUND"
       @user = User.find_by(email: @sender)
     else
-      puts "USER NOT FOUND"
+      Rails.logger.info "USER NOT FOUND"
       @user = User.create(email: @sender, name: @name)                
     end
 
-    attachments = JSON.parse params['attachments']
-    puts "ATTACHMENTS"
+    @trailheads = []
+
+    attachments = JSON.parse params['attachments']    
     if attachments.present?
-      puts attachments.count
+      Rails.logger.info attachments.count
       attachments.each do |a|
-        puts "ATTACHMENT #{a}"
+        Rails.logger.info "ATTACHMENT #{a}"
         
         # stream = params["attachment-#{i+1}"]
         # filename = stream.original_filename
@@ -42,6 +43,7 @@ class TrailheadsController < ApplicationController
 
         @trailhead = Trailhead.create(name:@subject, email:@sender, photo:File.open(test.path))                  
         @user.trailheads << @trailhead
+        @trailheads << @trailhead
         @exif = @trailhead.exifXtractr(test.path)
                 
         @trailhead.update_attributes(
@@ -49,12 +51,16 @@ class TrailheadsController < ApplicationController
           longitude:@exif.gps.longitude||@trailhead.longitude,
           taken_at:@exif.date_time,
           altitude:@exif.gps.altitude,
-          email_properties:params)
+          email_properties:params,
+          exif_properties:@exif)
         
       end
-      
     end     
-    puts "END OF EMAIL"
+
+    if Rails.env.production?
+      UserMailer.welcome_email(@user,@trailheads).deliver
+    end
+    
     render plain: "DONE"
   rescue Exception => e
     Rails.logger.error "ERROR"

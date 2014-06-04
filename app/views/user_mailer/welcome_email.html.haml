@@ -6,7 +6,8 @@
     %h1
       Nice work!
     %p
-      Nice work, we got your Trailhead, it looks great!
+      We received #{pluralize(@count,'Trailhead')}! They look great!
+    %p
       Here is your own personal page with all of your Trailheads:
     %p
       = link_to "Click here to see your contributions.", "http://traileditor.org/users/#{@user.id}"

@@ -1,8 +1,10 @@
 class UserMailer < ActionMailer::Base
   default from: 'welcome@traileditor.org'
 
-  def welcome_email(user)
+  def welcome_email(user, trailheads)
     @user = user    
-    mail(from: "welcome@traileditor.prg", to: @user.email, subject: 'Welcome to My Trailheads')
+    @trailheads = trailheads
+    mail(from: "welcome@traileditor.org", to: @user.email, subject: 'Thanks for the Trailheads!')
   end
+
 end
