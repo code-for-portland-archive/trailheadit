@@ -5,7 +5,9 @@ class TrailheadsController < ApplicationController
   def email
     
     # process various message parameters:
-    @sender  = params['sender']
+    mail_from = Mail::Address.new(params['from'] || params['sender'])
+    @sender  = mail_from.address
+    @name = mail_from.name
     @subject = params['subject']
 
     # get the "stripped" body of the message, i.e. without
@@ -18,7 +20,7 @@ class TrailheadsController < ApplicationController
       @user = User.find_by(email: @sender)
     else
       puts "USER NOT FOUND"
-      @user = User.create(email: @sender)                
+      @user = User.create(email: @sender, name: @name)                
     end
 
     attachments = JSON.parse params['attachments']
