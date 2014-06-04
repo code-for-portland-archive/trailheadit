@@ -15,6 +15,9 @@
   %body
     = render 'layouts/navigation'
 
+    - if content_for :pre_container
+      = yield :pre_container
+
     .container.main
       = render 'layouts/messages'    
       = yield

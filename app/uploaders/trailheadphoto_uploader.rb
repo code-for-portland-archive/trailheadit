@@ -25,6 +25,10 @@ class TrailheadphotoUploader < CarrierWave::Uploader::Base
     process :resize_to_fit => [150, 150]
   end
 
+  version :small do
+    process :resize_to_fit => [500, 500]
+  end
+
   # def extension_white_list
   #   %w(jpg jpeg)
   # end
