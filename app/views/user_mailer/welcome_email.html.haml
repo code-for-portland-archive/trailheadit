@@ -5,12 +5,14 @@
   %body
     %h1
       Nice work!
-    %p
-      We received #{pluralize(@count,'Trailhead')}! They look great!
+    - if @trailheads.any?
+      %p
+        We received #{pluralize(@trailheads.count,'Trailhead')}! They look great!
     %p
       Here is your own personal page with all of your Trailheads:
     %p
       = link_to "Click here to see your contributions.", "http://traileditor.org/users/#{@user.id}"
+    %hr
     %p
       Water, restroom? Take a look, share with your friends and help out your local park agency by adding some more info to your trailheads. 
     %p
