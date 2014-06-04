@@ -20,6 +20,12 @@
 	font-family: 'Open Sans Condensed', sans-serif;
 }
 
+.form-inputs.block{
+	select, input[type=text], input[type=number], input[type=text]{
+		@extend .form-control;
+		@extend .input-block-level;
+	}
+}
 .attribute {
 	input[type='checkbox'] {
 		margin-right:10px;
@@ -32,10 +38,21 @@
 		color: #555;
 		cursor: pointer;
 	}
+	label.checkbox{
+		border: solid 1px #ccc;
+		background: white;
+		padding: 10px;
+		border-radius: 10px;
+		background: #eee;
+	}
 }
 
 body {
-	height: 100%;
+	height: 100%;	
+}
+
+body > .container{
+	padding-top:60px;
 }
 
 .btn-edit {	
@@ -90,9 +107,6 @@ body {
 }
 .actions {
 	width: 100%;
-}
-.main{
-	margin-top:20px;
 }
 .actions .btn {
 	width: 33%;

@@ -1,7 +1,7 @@
 = simple_form_for(@trailhead, role: 'form') do |f|
   = f.error_notification
 
-  .form-inputs
+  .form-inputs.block
     .form-group
       = f.association :user
     .form-group
@@ -10,7 +10,7 @@
       = f.input :latitude
       = f.input :longitude
     .form-group   
-      = image_tag(@trailhead.photo_url) if @trailhead.photo?
+      = image_tag(@trailhead.photo.url(:thumb), class: "img-responsive img-polaroid") if @trailhead.photo?
       = f.input :photo, as: :file
       .attribute
         = f.input :remove_photo, as: :boolean, label: false, inline_label: true
@@ -20,5 +20,5 @@
       = f.input :restrooms, label: false, inline_label: true
       = f.input :kiosk, label: false, inline_label: true
 
-  .form-actions
-    = f.button :submit, class: 'btn btn-primary'
+  .form-actions.text-center
+    = f.button :submit, class: 'btn btn-primary btn-lg'

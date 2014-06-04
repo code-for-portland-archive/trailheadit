@@ -13,12 +13,8 @@
       <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
 
   %body
-    %header
-      = render 'layouts/navigation'
+    = render 'layouts/navigation'
 
-    %div.main
-      .container
-        .row
-          .col-md-12
-            = render 'layouts/messages'    
+    .container.main
+      = render 'layouts/messages'    
       = yield

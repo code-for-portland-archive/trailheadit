@@ -47,7 +47,7 @@ class TrailheadsController < ApplicationController
           taken_at:@exif.date_time,
           altitude:@exif.gps.altitude,
           email_properties:params,
-          exif_properties:@exif)
+          exif_properties:@exif.to_json)
         
       end
     end     
@@ -136,7 +136,7 @@ class TrailheadsController < ApplicationController
   def update
     respond_to do |format|
       if @trailhead.update(trailhead_params)
-        format.html { redirect_to @trailhead, notice: 'Trailhead was successfully updated.' }
+        format.html { redirect_to @trailhead.user, notice: 'Trailhead was successfully updated.' }
         format.json { render :show, status: :ok, location: @trailhead }
       else
         format.html { render :edit }

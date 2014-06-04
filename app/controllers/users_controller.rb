@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @trailheads = @user.trailheads.order('id desc')
+    render "trailheads/index"
   end
 
   # GET /users/new
