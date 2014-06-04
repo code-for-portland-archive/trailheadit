@@ -22,19 +22,20 @@
   %div.col-md-12.trailhead-box
     %div.col-md-4.photo-box
       = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive"
+
     %div.col-md-4.location-box
-      %ul
-        %li
-          - if trailhead.user
-            = link_to trailhead.user.email, trailhead.user
-        %li
-          =trailhead.latitude
-        %li
-          =trailhead.longitude
-        %li
-          =trailhead.altitude
+
+      .trailhead-map(id="trailhead-map-#{trailhead.id}")
+      :javascript
+        var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
+        myMap.setView([#{trailhead.latitude}, #{trailhead.longitude}], 18);
+        var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
+
     %div.col-md-4.details-box
       %ul
+        - if trailhead.user
+          %li
+            = link_to trailhead.user.email, trailhead.user
         %li
           = trailhead.name
         %li
@@ -57,6 +58,7 @@
             ="There is trail information present on site"
           - else
             ="No information is available here"
+        %br
         = link_to 'Edit', edit_trailhead_path(trailhead), class: "btn btn-primary btn-block"
     
         = link_to 'Delete', trailhead, :method => :delete, class: "btn btn-danger btn-block"
