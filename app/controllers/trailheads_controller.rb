@@ -31,11 +31,6 @@ class TrailheadsController < ApplicationController
       attachments.each do |a|
         Rails.logger.info "ATTACHMENT #{a}"
         
-        # stream = params["attachment-#{i+1}"]
-        # filename = stream.original_filename
-        # data = stream.read() 
-        # puts data.length     
-
         api_key = ENV['MAILGUN_API_KEY']
         url = a['url']
         # url.gsub!('https://',"https://api:#{api_key}@")

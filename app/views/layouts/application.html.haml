@@ -17,5 +17,8 @@
       = render 'layouts/navigation'
 
     %div.main
-      = render 'layouts/messages'    
+      .container
+        .row
+          .col-md-12
+            = render 'layouts/messages'    
       = yield
