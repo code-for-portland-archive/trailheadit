@@ -6,7 +6,7 @@
 .row
   .col-xs-5.headline
     .header-button
-      .lead= pluralize(@trailheads.count,'Trailhead')
+      %h3= pluralize(@trailheads.count,'Trailhead')
   .col-xs-7.text-right
     .header-button
       = link_to trailheads_path(format: :json), class: "btn btn-primary" do
@@ -19,7 +19,7 @@
       .col-sm-6.col-md-4
         .trailhead-box 
           .lead.text-center= trailhead.name
-            
+          %hr
           .photo-box
             = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive"
           
@@ -30,7 +30,7 @@
             var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
           .text-muted.text-center
             = link_to trailhead.latlng, "http://maps.google.com?q=#{trailhead.latlng}", target: :blank
-          %br
+          %hr
           %ul
             %li
               %h4
