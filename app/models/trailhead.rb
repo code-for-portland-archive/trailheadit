@@ -2,6 +2,8 @@ class Trailhead < ActiveRecord::Base
   mount_uploader :photo, TrailheadphotoUploader
   belongs_to :user
 
+  after_create :default_taken_at
+
   serialize :exif_properties, JSON
   serialize :email_properties, JSON
 
@@ -11,6 +13,11 @@ class Trailhead < ActiveRecord::Base
   #Output: GPS.latitude, GPS.Longitude, Timestamp
   #Values may be "Nil" for cases missing Exif info in the JPG
   
+  def default_taken_at
+    taken_at ||= created_at
+    save
+  end
+
   def latlng
     [latitude,longitude].join(',')
   end
