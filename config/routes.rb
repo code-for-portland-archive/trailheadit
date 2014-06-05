@@ -10,5 +10,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root :to => "trailheads#index"
+  root :to => "home#index"
   end

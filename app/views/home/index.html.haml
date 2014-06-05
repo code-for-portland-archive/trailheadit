@@ -1,8 +1,43 @@
 - content_for :pre_container do
   .banner
-  
+    .container
+      .welcome
+        %h1.text-center
+          Welcome to TrailEditor
+
+
 %br
-.landing.text-center
-  = link_to "Trailheads", trailheads_path, class: "btn btn-lg btn-primary"
+
+%row
+  .col-sm-4
+    .well
+      %h4
+        Step 1
+      %hr
+      %h2
+        Take a photo of a trailhead
+      %h5        
+  .col-sm-4
+    .well
+      %h4
+        Step 2
+      %hr
+      %h2
+        Email it to new@traileditor.org
+  .col-sm-4
+    .well
+      %h4
+        Step 3
+      %hr
+      %h2
+        Find it here and add details
+
+.row
+  .col-sm-12
+    %hr
+.row
+  .col-sm-12
+    .landing.text-center
+      = link_to "Latest Trailheads", trailheads_path, class: "btn btn-lg btn-primary"
 
 
