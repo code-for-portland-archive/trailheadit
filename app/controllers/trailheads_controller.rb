@@ -70,7 +70,7 @@ class TrailheadsController < ApplicationController
     @trailheads = Trailhead.order('taken_at desc')
     if @user = params[:user_id]
       @user = User.find(params[:user_id])
-      @trailheads = @user.trailheads
+      @trailheads = @user.trailheads.order('taken_at desc')
     end
     respond_to do |format|
       format.html{}        

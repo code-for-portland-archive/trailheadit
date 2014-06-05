@@ -70,8 +70,9 @@
                 By
                 = link_to trailhead.user, trailhead.user
             .col-xs-6.text-right.text-caps
-              = time_ago_in_words (trailhead.taken_at || trailhead.created_at)
-              ago
+              - if trailhead.taken_at
+                = time_ago_in_words (trailhead.taken_at || trailhead.created_at)
+                ago
           
 
   .row    
