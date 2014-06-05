@@ -16,21 +16,21 @@
 - @trailheads.each_slice(3) do |slice|
   .row    
     - slice.each do |trailhead|           
-      .col-sm-4      
+      .col-sm-6.col-md-4
         .trailhead-box 
-          %h3.text-center= trailhead.name
-          %h5.text-center
-            Taken
-            - if trailhead.user
-              by
-              = link_to trailhead.user, trailhead.user
-
-            = time_ago_in_words (trailhead.taken_at || trailhead.created_at)
-            ago
+          .lead.text-center= trailhead.name
             
           .photo-box
             = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive"
-        
+          .row
+            .col-xs-6.text-caps
+              - if trailhead.user
+                By
+                = link_to trailhead.user, trailhead.user
+            .col-xs-6.text-right.text-caps
+              = time_ago_in_words (trailhead.taken_at || trailhead.created_at)
+              ago
+          %br
           .trailhead-map(id="trailhead-map-#{trailhead.id}")
           :javascript
             var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
