@@ -49,6 +49,7 @@
 
 body {
 	height: 100%;	
+	background-color: #eee;
 }
 
 body > .container{
@@ -85,17 +86,12 @@ body > .container{
 
 /* padding on top to allow for header*/
 .container {
-	padding-top: 30px;
-	background-color: white;
+	padding-top: 30px;	
 }
 
 .container-fix {
 	padding-left: 30px;
 	padding-right: 30px;
-}
-
-.headline {
-	min-height: 100px;
 }
 
 .dashboard {
@@ -125,6 +121,9 @@ body > .container{
 	background-color: inherit;
 }
 
+.text-caps{
+	text-transform: uppercase;
+}
 /* left padding over-ride to align with table */
 .navbar-brand {
 	padding-left: 30px;
@@ -136,7 +135,14 @@ body > .container{
 	text-align: center
 }
 
+.trailhead-box{
+	background-color:white;
+	border: solid 1px #ddd;	
+	padding:10px;
+	margin-bottom:10px;
+}
 .photo-box {	
+	border: solid 1px #ddd;	
 	text-align:center;
 	padding: 0;
 	img{

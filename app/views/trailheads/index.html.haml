@@ -1,25 +1,12 @@
 .row
-  %div.col-md-12.headline
-    %h2 Your Trailheads
-
-.row
-  .col-md-4
+  %div.col-sm-3.headline
     .header-button
-      = link_to "Download OpenTrails Data (GeoJSON)", trailheads_path(format: :json), class: "btn btn-primary btn-block"
-  .col-md-4      
+    .lead Your Trailheads
+  .col-sm-9.text-right
     .header-button
-      %div.btn.btn-primary.btn-block Share Trailheads with Park Agencies
-  .col-md-4
-    .header-button
-      = link_to 'Document a new Trailhead', new_trailhead_path, class: "btn btn-primary btn-block"
-
-.row
-  %div.col-md-4.column-header
-    %h2.h3 Trailhead Photo
-  %div.col-md-4.column-header
-    %h2.h3 Location
-  %div.col-md-4.column-header
-    %h2.h3 Attributes
+      = link_to "Download OpenTrails", trailheads_path(format: :json), class: "btn btn-primary"
+      %div.btn.btn-primary Share with Park Agencies
+      = link_to 'Add a Trailhead', new_trailhead_path, class: "btn btn-primary"
 
 - @trailheads.each_slice(3) do |slice|
   .row    
@@ -36,17 +23,28 @@
             = time_ago_in_words (trailhead.taken_at || trailhead.created_at)
             ago
             
+          .photo-box
+            = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive"
+        
+          .trailhead-map(id="trailhead-map-#{trailhead.id}")
+          :javascript
+            var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
+            myMap.setView([#{trailhead.latitude}, #{trailhead.longitude}], 18);
+            var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
+          %br
           %ul
             %li
-              - if trailhead.restrooms
-                ="Restrooms available on site"
-              - else
-                ="No restrooms available here"
+              %h4
+                - if trailhead.restrooms
+                  ="Restrooms available on site"
+                - else
+                  ="No restrooms available here"
             %li
-              - if trailhead.drinking_water
-                ="There is drinking water on site"
-              - else
-                ="No drinking water is available here"
+              %h4
+                - if trailhead.drinking_water
+                  ="There is drinking water on site"
+                - else
+                  ="No drinking water is available here"
             %li
               - if trailhead.parking
                 ="There is parking on site"
@@ -58,18 +56,10 @@
               - else
                 ="No information is available here"
 
-        .photo-box
-          = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive img-thumbnail"
+          %br
+          = link_to 'Edit', edit_trailhead_path(trailhead), class: "btn btn-primary btn-block"
       
-        .trailhead-map(id="trailhead-map-#{trailhead.id}")
-        :javascript
-          var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
-          myMap.setView([#{trailhead.latitude}, #{trailhead.longitude}], 18);
-          var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
-        %br
-        = link_to 'Edit', edit_trailhead_path(trailhead), class: "btn btn-primary btn-block"
-    
-        = link_to 'Delete', trailhead, :method => :delete, class: "btn btn-danger btn-block"
+          = link_to 'Delete', trailhead, :method => :delete, class: "btn btn-danger btn-block"
 
   .row    
     .col-md-12
