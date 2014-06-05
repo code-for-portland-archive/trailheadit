@@ -50,11 +50,9 @@
 .row
   .col-sm-12
     %hr
-
-.row
-
-  - Trailhead.order('taken_at desc').limit(3).each_slice(3) do |slice|
-    .row    
-      - slice.each do |trailhead|           
-        = render "trailheads/trailhead_box", trailhead: trailhead          
+  
+- Trailhead.order('taken_at desc').limit(3).each_slice(3) do |slice|
+  .row    
+    - slice.each do |trailhead|           
+      = render "trailheads/trailhead_box", trailhead: trailhead          
 
