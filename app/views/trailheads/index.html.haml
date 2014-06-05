@@ -6,11 +6,14 @@
   %div.col-md-12.dashboard
     .row
       .col-md-4
-        = link_to "Download OpenTrails Data (GeoJSON)", trailheads_path(format: :json), class: "btn btn-primary btn-block"
+        .header-button
+          = link_to "Download OpenTrails Data (GeoJSON)", trailheads_path(format: :json), class: "btn btn-primary btn-block"
       .col-md-4      
-        %div.btn.btn-primary.btn-block Share Trailheads with Park Agencies
+        .header-button
+          %div.btn.btn-primary.btn-block Share Trailheads with Park Agencies
       .col-md-4
-        = link_to 'Document a new Trailhead', new_trailhead_path, class: "btn btn-primary btn-block"
+        .header-button
+          = link_to 'Document a new Trailhead', new_trailhead_path, class: "btn btn-primary btn-block"
 
 .row
   %div.col-md-12
