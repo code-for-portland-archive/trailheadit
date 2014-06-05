@@ -4,40 +4,57 @@
       .welcome
         %h1.text-center
           Welcome to TrailEditor
-
+        %h3.text-center
+          The easiest way to create trailheads!
 
 %br
 
 %row
-  .col-sm-4
+  .col-md-4
     .well
-      %h4
+      %h3
         Step 1
       %hr
-      %h2
+      %h1
         Take a photo of a trailhead
-      %h5        
-  .col-sm-4
+      %h4     
+        Use your smartphone or other GPS enabled device
+  .col-md-4
     .well
-      %h4
+      %h3
         Step 2
       %hr
-      %h2
+      %h1
         Email it to new@traileditor.org
-  .col-sm-4
-    .well
       %h4
+        We'll convert the photo to a trailhead
+  .col-md-4
+    .well
+      %h3
         Step 3
       %hr
-      %h2
+      %h1
         Find it here and add details
+      %h4
+        So that others can find the trailhead too
 
 .row
   .col-sm-12
     %hr
+
 .row
   .col-sm-12
     .landing.text-center
       = link_to "Latest Trailheads", trailheads_path, class: "btn btn-lg btn-primary"
 
+.row
+  .col-sm-12
+    %hr
+
+.row
+
+  - Trailhead.order('taken_at desc').limit(3).each_slice(3) do |slice|
+    .row    
+      - slice.each do |trailhead|           
+        = render "trailheads/trailhead_box", trailhead: trailhead          
 
