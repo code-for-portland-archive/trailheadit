@@ -143,9 +143,11 @@ body > .container{
 	text-align: center
 }
 
-.photo-box {
-	height: 300px;
+.photo-box {	
 	padding: 0;
+	img{
+		max-height:300px;
+	}
 }
 
 .details-box {
