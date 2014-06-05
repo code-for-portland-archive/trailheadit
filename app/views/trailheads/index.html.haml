@@ -39,7 +39,7 @@
             = trailhead.name
           %li
             Taken
-            = time_ago_in_words trailhead.taken_at      
+            = time_ago_in_words (trailhead.taken_at || trailhead.created_at)
             ago
           - if trailhead.user
             %li
