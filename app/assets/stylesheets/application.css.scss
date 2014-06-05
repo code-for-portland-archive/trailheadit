@@ -70,13 +70,6 @@ body > .container{
 	@extend .btn-primary;
 }
 
-.trailhead-map{
-	padding:4px;
-	background-color:white;
-	border: 1px solid #ddd;
-	width:100%;
-	height:280px;
-}
 /* P R I M A R I L Y   H O M E. I N D E X */
 
 .banner {
@@ -149,7 +142,18 @@ body > .container{
 	img{
 		max-height:280px;
 	}
+	margin:10px;
 }
+
+.trailhead-map{
+	padding:4px;
+	background-color:white;
+	border: 1px solid #ddd;
+	width:100%;
+	height:280px;
+	margin:10px;
+}
+
 
 .details-box {
 	margin: 15px 0;

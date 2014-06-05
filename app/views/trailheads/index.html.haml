@@ -24,11 +24,10 @@
 - @trailheads.each do |trailhead|      
   .row
     .col-md-12.trailhead-box
-      .col-md-4.photo-box
-        = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive img-thumbnail"
-
+      .col-md-4
+        .photo-box
+          = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive img-thumbnail"
       .col-md-4.location-box
-
         .trailhead-map(id="trailhead-map-#{trailhead.id}")
         :javascript
           var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
