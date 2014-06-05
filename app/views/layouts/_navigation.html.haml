@@ -6,7 +6,10 @@
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    = link_to 'TrailEditor', root_path, class: 'navbar-brand'
+    = link_to root_path, class: 'navbar-brand' do
+      TrailEditor
+      - if Rails.env.staging?        
+        Staging
   .collapse.navbar-collapse
     %ul.nav.navbar-nav.pull-right
       = render 'layouts/navigation_links'
