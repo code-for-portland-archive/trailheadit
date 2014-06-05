@@ -16,7 +16,7 @@
 - @trailheads.each_slice(3) do |slice|
   .row    
     - slice.each do |trailhead|           
-      .col-sm-6
+      .col-sm-4
         .trailhead-box 
           .lead.text-center= trailhead.display_name
           %hr
@@ -37,25 +37,25 @@
                 - if trailhead.restrooms
                   ="Restrooms available on site"
                 - else
-                  ="No restrooms available here"
+                  .no="No restrooms available here"
             %li
               %h4
                 - if trailhead.drinking_water
                   ="There is drinking water on site"
                 - else
-                  ="No drinking water is available here"
+                  .no="No drinking water is available here"
             %li
               %h4
                 - if trailhead.parking
                   ="There is parking on site"
                 - else
-                  ="No parking is available here"
+                  .no="No parking is available here"
             %li
               %h4
                 - if trailhead.kiosk
                   ="There is trail information present on site"
                 - else
-                  ="No information is available here"
+                  .no="No information is available here"
 
           %hr
           .row
