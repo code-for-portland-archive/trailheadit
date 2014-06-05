@@ -22,11 +22,24 @@ class TrailheadphotoUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
+    process :auto_orient
     process :resize_to_fit => [150, 150]
   end
 
   version :small do
+    process :auto_orient
     process :resize_to_fit => [500, 500]
+  end
+
+  version :oriented do
+    process :auto_orient    
+  end
+
+  def auto_orient
+    manipulate! do |image|
+      image.auto_orient      
+      image
+    end
   end
 
   # def extension_white_list
