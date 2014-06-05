@@ -52,10 +52,6 @@ body {
 	background-color: #eee;
 }
 
-body > .container{
-	padding-top:60px;
-}
-
 .btn-edit {	
 	@extend .btn;
 	@extend .btn-primary;
@@ -85,9 +81,6 @@ body > .container{
 /* P R I M A R I L Y   T R A I L H E A D S . I N D E X */
 
 /* padding on top to allow for header*/
-.container {
-	padding-top: 30px;	
-}
 
 .container-fix {
 	padding-left: 30px;
@@ -142,11 +135,11 @@ body > .container{
 	margin-bottom:10px;
 }
 .photo-box {	
-	border: solid 1px #ddd;	
 	text-align:center;
 	padding: 0;
 	img{
 		max-height:280px;
+		border: solid 1px #ddd;	
 	}
 	margin: 10px 0px;
 }

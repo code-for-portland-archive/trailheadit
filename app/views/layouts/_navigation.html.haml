@@ -1,5 +1,5 @@
 -# navigation styled for Bootstrap 3.0
-%nav.navbar.navbar-default.navbar-fixed-top
+%nav.navbar.navbar-default
   .navbar-header
     %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
       %span.sr-only Toggle navigation
@@ -8,5 +8,5 @@
       %span.icon-bar
     = link_to 'TrailEditor', root_path, class: 'navbar-brand'
   .collapse.navbar-collapse
-    %ul.nav.navbar-nav
+    %ul.nav.navbar-nav.pull-right
       = render 'layouts/navigation_links'

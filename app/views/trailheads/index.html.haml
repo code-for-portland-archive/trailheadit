@@ -1,12 +1,12 @@
 .row
-  %div.col-sm-3.headline
+  .col-xs-4.headline
     .header-button
     .lead Your Trailheads
-  .col-sm-9.text-right
+  .col-xs-8.text-right
     .header-button
-      = link_to "Download OpenTrails", trailheads_path(format: :json), class: "btn btn-primary"
-      %div.btn.btn-primary Share with Park Agencies
-      = link_to 'Add a Trailhead', new_trailhead_path, class: "btn btn-primary"
+      = link_to trailheads_path(format: :json), class: "btn btn-primary" do
+        &darr;&nbsp;
+        Download OpenTrails
 
 - @trailheads.each_slice(3) do |slice|
   .row    
