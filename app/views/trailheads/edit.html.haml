@@ -1,14 +1,16 @@
 .container
   .row
     .col-md-6
-      %h1 Trailhead from #{@trailhead.user.try :email}
+      %h3 Trailhead 
+      - if @trailhead.user
+        %h4 from #{@trailhead.user.try :email}
 
       = render 'form'
 
       %h3
         Debug
       %pre
-        = JSON.pretty_generate JSON.parse(@trailhead.to_json)
+        = JSON.pretty_generate(JSON.parse(@trailhead.to_json))
 
       = link_to 'Show', @trailhead
       \|
