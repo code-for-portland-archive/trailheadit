@@ -19,7 +19,7 @@ class Trailhead < ActiveRecord::Base
   end
 
   def latlng
-    [latitude,longitude].join(',')
+    [latitude.round(7),longitude.round(7)].join(',')
   end
 
   def exifXtractr(imgPath)   

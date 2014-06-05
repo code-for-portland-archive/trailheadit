@@ -18,7 +18,7 @@
     - slice.each do |trailhead|           
       .col-sm-6.col-md-4
         .trailhead-box 
-          .lead.text-center= trailhead.name
+          .lead.text-center= trailhead.name || trailhead.latlng
           %hr
           .photo-box
             = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive"
