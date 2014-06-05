@@ -118,8 +118,7 @@ body {
 	text-transform: uppercase;
 }
 /* left padding over-ride to align with table */
-.navbar-brand {
-	padding-left: 30px;
+.navbar-brand {	
 	font-size: 1.5em;
 }
 
@@ -200,4 +199,8 @@ button a:hover {
 
 .back-btn {
 	margin-top: 30px;
+}
+
+.navbar{
+	margin-bottom:0px;
 }

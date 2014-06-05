@@ -1,8 +1,13 @@
+- if @user
+  %h4
+    Taken by
+    = @user
+
 .row
-  .col-xs-4.headline
+  .col-xs-5.headline
     .header-button
-    .lead Your Trailheads
-  .col-xs-8.text-right
+      .lead= pluralize(@trailheads.count,'Trailhead')
+  .col-xs-7.text-right
     .header-button
       = link_to trailheads_path(format: :json), class: "btn btn-primary" do
         &darr;&nbsp;
@@ -11,7 +16,7 @@
 - @trailheads.each_slice(3) do |slice|
   .row    
     - slice.each do |trailhead|           
-      .col-md-4      
+      .col-sm-4      
         .trailhead-box 
           %h3.text-center= trailhead.name
           %h5.text-center
@@ -46,15 +51,17 @@
                 - else
                   ="No drinking water is available here"
             %li
-              - if trailhead.parking
-                ="There is parking on site"
-              - else
-                ="No parking is available here"
+              %h4
+                - if trailhead.parking
+                  ="There is parking on site"
+                - else
+                  ="No parking is available here"
             %li
-              - if trailhead.kiosk
-                ="There is trail information present on site"
-              - else
-                ="No information is available here"
+              %h4
+                - if trailhead.kiosk
+                  ="There is trail information present on site"
+                - else
+                  ="No information is available here"
 
           %br
           = link_to 'Edit', edit_trailhead_path(trailhead), class: "btn btn-primary btn-block"
