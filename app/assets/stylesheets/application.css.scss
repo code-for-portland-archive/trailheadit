@@ -71,6 +71,9 @@ body > .container{
 }
 
 .trailhead-map{
+	padding:4px;
+	background-color:white;
+	border: 1px solid #ddd;
 	width:100%;
 	height:300px;
 }
@@ -142,8 +145,6 @@ body > .container{
 
 .photo-box {
 	height: 300px;
-
-	background-color: #e5e5e5;	
 	padding: 0;
 }
 
@@ -152,9 +153,9 @@ body > .container{
 }
 
 /* Additional height limit added to img-responsive bootstrap class */
-.img-responsive {
-	max-height: 250px;
-}
+// .img-responsive {
+// 	max-height: 250px;
+// }
 
 /* Table  Borders and Buttons */
 .table > tbody > tr {
