@@ -18,8 +18,12 @@ class Trailhead < ActiveRecord::Base
     save
   end
 
-  def latlng
-    [latitude.round(7),longitude.round(7)].join(',')
+  def display_name
+    name || latlng || "Untitled"
+  end
+  
+  def latlng    
+    [latitude.round(7),longitude.round(7)].compact.join(',')
   end
 
   def exifXtractr(imgPath)   
