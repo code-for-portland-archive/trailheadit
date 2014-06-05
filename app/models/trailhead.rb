@@ -14,8 +14,8 @@ class Trailhead < ActiveRecord::Base
   #Values may be "Nil" for cases missing Exif info in the JPG
   
   def default_taken_at
-    taken_at ||= created_at
-    save
+    self.taken_at ||= self.created_at
+    self.save
   end
 
   def display_name

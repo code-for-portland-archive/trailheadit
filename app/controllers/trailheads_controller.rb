@@ -67,7 +67,7 @@ class TrailheadsController < ApplicationController
   # GET /trailheads
   # GET /trailheads.json
   def index
-    @trailheads = Trailhead.order('taken_at desc, created_at')
+    @trailheads = Trailhead.order('taken_at desc')
     if @user = params[:user_id]
       @user = User.find(params[:user_id])
       @trailheads = @user.trailheads
