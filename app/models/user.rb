@@ -6,6 +6,6 @@ class User < ActiveRecord::Base
   end
   
   def to_s
-    email
+    email.split('@')[0]
   end
 end
