@@ -32,9 +32,14 @@
         myMap.setView([#{trailhead.latitude}, #{trailhead.longitude}], 15);
         var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
       .row
-        .col-xs-6.text-muted          
-          = trailhead.latlng
+        .col-xs-6
+          = trailhead.address
+          .text-muted                    
+            = trailhead.latlng
+          
+
         .col-xs-6.text-right
+          = link_to "OpenStreetMap", "http://www.openstreetmap.org/#map=15/#{trailhead.latitude}/#{trailhead.longitude}", target: :blank, class: "btn btn-primary"
           = link_to "Google Maps", "http://maps.google.com?q=#{trailhead.latlng}", target: :blank, class: "btn btn-primary"
       %hr
       %ul
