@@ -1,21 +1,11 @@
-- if @user
-  %h4
-    Taken by
-    = @user
 
 .row
-  .col-xs-5.headline
-    .header-button
-      %h3= pluralize(@trailheads.count,'Trailhead')
-  .col-xs-7.text-right
-    .header-button
-      = link_to trailheads_path(format: :json), class: "btn btn-primary" do
-        &darr;&nbsp;
-        Download OpenTrails
-      &nbsp;        
-      = link_to "Open with geojson.io", 
-        "http://geojson.io/#data=data:text/x-url,#{trailheads_url(format: :json)}",
-        class: "btn btn-primary"
+  .col-xs-12.headline
+    %h3= pluralize(@trailheads.count,'Trailhead')
+    - if @user
+      %h4
+        = @user
+
 - @trailheads.each_slice(3) do |slice|
   .row    
     - slice.each do |trailhead|           
