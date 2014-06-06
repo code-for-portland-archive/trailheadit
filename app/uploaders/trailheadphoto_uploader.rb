@@ -24,6 +24,10 @@ class TrailheadphotoUploader < CarrierWave::Uploader::Base
     process :auto_orient    
   end
 
+  version :large, :from_version => :oriented do
+    process :resize_to_fit => [1000, 1000]
+  end
+
   version :small, :from_version => :oriented do
     process :resize_to_fit => [500, 500]
   end
