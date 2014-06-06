@@ -1,20 +1,41 @@
+
 - trailhead = @trailhead
+- content_for :title do
+  = ['Trailhead on Trail Editor',trailhead.name,trailhead.address].compact().join(" : ")
+
 .row
   .col-md-8.col-md-offset-2    
     .trailhead-box 
-      .lead.text-center= trailhead.display_name
+      .row
+        .col-xs-8
+          %h4.text-caps
+            = link_to trailheads_path do
+              &laquo; Trailheads
+            - if trailhead.user
+              = link_to trailheads_path(user_id:trailhead.user.id) do
+                &laquo; By #{trailhead.user}          
+        .col-xs-4.text-right
+          :erb
+            <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out this trailhead!" data-size="large" data-hashtags="traileditor">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      %h3= trailhead.display_name      
       %hr
+      -# %hr
       .photo-box
         = link_to trailhead.photo.url(:oriented) do
           = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive"
+      .share.text-center
 
       .trailhead-map(id="trailhead-map-#{trailhead.id}")
       :javascript
         var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
         myMap.setView([#{trailhead.latitude}, #{trailhead.longitude}], 15);
         var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
-      .text-center
-        = link_to trailhead.latlng, "http://maps.google.com?q=#{trailhead.latlng}", target: :blank, class: "btn btn-primary"
+      .row
+        .col-xs-6.text-muted          
+          = trailhead.latlng
+        .col-xs-6.text-right
+          = link_to "Google Maps", "http://maps.google.com?q=#{trailhead.latlng}", target: :blank, class: "btn btn-primary"
       %hr
       %ul
         %li
@@ -44,26 +65,21 @@
 
       %hr
       .row
-        .col-xs-6
+        .col-xs-12
           = link_to 'Edit', edit_trailhead_path(trailhead), class: "btn btn-primary btn-block"
-        .col-xs-6
-          = link_to 'Delete', trailhead, :method => :delete, class: "btn btn-danger btn-block"
+        -# .col-xs-6
+        -#   = link_to 'Delete', trailhead, :method => :delete, class: "btn btn-danger btn-block"
       %hr
       .row
         .col.sm-12.col-md-6.text-caps
           .text-muted
-            Taken
+            Added
           - if trailhead.user
             By
             = link_to trailhead.user, trailhead.user
-            - if trailhead.taken_at          
-              = time_ago_in_words trailhead.taken_at
-              ago
-        .col-sm-12.col-md-6.text-right.text-caps        
-          .text-muted
-            Sent
-          = time_ago_in_words trailhead.created_at
-          ago
+          - if trailhead.taken_at          
+            = time_ago_in_words trailhead.created_at
+            ago
     - if params[:debug]    
       %h3
         Debug
