@@ -1,12 +1,8 @@
 .container
   .row
-    .col-md-6.col-md-offset-3
-      %h3 Trailhead 
+    .col-md-8.col-md-offset-2
+      %h2 Edit Trailhead 
       - if @trailhead.user
         %h4 from #{@trailhead.user.try :email}
-
+      %hr
       = render 'form'
-
-      = link_to 'Show', @trailhead
-      \|
-      = link_to 'Back', trailheads_path

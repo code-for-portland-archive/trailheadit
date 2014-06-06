@@ -23,4 +23,5 @@
         = f.input :kiosk, label: false, inline_label: true
 
     .form-actions.text-center
-      = f.button :submit, class: 'btn btn-primary btn-lg'
+      = f.button :submit, class: 'btn btn-primary btn-lg btn-block'
+      = link_to "Cancel", @trailhead, class: 'btn btn-lg btn-default btn-block'
