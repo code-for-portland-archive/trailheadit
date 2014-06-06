@@ -64,9 +64,9 @@
             Sent
           = time_ago_in_words trailhead.created_at
           ago
-    
-    %h3
-      Debug
-    %pre
-      = JSON.pretty_generate(JSON.parse(@trailhead.to_json))
+    - if params[:debug]    
+      %h3
+        Debug
+      %pre
+        = JSON.pretty_generate(JSON.parse(@trailhead.to_json))
 
