@@ -25,7 +25,7 @@
         var featureLayer = L.geoJson(data, {
           onEachFeature: function(feature,layer){
             content = '<div><h3><a href="/trailheads/' + feature.properties.id + '">' + feature.properties.name + '</h3><img style="width:300px" src="' + feature.properties.photos['small'] + '"/></a></div>';
-            layer.bindPopup(content,{minWidth:300,autoPan:true,autoPanPadding:[20,20]});
+            layer.bindPopup(content,{minWidth:300,autoPan:true,autoPanPadding:[80,80]});
           }
         });        
         map.fitBounds(featureLayer.getBounds());
