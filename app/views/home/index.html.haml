@@ -9,9 +9,9 @@
 
 %br
 
-%row
-  .col-md-4
-    .well
+.row
+  .col-md-4    
+    .white-box
       %h3
         Step 1
       %hr
@@ -20,7 +20,7 @@
       %h4     
         Use your smartphone or other GPS enabled device
   .col-md-4
-    .well
+    .white-box
       %h3
         Step 2
       %hr
@@ -29,7 +29,7 @@
       %h4
         We'll convert the photo to a trailhead
   .col-md-4
-    .well
+    .white-box
       %h3
         Step 3
       %hr
@@ -40,20 +40,43 @@
 
 .row
   .col-sm-12
-    %hr
-
-.row
-  .col-sm-12
     .landing.text-center
-      = link_to "Latest Trailheads", trailheads_path, class: "btn btn-lg btn-primary"
+      %h2
+        Latest Trailheads
 
-.row
-  .col-sm-12
-    %hr
+%br
   
 - Trailhead.latest.limit(3).each_slice(3) do |slice|
   .row    
     - slice.each do |trailhead|           
       = render "trailheads/trailhead_box", trailhead: trailhead          
 
+.row
+  .col-sm-12
+    .landing.text-center
+      %h2
+      = link_to "More Trailheads", trailheads_path, class: "btn btn-lg btn-primary"
 
+%br
+%br
+
+.row
+  .col-sm-12
+    .landing.text-center
+      %h2
+        From
+%br
+
+.row
+  .col-xs-4.col-sm-2.col-sm-offset-3
+    = link_to "http://www.codeforamerica.org" do
+      = image_tag "cfa_profile.png", class: "img-responsive"
+  .col-xs-4.col-sm-2
+    = link_to "http://www.codeforportland.org" do
+      = image_tag "pdx_profile.png", class: "img-responsive"
+  .col-xs-4.col-sm-2
+    = link_to "http://www.trailheadlabs.com" do
+      = image_tag "thl_profile.png", class: "img-responsive"
+
+%br
+%br
