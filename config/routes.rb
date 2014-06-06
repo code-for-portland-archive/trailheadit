@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :trailheads do
     collection do
       post "email"
+      get "map"
     end
   end
 

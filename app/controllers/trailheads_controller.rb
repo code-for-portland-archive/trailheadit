@@ -34,7 +34,7 @@ class TrailheadsController < ApplicationController
         api_key = ENV['MAILGUN_API_KEY']
         url = a['url']
         # url.gsub!('https://',"https://api:#{api_key}@")
-        test = open(url,:http_basic_authentication=>['api',ENV['MAILGUN_API_KEY']])        
+        test = open(url,:http_basic_authentication=>['api',ENV['MAILGUN_API_KEY']])
 
         @trailhead = Trailhead.create(name:@subject, email:@sender, photo:File.open(test.path))                  
         @user.trailheads << @trailhead
@@ -83,6 +83,14 @@ class TrailheadsController < ApplicationController
     end
   end
 
+  def map
+    @trailheads = Trailhead.latest
+    if @user = params[:user_id]
+      @user = User.find(params[:user_id])
+      @trailheads = @user.trailheads.latest
+    end
+  end
+  
   # GET /trailheads/1
   # GET /trailheads/1.json
   def show

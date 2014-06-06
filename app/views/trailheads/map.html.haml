@@ -1,0 +1,16 @@
+- content_for :pre_container do
+  #trailhead-map.fullpage-map
+
+  :javascript
+    var map = L.mapbox.map('trailhead-map', 'jerememonteau.holfp9ah');        
+
+    // As with any other AJAX request, this technique is subject to the Same Origin Policy:
+    // http://en.wikipedia.org/wiki/Same_origin_policy
+    // So the CSV file must be on the same domain as the Javascript, or the server
+    // delivering it should support CORS.
+    
+    $.getJSON('/trailheads.json', function(data){
+        var featureLayer = L.geoJson(data);
+        featureLayer.addTo(map);
+        map.fitBounds(featureLayer.getBounds());
+        });

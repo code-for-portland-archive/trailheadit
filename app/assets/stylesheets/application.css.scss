@@ -19,6 +19,14 @@
 * {
 	font-family: 'Open Sans Condensed', sans-serif;
 }
+body {
+    padding: 0;
+    margin: 0;
+}
+
+html, body, .fullpage-map {
+    height: 100%;
+}
 
 .container.main{
 	margin-top:10px;
