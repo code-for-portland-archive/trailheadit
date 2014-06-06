@@ -8,6 +8,17 @@ Bundler.require(*Rails.groups)
 
 module Trailheadit
   class Application < Rails::Application
+    config.middleware.use Rack::Cors do
+      allow do
+        origins 'geojson.io'
+        resource %r{/trailheads.json},
+          :headers => :any,
+          :methods => [:get]
+        resource %r{/trailheads/\d+.json},
+          :headers => :any,
+          :methods => [:get]
+      end
+    end
 
     config.generators do |g|
       g.test_framework :rspec,
