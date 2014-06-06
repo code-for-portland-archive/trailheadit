@@ -60,7 +60,8 @@ class Trailhead < ActiveRecord::Base
         kiosk:kiosk,
         parking:parking,
         restrooms:restrooms,
-        drinkwater:drinking_water
+        drinkwater:drinking_water,
+        photo:photo.url(:oriented)
         # address: address.to_s        
     }
 

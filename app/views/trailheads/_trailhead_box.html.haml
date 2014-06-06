@@ -47,11 +47,17 @@
         = link_to 'Delete', trailhead, :method => :delete, class: "btn btn-danger btn-block"
     %hr
     .row
-      .col-xs-6.text-caps
+      .col.sm-12.col-md-6.text-caps
+        .text-muted
+          Taken
         - if trailhead.user
           By
           = link_to trailhead.user, trailhead.user
-      .col-xs-6.text-right.text-caps
-        - if trailhead.taken_at
-          = time_ago_in_words (trailhead.taken_at || trailhead.created_at)
-          ago
+          - if trailhead.taken_at          
+            = time_ago_in_words trailhead.taken_at
+            ago
+      .col-sm-12.col-md-6.text-right.text-caps        
+        .text-muted
+          Sent
+        = time_ago_in_words trailhead.created_at
+        ago
