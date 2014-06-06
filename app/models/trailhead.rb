@@ -59,10 +59,10 @@ class Trailhead < ActiveRecord::Base
     properties = {
         # trailIds:c.trails.collect(&:plats_id).join("; "),
         name:name,              
-        kiosk:kiosk,
-        parking:parking,
-        restrooms:restrooms,
-        drinkwater:drinking_water,
+        kiosk:kiosk || false,
+        parking:parking || false,
+        restrooms:restrooms || false,
+        drinkwater:drinking_water || false,
         photo:photo.url(:oriented)
         # address: address.to_s        
     }
