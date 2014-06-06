@@ -90,7 +90,7 @@ class TrailheadsController < ApplicationController
       @trailheads = @user.trailheads.latest
     end
   end
-  
+
   # GET /trailheads/1
   # GET /trailheads/1.json
   def show
@@ -144,7 +144,7 @@ class TrailheadsController < ApplicationController
   def update
     respond_to do |format|
       if @trailhead.update(trailhead_params)
-        format.html { redirect_to @trailhead.user, notice: 'Trailhead was successfully updated.' }
+        format.html { redirect_to @trailhead, notice: 'Trailhead was successfully updated.' }
         format.json { render :show, status: :ok, location: @trailhead }
       else
         format.html { render :edit }
