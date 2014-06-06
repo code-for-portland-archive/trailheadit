@@ -14,7 +14,7 @@
         Download OpenTrails
       = link_to "Open with geojson.io", 
         "http://geojson.io/#data=data:text/x-url,#{trailheads_url(format: :json)}",
-        class: "btn -btn-primary"
+        class: "btn btn-primary"
 - @trailheads.each_slice(3) do |slice|
   .row    
     - slice.each do |trailhead|           

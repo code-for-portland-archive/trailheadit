@@ -20,19 +20,26 @@ class TrailheadphotoUploader < CarrierWave::Uploader::Base
   # Process files as they are uploaded:
   # process :scale => [800, 800]
 
-  # Create different versions of your uploaded files:
-  version :thumb do
-    process :auto_orient
-    process :resize_to_fit => [150, 150]
+  version :oriented do
+    process :auto_orient    
   end
 
-  version :small do
-    process :auto_orient
+  version :small, :from_version => :oriented do
     process :resize_to_fit => [500, 500]
   end
 
-  version :oriented do
-    process :auto_orient    
+  version :mini_square, from_version => :oriented do
+    process :resize_to_fill => [300, 300]
+  end
+
+  # Create different versions of your uploaded files:
+  version :thumb :from_version => :small do    
+    process :resize_to_fit => [150, 150]
+  end
+
+  # Create different versions of your uploaded files:
+  version :thumb_square :from_version => :small do    
+    process :resize_to_fill => [150, 150]
   end
 
   def auto_orient
