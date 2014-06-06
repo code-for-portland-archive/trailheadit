@@ -1,7 +1,7 @@
 %li
   = link_to 'Trailheads', trailheads_path
 %li
-  = link_to 'Map', map_trailheads_path
+  = link_to 'Map', map_trailheads_path, 'data-no-turbolink' => true
 %li
   = link_to 'Add Trailhead', new_trailhead_path
 %li
@@ -10,4 +10,4 @@
 %li
   = link_to "Open on GeoJSON.io", 
     "http://geojson.io/#data=data:text/x-url,#{trailheads_url(format: :json)}"
-  
+

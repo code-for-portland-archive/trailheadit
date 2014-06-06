@@ -1,8 +1,6 @@
 .container
   .row
-    .col-md-6
-      %h1 New Trailhead
+    .col-md-6.col-md-offset-3
+      %h1 Add a Trailhead
 
       = render 'form'
-
-      = link_to "Back to All Trailheads You've Photographed", trailheads_path, class: 'btn btn-default back-btn'
