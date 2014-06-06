@@ -37,9 +37,8 @@
           .text-muted                    
             = trailhead.latlng
           
-
         .col-xs-6.text-right
-          = link_to "OpenStreetMap", "http://www.openstreetmap.org/#map=15/#{trailhead.latitude}/#{trailhead.longitude}", target: :blank, class: "btn btn-primary"
+          = link_to "OpenStreetMap", "http://www.openstreetmap.org/?mlat=#{trailhead.latitude}&mlon=#{trailhead.longitude}#map=15/#{trailhead.latitude}/#{trailhead.longitude}", target: :blank, class: "btn btn-primary"
           = link_to "Google Maps", "http://maps.google.com?q=#{trailhead.latlng}", target: :blank, class: "btn btn-primary"
       %hr
       %ul
