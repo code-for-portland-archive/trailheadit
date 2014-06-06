@@ -42,10 +42,10 @@ class TrailheadsController < ApplicationController
         @exif = @trailhead.exifXtractr(test.path)
                 
         @trailhead.update_attributes(
-          latitude:@exif.gps.latitude||@trailhead.latitude,
-          longitude:@exif.gps.longitude||@trailhead.longitude,
-          taken_at:@exif.date_time,
-          altitude:@exif.gps.altitude,
+          latitude:@exif.gps.try(:latitude)||@trailhead.latitude,
+          longitude:@exif.gps.try(:longitude)||@trailhead.longitude,
+          taken_at:@exif.try(:date_time),
+          altitude:@exif.gps.try(:altitude),
           email_properties:params,
           exif_properties:@exif.to_json)
         
@@ -124,10 +124,10 @@ class TrailheadsController < ApplicationController
       if @trailhead.save
         @exif = @trailhead.exifXtractr(@trailhead.photo.path)
         @trailhead.update_attributes(
-          latitude:@exif.gps.latitude||@trailhead.latitude,
-          longitude:@exif.gps.longitude||@trailhead.longitude,
-          taken_at:@exif.date_time,
-          altitude:@exif.gps.altitude)
+          latitude:@exif.gps.try(:latitude)||@trailhead.latitude,
+          longitude:@exif.gps.try(:longitude)||@trailhead.longitude,
+          taken_at:@exif.try(:date_time),
+          altitude:@exif.gps.try(:altitude))
 
 
         format.html { redirect_to @trailhead, notice: 'Trailhead was successfully created.' }
