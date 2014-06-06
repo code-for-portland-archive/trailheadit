@@ -61,6 +61,7 @@ class Trailhead < ActiveRecord::Base
   def to_geojson
     properties = {
         # trailIds:c.trails.collect(&:plats_id).join("; "),
+        id:id,
         name:name,              
         kiosk:kiosk || false,
         parking:parking || false,

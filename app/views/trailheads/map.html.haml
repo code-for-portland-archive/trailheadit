@@ -1,4 +1,8 @@
 - content_for :pre_container do
+  :erb
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
   #trailhead-map.fullpage-map
 
   :javascript
@@ -8,9 +12,25 @@
     // http://en.wikipedia.org/wiki/Same_origin_policy
     // So the CSV file must be on the same domain as the Javascript, or the server
     // delivering it should support CORS.
-    
+    var markers = new L.MarkerClusterGroup({      
+      showCoverageOnHover: false,      
+      maxClusterRadius:40,
+      spiderfyOnMaxZoom:true,
+      animateAddingMarkers:true,
+      spiderfyDistanceMultiplier:4
+            
+    });
+
     $.getJSON('/trailheads.json', function(data){
-        var featureLayer = L.geoJson(data);
-        featureLayer.addTo(map);
+        var featureLayer = L.geoJson(data, {
+          onEachFeature: function(feature,layer){
+            content = '<h3><a href="/trailheads/' + feature.properties.id + '">' + feature.properties.name + '</a></h3><img src="' + feature.properties.photo + '"/>';
+            layer.bindPopup(content);
+          }
+        });        
         map.fitBounds(featureLayer.getBounds());
-        });
+        markers.addLayer(featureLayer);
+        map.addLayer(markers);
+      });
+
+
