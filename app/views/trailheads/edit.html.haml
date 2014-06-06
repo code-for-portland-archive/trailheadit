@@ -7,11 +7,6 @@
 
       = render 'form'
 
-      %h3
-        Debug
-      %pre
-        = JSON.pretty_generate(JSON.parse(@trailhead.to_json))
-
       = link_to 'Show', @trailhead
       \|
       = link_to 'Back', trailheads_path
