@@ -12,6 +12,7 @@
       = link_to trailheads_path(format: :json), class: "btn btn-primary" do
         &darr;&nbsp;
         Download OpenTrails
+      &nbsp;        
       = link_to "Open with geojson.io", 
         "http://geojson.io/#data=data:text/x-url,#{trailheads_url(format: :json)}",
         class: "btn btn-primary"
@@ -19,7 +20,6 @@
   .row    
     - slice.each do |trailhead|           
       = render "trailheads/trailhead_box", trailhead: trailhead          
-
   .row    
     .col-md-12
       %hr 
