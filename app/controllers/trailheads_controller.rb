@@ -67,10 +67,10 @@ class TrailheadsController < ApplicationController
   # GET /trailheads
   # GET /trailheads.json
   def index
-    @trailheads = Trailhead.order('created_at desc')
+    @trailheads = Trailhead.latest
     if @user = params[:user_id]
       @user = User.find(params[:user_id])
-      @trailheads = @user.trailheads.order('created_at desc')
+      @trailheads = @user.trailheads.latest
     end
     respond_to do |format|
       format.html{}        

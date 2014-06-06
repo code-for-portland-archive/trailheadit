@@ -7,6 +7,8 @@ class Trailhead < ActiveRecord::Base
   serialize :exif_properties, JSON
   serialize :email_properties, JSON
 
+  scope :latest, -> { order('id DESC') } 
+
   #This method returns the GPS Latitude, Longitude, Timestamp
   #For a specified image.
   #Input: Image path for local JPG copy
