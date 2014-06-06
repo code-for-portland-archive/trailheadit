@@ -3,7 +3,8 @@
     .lead.text-center= trailhead.display_name
     %hr
     .photo-box
-      = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive"
+      = link_to trailhead.photo.url(:oriented) do
+        = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive"
 
     .trailhead-map(id="trailhead-map-#{trailhead.id}")
     :javascript
