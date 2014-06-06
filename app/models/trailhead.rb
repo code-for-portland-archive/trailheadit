@@ -9,6 +9,9 @@ class Trailhead < ActiveRecord::Base
 
   scope :latest, -> { order('id DESC') } 
 
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode  # auto-fetch address
+
   #This method returns the GPS Latitude, Longitude, Timestamp
   #For a specified image.
   #Input: Image path for local JPG copy

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604032351) do
+ActiveRecord::Schema.define(version: 20140606082539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20140604032351) do
     t.integer  "user_id"
     t.text     "email_properties"
     t.text     "exif_properties"
+    t.text     "address"
   end
 
   add_index "trailheads", ["user_id"], name: "index_trailheads_on_user_id", using: :btree

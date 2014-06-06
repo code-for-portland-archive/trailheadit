@@ -20,6 +20,7 @@ gem "fog", "~> 1.3.1"
 gem "mini_magick"
 gem "exifr"
 gem "mail"
+gem "geocoder"
 gem 'rack-cors',
   :require => 'rack/cors'
 

@@ -93,6 +93,7 @@ GEM
       nokogiri (~> 1.5.0)
       ruby-hmac
     formatador (0.2.5)
+    geocoder (1.2.1)
     guard (2.6.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -290,6 +291,7 @@ DEPENDENCIES
   faker
   figaro!
   fog (~> 1.3.1)
+  geocoder
   guard-bundler
   guard-rails
   guard-rspec
