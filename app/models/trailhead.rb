@@ -58,6 +58,13 @@ class Trailhead < ActiveRecord::Base
     update_attributes(exif_properties:exif_json)
   end  
 
+  def refresh
+    photo.recreate_versions!
+    self.exif_properties = exif_json
+    reverse_geocode
+    save
+  end
+
   def to_geojson
     properties = {
         # trailIds:c.trails.collect(&:plats_id).join("; "),

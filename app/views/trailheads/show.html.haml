@@ -1,7 +1,7 @@
 
 - trailhead = @trailhead
 - content_for :title do
-  = ['Trailhead on Trail Editor',trailhead.name,trailhead.address].compact().join(" : ")
+  = ['Trail Editor : Trailhead',trailhead.name,trailhead.address].compact().join(" : ")
 
 .row
   .col-md-8.col-md-offset-2    
@@ -23,7 +23,7 @@
       -# %hr
       .photo-box
         = link_to trailhead.photo.url(:oriented) do
-          = image_tag (trailhead.photo.url(:small) || "trailheadit_hq.jpg"), class: "img-responsive"
+          = image_tag (trailhead.photo.url(:large) || "trailheadit_hq.jpg"), class: "img-responsive"
       .share.text-center
 
       .trailhead-map(id="trailhead-map-#{trailhead.id}")
