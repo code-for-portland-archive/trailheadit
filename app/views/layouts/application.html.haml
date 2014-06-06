@@ -1,6 +1,10 @@
 !!!
 %html
   %head
+    :erb
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-title" content="TrailEditor">
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui"}    
     %title= content_for?(:title) ? yield(:title) : 'Trail Editor'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Trail Editor'}"}
