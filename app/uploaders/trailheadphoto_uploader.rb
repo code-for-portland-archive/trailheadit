@@ -38,7 +38,7 @@ class TrailheadphotoUploader < CarrierWave::Uploader::Base
   end
 
   # Create different versions of your uploaded files:
-  version :thumb_square :from_version => :small do    
+  version :thumb_square, :from_version => :small do    
     process :resize_to_fill => [150, 150]
   end
 
