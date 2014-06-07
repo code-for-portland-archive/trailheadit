@@ -1,8 +1,5 @@
-.row
+- content_for :pre_container do
   .photo-wall
-    - Trailhead.latest.each_slice(12) do |slice|
-      .row
-        - slice.each do |th|
-          .col-xs-4.col-sm-3.col-md-1
-            = link_to th do
-              = image_tag th.photo.thumb_square.url
+    - Trailhead.latest.each do |th|
+      = link_to th do
+        = image_tag th.photo.thumb_square.url, class: 'pull-left img-responsive'
