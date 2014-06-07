@@ -1,0 +1,3 @@
+- content_for :pre_container do
+  - Trailhead.latest.each do |th|
+    = image_tag th.photo.small_square.url, class: 'pull-left'

@@ -91,6 +91,9 @@ class TrailheadsController < ApplicationController
     end
   end
 
+  def wall
+  end
+  
   # GET /trailheads/1
   # GET /trailheads/1.json
   def show
