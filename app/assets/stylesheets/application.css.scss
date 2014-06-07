@@ -32,7 +32,7 @@ html, body, .fullpage-map {
 	margin-top:20px;
 }
 .welcome{
-	margin-top:100px;
+	margin-top:70px;
 	color:white;
 	text-shadow: -1px -1px black;
 	h1{
@@ -93,7 +93,7 @@ body {
 
 .banner {
 	width: 100%;
-	min-height: 300px;
+	min-height: 240px;
 	background-repeat:no-repeat;
 	background-size: cover;
 	background-position:center;
@@ -161,6 +161,18 @@ h1,h2,h3,h4,h5{
 	border: solid 1px #ddd;	
 	padding:24px;
 	margin-bottom:10px;
+}
+
+.photo-wall{
+	margin-top:3px;
+	white-space:nowrap;
+	display:inline-block;	
+	height:120px;
+	overflow-x:scroll;
+	img{
+		height:100%;
+		display:inline-block;
+	}
 }
 
 .photo-box {	
