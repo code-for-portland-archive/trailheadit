@@ -36,24 +36,28 @@ class TrailheadsController < ApplicationController
         # url.gsub!('https://',"https://api:#{api_key}@")
         test = open(url,:http_basic_authentication=>['api',ENV['MAILGUN_API_KEY']])
 
-        @trailhead = Trailhead.create(name:@subject, email:@sender, photo:File.open(test.path))                  
+        @trailhead = Trailhead.create(name:@subject, 
+          email:@sender, 
+          photo:File.open(test.path),
+          email_properties:params)                  
         @user.trailheads << @trailhead
         @trailheads << @trailhead
-        @exif = @trailhead.exifXtractr(test.path)
-                
-        @trailhead.update_attributes(
-          latitude:@exif.gps.try(:latitude)||@trailhead.latitude,
-          longitude:@exif.gps.try(:longitude)||@trailhead.longitude,
-          taken_at:@exif.try(:date_time),
-          altitude:@exif.gps.try(:altitude),
-          email_properties:params,
-          exif_properties:@exif.to_json)
-        
+        begin
+          @exif = @trailhead.exifXtractr(test.path)
+                  
+          @trailhead.update_attributes(
+            latitude:@exif.gps.try(:latitude)||@trailhead.latitude,
+            longitude:@exif.gps.try(:longitude)||@trailhead.longitude,
+            taken_at:@exif.try(:date_time),
+            altitude:@exif.gps.try(:altitude),            
+            exif_properties:@exif.to_json)
+        rescue
+        end        
       end
     end     
 
     if Rails.env.production?
-      UserMailer.welcome_email(@user,@trailheads).deliver
+      UserMailer.welcome_email(@user,@trailheads).deliver      
     end
     
     render plain: "DONE"
@@ -122,16 +126,18 @@ class TrailheadsController < ApplicationController
   def create
 
     @trailhead = Trailhead.new(trailhead_params)
-
+    
     respond_to do |format|
       if @trailhead.save
-        @exif = @trailhead.exifXtractr(@trailhead.photo.path)
-        @trailhead.update_attributes(
-          latitude:@exif.gps.try(:latitude)||@trailhead.latitude,
-          longitude:@exif.gps.try(:longitude)||@trailhead.longitude,
-          taken_at:@exif.try(:date_time),
-          altitude:@exif.gps.try(:altitude))
-
+        begin
+          @exif = @trailhead.exifXtractr(@trailhead.photo.path)
+          @trailhead.update_attributes(
+            latitude:@exif.gps.try(:latitude)||@trailhead.latitude,
+            longitude:@exif.gps.try(:longitude)||@trailhead.longitude,
+            taken_at:@exif.try(:date_time),
+            altitude:@exif.gps.try(:altitude))
+        rescue
+        end
 
         format.html { redirect_to @trailhead, notice: 'Trailhead was successfully created.' }
         format.json { render :show, status: :created, location: @trailhead }
