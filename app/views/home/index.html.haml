@@ -8,7 +8,7 @@
         %h3.text-center
           The easiest way to create trailheads!
   .photo-wall
-    - Trailhead.latest.each do |th|
+    - Trailhead.latest.limit(100).each do |th|
       = link_to th do
         = image_tag th.photo.thumb_square.url
 
