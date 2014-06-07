@@ -56,12 +56,9 @@ ProcessEmail = Struct.new(:params) do
       UserMailer.welcome_email(@user,@trailheads).deliver      
     end
     
-    render plain: "DONE"
   rescue Exception => e
     Rails.logger.error "ERROR"
     Rails.logger.error e.message
-    e.backtrace.each { |line| Rails.logger.error line }
-    render plain: "ERROR"
-    
+    e.backtrace.each { |line| Rails.logger.error line }    
   end
 end

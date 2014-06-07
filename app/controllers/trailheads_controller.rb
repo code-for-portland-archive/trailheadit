@@ -4,6 +4,7 @@ class TrailheadsController < ApplicationController
 
   def email
     Delayed::Job.enqueue ProcessEmail.new(params)    
+    render plain: "DONE"
   end
 
   # GET /trailheads
