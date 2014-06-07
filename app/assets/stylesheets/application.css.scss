@@ -169,6 +169,8 @@ h1,h2,h3,h4,h5{
 	display:inline-block;	
 	height:120px;
 	overflow-x:scroll;
+	overflow-scrolling: touch;
+	-webkit-overflow-scrolling: touch;
 	img{
 		height:100%;
 		display:inline-block;
