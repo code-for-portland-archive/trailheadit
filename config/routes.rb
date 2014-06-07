@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   end
 
   root :to => "home#index"
-  end
 
   match "/dj" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+end
+
+  
