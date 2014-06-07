@@ -69,7 +69,7 @@ class Trailhead < ActiveRecord::Base
     properties = {
         # trailIds:c.trails.collect(&:plats_id).join("; "),
         id:id,
-        name:name,              
+        name:display_name,              
         kiosk:kiosk || false,
         parking:parking || false,
         restrooms:restrooms || false,
