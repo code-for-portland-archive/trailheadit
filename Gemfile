@@ -21,6 +21,8 @@ gem "mini_magick"
 gem "exifr"
 gem "mail"
 gem "geocoder"
+gem "delayed_job_active_record"
+gem "delayed_job_web"
 gem 'rack-cors',
   :require => 'rack/cors'
 

@@ -45,6 +45,7 @@
             %ul.dropdown-menu.pull-right{role: "menu"}
               %li
                 = link_to "OpenStreetMap", "http://www.openstreetmap.org/?mlat=#{trailhead.latitude}&mlon=#{trailhead.longitude}#map=15/#{trailhead.latitude}/#{trailhead.longitude}", target: :blank
+              %li.divider
               %li
                 = link_to "Google Maps", "http://maps.google.com?q=#{trailhead.latlng}", target: :blank
 
