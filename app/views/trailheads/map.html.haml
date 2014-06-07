@@ -1,40 +1,39 @@
 - content_for :pre_container do
-  :erb
-    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
-    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
-    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
   #trailhead-map.fullpage-map
 
   :javascript
-    var map = L.mapbox.map('trailhead-map', 'jerememonteau.holfp9ah',{detectRetina: true});        
-    map.addControl(L.mapbox.geocoderControl('jerememonteau.holfp9ah'));
-    // As with any other AJAX request, this technique is subject to the Same Origin Policy:
-    // http://en.wikipedia.org/wiki/Same_origin_policy
-    // So the CSV file must be on the same domain as the Javascript, or the server
-    // delivering it should support CORS.
-    var markers = new L.MarkerClusterGroup({      
-      showCoverageOnHover: false,      
-      maxClusterRadius:40,
-      spiderfyOnMaxZoom:true,
-      animateAddingMarkers:true,
-      spiderfyDistanceMultiplier:4
-            
-    });
-
-    $.getJSON('/trailheads.json', function(data){
-        var featureLayer = L.geoJson(data, {
-          onEachFeature: function(feature,layer){
-            content = '<div><h3><a href="/trailheads/' + feature.properties.id + '">' + feature.properties.name + '</h3><img style="width:300px" src="' + feature.properties.photos['small'] + '"/></a></div>';
-            layer.bindPopup(content,{
-              minWidth:200,
-              minHeight:200,
-              autoPan:true,
-              autoPanPadding:[80,80]});
-          }
-        });        
-        map.fitBounds(featureLayer.getBounds());
-        markers.addLayer(featureLayer);
-        map.addLayer(markers);
+    var ready = function(){
+      var map = L.mapbox.map('trailhead-map', 'jerememonteau.holfp9ah',{detectRetina: true});        
+      map.addControl(L.mapbox.geocoderControl('jerememonteau.holfp9ah'));
+      // As with any other AJAX request, this technique is subject to the Same Origin Policy:
+      // http://en.wikipedia.org/wiki/Same_origin_policy
+      // So the CSV file must be on the same domain as the Javascript, or the server
+      // delivering it should support CORS.
+      var markers = new L.MarkerClusterGroup({      
+        showCoverageOnHover: false,      
+        maxClusterRadius:20,
+        spiderfyOnMaxZoom:true,
+        animateAddingMarkers:true,
+        spiderfyDistanceMultiplier:4
+              
       });
 
+      $.getJSON('/trailheads.json', function(data){
+          var featureLayer = L.geoJson(data, {
+            onEachFeature: function(feature,layer){
+              content = '<div><h3><a href="/trailheads/' + feature.properties.id + '">' + feature.properties.name + '</h3><img style="width:300px" src="' + feature.properties.photos['small'] + '"/></a></div>';
+              layer.bindPopup(content,{
+                minWidth:200,
+                minHeight:200,
+                autoPan:true,
+                autoPanPadding:[80,80]});
+            }
+          });        
+          map.fitBounds(featureLayer.getBounds());
+          markers.addLayer(featureLayer);
+          map.addLayer(markers);
+        });
+    };
+    $(document).ready(ready);
+    $(document).on('page:load', ready);
 
