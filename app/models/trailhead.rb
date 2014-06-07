@@ -29,7 +29,7 @@ class Trailhead < ActiveRecord::Base
 
   def latlng    
     if latitude && longitude
-      [latitude.round(7),longitude.round(7)].compact.join(',')
+      [latitude.round(7),longitude.round(7)].compact.join(', ')
     else
       "0,0"
     end
