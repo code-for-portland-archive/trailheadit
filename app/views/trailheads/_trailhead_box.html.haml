@@ -13,6 +13,9 @@
     -#   var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
     -# .text-muted.text-center
     -#   = link_to trailhead.latlng, "http://maps.google.com?q=#{trailhead.latlng}", target: :blank
+    .text-muted
+      = trailhead.address
+
     %hr
     %ul
       %li

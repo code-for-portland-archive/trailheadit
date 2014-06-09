@@ -1,16 +1,18 @@
 .row
   .col-md12
-    %h3 Users
+    %h3 Trail Editors
 
     %table.table.table-striped
       %tr
         %th Email
+        %th Trailheads
         %th    
         
 
       - @users.each do |user|
         %tr
           %td= link_to user.email, user
+          %td= user.trailheads.count
           %td.text-right
             = link_to 'Edit', edit_user_path(user), class: 'btn-edit'
             = link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn-delete'
