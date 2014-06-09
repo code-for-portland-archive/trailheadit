@@ -14,7 +14,7 @@
     -# .text-muted.text-center
     -#   = link_to trailhead.latlng, "http://maps.google.com?q=#{trailhead.latlng}", target: :blank
     .text-muted
-      = trailhead.address
+      = trailhead.address || trailhead.latlng
 
     %hr
     %ul
