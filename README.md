@@ -61,7 +61,7 @@ me and I’ll add a note to the README so that others can find your work.
 Credits
 -------
 
-First Sprint Contributors
+Hackathon Sprint Team
 
 * Alan Williams ( Code for America )
 * Dale Hollocher
@@ -70,3 +70,7 @@ First Sprint Contributors
 * Razaik Singh
 * Zac Christiansen ( Oregon Metro )
 
+Special Thanks To 
+
+* Code For Portland 
+* NORTH
