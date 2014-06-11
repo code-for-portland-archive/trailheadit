@@ -6,7 +6,7 @@ This project was created during the 2014 National Day of Civic Hacking event in 
 traileditor.org
 =========
 
-An instance of this application, sponsored by [Trailhead Labs](http://www.trailheadlabs.com) is accessible at http://www.traileditor.org and is hosted on [Heroku](http://www.heroku.com).
+An instance of this application, sponsored by [Trailhead Labs](http://www.trailheadlabs.com), is accessible at http://www.traileditor.org and is hosted on [Heroku](http://www.heroku.com).
 
 Ruby on Rails
 -------------
