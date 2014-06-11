@@ -3,6 +3,10 @@ Trailheadit
 
 This project was created during the 2014 National Day of Civic Hacking event in Porland, Oregon. The goal of the project is to provide an open solution for the collection of trailhead data via GPS tagged photos. A user in the field can simply take a photo of a trailhead and email the photo to an instance of this backend. The backend would then parse the location data from the EXIF headers in the photo and create a new Trailhead object. The accumulated trailhead objects can then be saved in the OpenTrails open data specification.
 
+traileditor.org
+=========
+
+An instance of this application, sponsored by [Trailhead Labs](http://www.trailheadlabs.com) is accessible at http://www.traileditor.org and is hosted on [Heroku](http://www.heroku.com).
 
 Ruby on Rails
 -------------
