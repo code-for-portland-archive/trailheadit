@@ -1,73 +1,12 @@
 Trailheadit
 =========
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+This project was created during the 2014 National Day of Civic Hacking event in Porland, Oregon. The goal of the project is to provide an open solution for the collection of trailhead data via GPS tagged photos. A user in the field can simply take a photo of a trailhead and email the photo to an instance of this backend. The backend would then parse the location data from the EXIF headers in the photo and create a new Trailhead object. The accumulated trailhead objects can then be saved in the OpenTrails open data specification.
 
-Diagnostics
------------
+traileditor.org
+=========
 
-This application was built with recipes that are NOT known to work together.
-
-This application was built with preferences that are NOT known to work
-together.
-
-If the application doesn’t work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include these diagnostics:
-
-We’d also like to know if you’ve found combinations of recipes or
-preferences that do work together.
-
-Recipes:
-
-* controllers
-* core
-* deployment
-* email
-* extras
-* frontend
-* gems
-* git
-* init
-* learn_rails
-* models
-* prelaunch
-* rails_bootstrap
-* rails_devise
-* rails_devise_pundit
-* rails_foundation
-* rails_omniauth
-* rails_signup_download
-* railsapps
-* readme
-* routes
-* saas
-* setup
-* testing
-* tests4
-* views
-
-Preferences:
-
-* git: true
-* apps4: none
-* dev_webserver: webrick
-* prod_webserver: same
-* database: sqlite
-* templates: haml
-* tests: rspec
-* continuous_testing: guard
-* frontend: bootstrap3
-* email: gmail
-* authentication: none
-* authorization: none
-* form_builder: simple_form
-* starter_app: home_app
-* rvmrc: true
-* quiet_assets: true
-* local_env_file: figaro
-* better_errors: true
-* pry: true
+An instance of this application, sponsored by [Trailhead Labs](http://www.trailheadlabs.com), is accessible at http://www.traileditor.org and is hosted on [Heroku](http://www.heroku.com).
 
 Ruby on Rails
 -------------
@@ -77,12 +16,11 @@ This application requires:
 -   Ruby
 -   Rails
 
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
 
 Database
 --------
 
-This application uses SQLite with ActiveRecord.
+This application uses PostgreSQL with ActiveRecord.
 
 Development
 -----------
@@ -91,35 +29,24 @@ Development
 -   Testing Framework: Test::Unit
 -   Front-end Framework: Bootstrap 3.0 (Sass)
 -   Form Builder: SimpleForm
--   Authentication: None
--   Authorization: None
--   Admin: None
 
 Email
 -----
 
-The application is configured to send email using a Gmail account.
+The application is configured to send and receive email using the MailGun service and API.
 
 Email delivery is disabled in development.
-
-Getting Started
----------------
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
 Documentation and Support
 -------------------------
 
-This is the only documentation.
+This is the only documentation (for now).
 
-#### Issues
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-Similar Projects
+Related Projects
 ----------------
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+* PDX Trails iOS Application
+* To the Trails PhoneGap Application
 
 Contributing
 ------------
@@ -138,9 +65,16 @@ me and I’ll add a note to the README so that others can find your work.
 Credits
 -------
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Hackathon Sprint Team
 
-License
--------
+* Alan Williams ( Code for America )
+* Dale Hollocher
+* Jereme Monteau ( Trailhead Labs )
+* Ryan Branciforte ( Trailhead Labs )
+* Razaik Singh
+* Zac Christiansen ( Oregon Metro )
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Special Thanks To 
+
+* Code For Portland 
+* NORTH
