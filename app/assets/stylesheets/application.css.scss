@@ -45,9 +45,9 @@ html, body, .fullpage-map {
 .form-inputs.block{
 	select, input[type=text], input[type=number], input[type=text]{
 		@extend .form-control;
-		@extend .input-block-level;
 	}
 }
+
 .attribute {
 	input[type='checkbox'] {
 		margin-right:10px;
