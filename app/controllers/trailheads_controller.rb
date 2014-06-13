@@ -71,11 +71,12 @@ class TrailheadsController < ApplicationController
         begin
           @exif = @trailhead.exifXtractr(@trailhead.photo.path)
           @trailhead.update_attributes(
-            latitude:@exif.gps.try(:latitude)||@trailhead.latitude,
-            longitude:@exif.gps.try(:longitude)||@trailhead.longitude,
+            latitude:@exif.gps.try(:latitude)||@trailhead.latitude||0.0,
+            longitude:@exif.gps.try(:longitude)||@trailhead.longitude||0.0,
             taken_at:@exif.try(:date_time),
             altitude:@exif.gps.try(:altitude))
-        rescue
+        rescue Exception => e
+          Rails.logger.error(e)
         end
 
         format.html { redirect_to @trailhead, notice: 'Trailhead was successfully created.' }

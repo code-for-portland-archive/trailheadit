@@ -42,8 +42,8 @@ ProcessEmail = Struct.new(:params) do
           @exif = @trailhead.exifXtractr(test.path)
                   
           @trailhead.update_attributes(
-            latitude:@exif.gps.try(:latitude)||@trailhead.latitude,
-            longitude:@exif.gps.try(:longitude)||@trailhead.longitude,
+            latitude:@exif.gps.try(:latitude)||@trailhead.latitude||0.0,
+            longitude:@exif.gps.try(:longitude)||@trailhead.longitude||0.0,
             taken_at:@exif.try(:date_time),
             altitude:@exif.gps.try(:altitude),            
             exif_properties:@exif.to_json)
