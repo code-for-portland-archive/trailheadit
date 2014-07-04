@@ -28,6 +28,23 @@ html, body, .fullpage-map {
     height: 100%;
 }
 
+.trailhead-marker-icon{
+	width:54px;
+	height:64px;
+	img{
+		width:40px;
+		border:solid 4px white;
+	}
+	.marker-pointer{
+		margin: 0 auto;
+		width: 0;
+		height: 0;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-top: 10px solid white;
+
+	}
+}
 .container.main{
 	margin-top:20px;
 }

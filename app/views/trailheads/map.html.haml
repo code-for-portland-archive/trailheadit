@@ -21,12 +21,21 @@
       $.getJSON('/trailheads.json', function(data){
           var featureLayer = L.geoJson(data, {
             onEachFeature: function(feature,layer){
-              content = '<div><h3><a href="/trailheads/' + feature.properties.id + '">' + feature.properties.name + '</h3><img style="width:300px" src="' + feature.properties.photos['small'] + '"/></a></div>';
+              var content = '<div><h3><a href="/trailheads/' + feature.properties.id + '">' + feature.properties.name + '</h3><img style="width:300px" src="' + feature.properties.photos['small'] + '"/></a></div>';
+              var iconContent = '<div><img src="' + feature.properties.photos['thumb_square'] + '"/></div><div class="marker-pointer"></div>';
               layer.bindPopup(content,{
                 minWidth:200,
                 minHeight:200,
                 autoPan:true,
                 autoPanPadding:[80,80]});
+              var myIcon = L.divIcon(
+                {
+                  iconSize:null, 
+                  html: iconContent, 
+                  className: 'trailhead-marker-icon',
+                  iconAnchor: [27,64]
+                });
+              layer.setIcon(myIcon);
             }
           });        
           map.fitBounds(featureLayer.getBounds());
