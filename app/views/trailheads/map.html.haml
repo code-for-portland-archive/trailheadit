@@ -22,7 +22,7 @@
           var featureLayer = L.geoJson(data, {
             onEachFeature: function(feature,layer){
               var content = '<div><h3><a href="/trailheads/' + feature.properties.id + '">' + feature.properties.name + '</h3><img style="width:300px" src="' + feature.properties.photos['small'] + '"/></a></div>';
-              var iconContent = '<div><img src="' + feature.properties.photos['thumb_square'] + '"/></div><div class="marker-pointer"></div>';
+              var iconContent = '<div><img src="' + feature.properties.photos['square'] + '"/></div><div class="marker-pointer"></div>';
               layer.bindPopup(content,{
                 minWidth:200,
                 minHeight:200,
