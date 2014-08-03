@@ -16,10 +16,11 @@ ProcessEmail = Struct.new(:params) do
       @user = User.find_by(email: @sender)
     else
       Rails.logger.info "USER NOT FOUND"
-      @user = User.create(email: @sender, name: @name)                
+      @user = User.create(email: @sender, name: @name)
     end
 
     @trailheads = []
+    @trailheads_nogps = []
 
     attachments = JSON.parse params['attachments']    
     if attachments.present?
@@ -32,12 +33,11 @@ ProcessEmail = Struct.new(:params) do
         # url.gsub!('https://',"https://api:#{api_key}@")
         test = open(url,:http_basic_authentication=>['api',ENV['MAILGUN_API_KEY']])
 
-        @trailhead = Trailhead.create(name:@subject, 
+        @trailhead = Trailhead.create(name:@subject,
           email:@sender, 
           photo:File.open(test.path),
-          email_properties:params)                  
+          email_properties:params)
         @user.trailheads << @trailhead
-        @trailheads << @trailhead
         begin
           @exif = @trailhead.exifXtractr(test.path)
                   
@@ -45,20 +45,29 @@ ProcessEmail = Struct.new(:params) do
             latitude:@exif.gps.try(:latitude)||@trailhead.latitude||0.0,
             longitude:@exif.gps.try(:longitude)||@trailhead.longitude||0.0,
             taken_at:@exif.try(:date_time),
-            altitude:@exif.gps.try(:altitude),            
+            altitude:@exif.gps.try(:altitude),
             exif_properties:@exif.to_json)
-        rescue
-        end        
+        end
+        if @trailhead.latitude == 0.0
+          @trailheads_nogps << @trailhead
+        else
+          @trailheads << @trailhead
+        end
       end
-    end     
+    end
 
     if Rails.env.production?
-      UserMailer.welcome_email(@user,@trailheads).deliver      
+      if @trailheads
+        UserMailer.welcome_email(@user, @trailheads).deliver
+      end
+      if @trailheads_nogps
+        UserMailer.welcome_email_nogps(@user, @trailheads_nogps).deliver
+      end
     end
     
   rescue Exception => e
     Rails.logger.error "ERROR"
     Rails.logger.error e.message
-    e.backtrace.each { |line| Rails.logger.error line }    
+    e.backtrace.each { |line| Rails.logger.error line }
   end
 end
