@@ -57,10 +57,10 @@ ProcessEmail = Struct.new(:params) do
     end
 
     if Rails.env.production?
-      if @trailheads
+      unless @trailheads.blank?
         UserMailer.welcome_email(@user, @trailheads).deliver
       end
-      if @trailheads_nogps
+      unless @trailheads_nogps.blank?
         UserMailer.welcome_email_nogps(@user, @trailheads_nogps).deliver
       end
     end
