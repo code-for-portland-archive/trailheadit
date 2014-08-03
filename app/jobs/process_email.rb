@@ -47,11 +47,12 @@ ProcessEmail = Struct.new(:params) do
             taken_at:@exif.try(:date_time),
             altitude:@exif.gps.try(:altitude),
             exif_properties:@exif.to_json)
-        end
-        if @trailhead.latitude == 0.0
-          @trailheads_nogps << @trailhead
-        else
-          @trailheads << @trailhead
+          if @trailhead.latitude == 0.0
+            @trailheads_nogps << @trailhead
+          else
+            @trailheads << @trailhead
+          end
+        rescue
         end
       end
     end
