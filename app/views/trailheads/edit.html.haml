@@ -31,7 +31,6 @@
               = link_to trailhead.photo.url(:oriented) do
                 = image_tag (trailhead.photo.url(:large) || "trailheadit_hq.jpg"), class: "img-responsive"
             .share.text-center
-
             .trailhead-map(id="trailhead-map-#{trailhead.id}")
             :javascript
               var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
@@ -42,11 +41,23 @@
                   draggable: true
                   });
               marker.addTo(myMap);
+              marker.on('drag', ondrag);
+              marker.on('dragend', set_gps_form);
+              ondrag();
+              function ondrag() {
+                var m = marker.getLatLng();
+                coordinates.innerHTML = 'Latitude: ' + m.lat + '<br/>Longitude: ' + m.lng;
+              };
+              function set_gps_form() {
+                var m = marker.getLatLng();
+                $("#trailhead_latitude").val(m.lat);
+                $("#trailhead_longitude").val(m.lng);
+              };
+            %pre#coordinates.ui-coordinates
+
             .row
               .col-sm-9.col.xs-12
                 = trailhead.address
-                .text-muted                    
-                  = trailhead.latlng
                 %br
                 
               .col-xs-12.col-sm-3.text-center
