@@ -7,7 +7,7 @@
       Nice work!
     - if @trailheads.any?
       %p
-        We received #{pluralize(@trailheads.count,'Trailhead')}! They look good... but we couldn't get the GPS info. Please click below to manually update the gps information.
+        We received #{pluralize(@trailheads.count,'Trailhead')}! They look good... but we couldn't get the GPS info. If you click the link below, you can manually update your trailhead with the correct gps coordinates (look for the edit button on the bottom of the page).
     %hr    
     %h2
       = link_to "Click here to see your Trailheads", "http://traileditor.org/users/#{@user.id}"
