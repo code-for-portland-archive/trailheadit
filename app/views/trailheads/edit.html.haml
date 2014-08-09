@@ -41,6 +41,8 @@
                   draggable: true
                   });
               marker.addTo(myMap);
+              var myLayer = L.mapbox.featureLayer().addTo(myMap);
+              var geolocate = document.getElementById('geolocate');
               marker.on('drag', ondrag);
               marker.on('dragend', set_gps_form);
               ondrag();
@@ -53,8 +55,35 @@
                 $("#trailhead_latitude").val(m.lat);
                 $("#trailhead_longitude").val(m.lng);
               };
-            %pre#coordinates.ui-coordinates
+              geolocate.onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                myMap.locate();
+              };
+              myMap.on('locationfound', function(e) {
+                myMap.fitBounds(e.bounds);
 
+                myLayer.setGeoJSON({
+                  type: 'Feature',
+                  geometry: {
+                    type: 'Point',
+                    coordinates: [e.latlng.lng, e.latlng.lat]
+                  },
+                  properties: {
+                    'title': 'Here I am!',
+                    'marker-color': '#ff8888',
+                    'marker-symbol': 'star'
+                  }
+                });
+
+                geolocate.parentNode.removeChild(geolocate);
+              });
+
+              myMap.on('locationerror', function() {
+                geolocate.innerHTML = 'Position could not be found';
+              });
+            %pre#coordinates.ui-coordinates
+            %a#geolocate.ui-button{href: "#"} Find me
             .row
               .col-sm-9.col.xs-12
                 = trailhead.address
