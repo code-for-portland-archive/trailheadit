@@ -1,12 +1,9 @@
 - content_for :pre_container do
-  :erb
-    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
-
   #trailhead-map.fullpage-map
 
   :javascript
     var ready = function(){
-      var map = L.mapbox.map('trailhead-map', 'jerememonteau.holfp9ah',{detectRetina: true});              
+      var map = L.mapbox.map('trailhead-map', 'jerememonteau.holfp9ah',{detectRetina: true});        
       map.addControl(L.mapbox.geocoderControl('jerememonteau.holfp9ah'));
       // As with any other AJAX request, this technique is subject to the Same Origin Policy:
       // http://en.wikipedia.org/wiki/Same_origin_policy
@@ -41,7 +38,6 @@
             }
           });        
           map.fitBounds(featureLayer.getBounds());
-          var hash = L.hash(map);
           markers.addLayer(featureLayer);
           map.addLayer(markers);
         });
