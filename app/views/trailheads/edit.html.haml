@@ -82,19 +82,9 @@
   };
   myMap.on('locationfound', function(e) {
     myMap.fitBounds(e.bounds);
-
-    myLayer.setGeoJSON({
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [e.latlng.lng, e.latlng.lat]
-      },
-      properties: {
-        'title': 'Here I am!',
-        'marker-color': '#ff8888',
-        'marker-symbol': 'star'
-      }
-    });
+    marker.setLatLng([e.latlng.lat, e.latlng.lng]);
+    ondrag();
+    set_gps_form();
   });
 
   myMap.on('locationerror', function() {
