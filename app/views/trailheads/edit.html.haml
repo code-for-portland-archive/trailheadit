@@ -32,58 +32,8 @@
                 = image_tag (trailhead.photo.url(:large) || "trailheadit_hq.jpg"), class: "img-responsive"
             .share.text-center
             .trailhead-map(id="trailhead-map-#{trailhead.id}")
-            :javascript
-              var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
-              myMap.setView([#{trailhead.latitude}, #{trailhead.longitude}], 15);
-              var marker = L.marker(
-                new L.LatLng(#{trailhead.latitude}, #{trailhead.longitude}), {
-                  icon: L.mapbox.marker.icon({'marker-color': 'ff8888'}),
-                  draggable: true
-                  });
-              marker.addTo(myMap);
-              var myLayer = L.mapbox.featureLayer().addTo(myMap);
-              var geolocate = document.getElementById('geolocate');
-              marker.on('drag', ondrag);
-              marker.on('dragend', set_gps_form);
-              ondrag();
-              function ondrag() {
-                var m = marker.getLatLng();
-                coordinates.innerHTML = 'Latitude: ' + m.lat + '<br/>Longitude: ' + m.lng;
-              };
-              function set_gps_form() {
-                var m = marker.getLatLng();
-                $("#trailhead_latitude").val(m.lat);
-                $("#trailhead_longitude").val(m.lng);
-              };
-              geolocate.onclick = function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                myMap.locate();
-              };
-              myMap.on('locationfound', function(e) {
-                myMap.fitBounds(e.bounds);
-
-                myLayer.setGeoJSON({
-                  type: 'Feature',
-                  geometry: {
-                    type: 'Point',
-                    coordinates: [e.latlng.lng, e.latlng.lat]
-                  },
-                  properties: {
-                    'title': 'Here I am!',
-                    'marker-color': '#ff8888',
-                    'marker-symbol': 'star'
-                  }
-                });
-
-                geolocate.parentNode.removeChild(geolocate);
-              });
-
-              myMap.on('locationerror', function() {
-                geolocate.innerHTML = 'Position could not be found';
-              });
             %pre#coordinates.ui-coordinates
-            %a#geolocate.ui-button{href: "#"} Find me
+            %a#geolocate.ui-button{href: "#"} Relocate to my Current Location
             .row
               .col-sm-9.col.xs-12
                 = trailhead.address
@@ -102,3 +52,41 @@
                       = link_to "Google Maps", "http://maps.google.com?q=#{trailhead.latlng}", target: :blank, class: "btn btn-block"
 
       = render 'form'
+:javascript
+  var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
+  myMap.setView([#{trailhead.latitude}, #{trailhead.longitude}], 15);
+  var marker = L.marker(
+    new L.LatLng(#{trailhead.latitude}, #{trailhead.longitude}), {
+      icon: L.mapbox.marker.icon({'marker-color': 'ff8888'}),
+      draggable: true
+      });
+  marker.addTo(myMap);
+  var myLayer = L.mapbox.featureLayer().addTo(myMap);
+  var geolocate = document.getElementById('geolocate');
+  marker.on('drag', ondrag);
+  marker.on('dragend', set_gps_form);
+  ondrag();
+  function ondrag() {
+    var m = marker.getLatLng();
+    coordinates.innerHTML = 'Latitude: ' + m.lat + '<br/>Longitude: ' + m.lng;
+  };
+  function set_gps_form() {
+    var m = marker.getLatLng();
+    $("#trailhead_latitude").val(m.lat);
+    $("#trailhead_longitude").val(m.lng);
+  };
+  geolocate.onclick = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    myMap.locate();
+  };
+  myMap.on('locationfound', function(e) {
+    myMap.fitBounds(e.bounds);
+    marker.setLatLng([e.latlng.lat, e.latlng.lng]);
+    ondrag();
+    set_gps_form();
+  });
+
+  myMap.on('locationerror', function() {
+    geolocate.innerHTML = 'Position could not be found';
+  });
