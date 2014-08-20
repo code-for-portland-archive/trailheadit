@@ -1,4 +1,3 @@
-
 - trailhead = @trailhead
 - content_for :title do
   = ['Trail Editor : Trailhead',trailhead.name,trailhead.address].compact().join(" : ")
@@ -8,17 +7,17 @@
     .trailhead-box 
       .row
         .col-sm-10.col-xs-12
-          %h2= trailhead.display_name      
+          %h2=trailhead.display_name
           - if trailhead.user
             %h4
               = link_to trailheads_path(user_id:trailhead.user.id) do
-                #{trailhead.user}                
+                = trailhead.user                
 
         .col-sm-2.col-xs-12.text-center
           :erb
             <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out this trailhead!" data-size="large" data-count="none" data-hashtags="traileditor">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-      
+
       %hr
       -# %hr
       .photo-box
@@ -37,7 +36,7 @@
           .text-muted                    
             = trailhead.latlng
           %br
-          
+
         .col-xs-12.col-sm-3.text-center
           .btn-group
             %button.btn.btn-primary.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
@@ -50,7 +49,7 @@
               %li
                 = link_to "Google Maps", "http://maps.google.com?q=#{trailhead.latlng}", target: :blank, class: "btn btn-block"
 
-        
+
       %hr
       %ul
         %li
