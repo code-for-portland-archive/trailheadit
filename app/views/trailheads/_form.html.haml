@@ -1,6 +1,7 @@
 .trailhead-map(id="trailhead-map-#{@trailhead.id}")
 %pre#coordinates.ui-coordinates
-%a#geolocate.ui-button{href: "#"} Relocate to my Current Location
+= link_to "Relocate to my Current Location", '#', class: 'btn btn-lg btn-default btn-block', id: 'geolocate'      
+
 
 .white-box
   = simple_form_for(@trailhead, role: 'form') do |f|
