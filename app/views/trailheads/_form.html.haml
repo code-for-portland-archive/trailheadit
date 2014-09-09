@@ -2,7 +2,8 @@
 %pre#coordinates.ui-coordinates
 %p
   = link_to "Use My Current Location", '#', class: 'btn btn-lg btn-primary btn-block', id: 'geolocate'      
-
+%p#geolocate-error
+  Geolocation failed. Check your privacy settings on your phone to make sure Location Services are enabled for this brower, then try again. 
 .white-box
   = simple_form_for(@trailhead, role: 'form') do |f|
     = f.error_notification
@@ -67,5 +68,6 @@
   });
 
   myMap.on('locationerror', function() {
-    geolocate.innerHTML = 'Position could not be found';
+    geolocate.innerHTML = 'Geolocation failed';
+    $('#geolocate-error').show();
   });
