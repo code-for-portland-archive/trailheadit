@@ -15,6 +15,11 @@ class TrailheadsController < ApplicationController
       @user = User.find(params[:user_id])
       @trailheads = @user.trailheads.latest
     end
+
+    if params[:no_gps]
+      @trailheads = @trailheads.no_gps
+    end
+
     respond_to do |format|
       format.html{}        
       format.json do

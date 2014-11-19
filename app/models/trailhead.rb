@@ -8,6 +8,7 @@ class Trailhead < ActiveRecord::Base
   serialize :email_properties, JSON
 
   scope :latest, -> { order('id DESC') } 
+  scope :no_gps, -> { where('(latitude = 0.0 AND longitude = 0.0) OR (latitude IS NULL) or (longitude IS NULL)') }
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode  # auto-fetch address
