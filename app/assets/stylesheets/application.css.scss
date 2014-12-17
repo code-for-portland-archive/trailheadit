@@ -24,9 +24,13 @@ body {
     margin: 0;
 }
 
-html, body, .fullpage-map {
-    height: 600px;
-    border-bottom: solid 1px #ccc;
+html, body{
+    height: 100%;
+}
+
+.fullpage-map{
+	height: 600px;
+	border-bottom: solid 1px #ccc;
 }
 
 .trailhead-marker-icon{
