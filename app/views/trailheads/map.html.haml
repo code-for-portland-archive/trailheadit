@@ -6,14 +6,15 @@
 
   :javascript
     var ready = function(){
-      var map = L.mapbox.map('trailhead-map', 'jerememonteau.holfp9ah',{detectRetina: true});              
+      var map = L.mapbox.map('trailhead-map', 'jerememonteau.holfp9ah',{detectRetina: true});
+      map.scrollWheelZoom.disable();
       map.addControl(L.mapbox.geocoderControl('jerememonteau.holfp9ah'));
       // As with any other AJAX request, this technique is subject to the Same Origin Policy:
       // http://en.wikipedia.org/wiki/Same_origin_policy
       // So the CSV file must be on the same domain as the Javascript, or the server
       // delivering it should support CORS.
-      var markers = new L.MarkerClusterGroup({      
-        showCoverageOnHover: false,      
+      var markers = new L.MarkerClusterGroup({
+        showCoverageOnHover: false,
         maxClusterRadius:20,
         spiderfyOnMaxZoom:true,
         animateAddingMarkers:true,
@@ -32,14 +33,14 @@
                 autoPanPadding:[80,80]});
               var myIcon = L.divIcon(
                 {
-                  iconSize:null, 
-                  html: iconContent, 
+                  iconSize:null,
+                  html: iconContent,
                   className: 'trailhead-marker-icon',
                   iconAnchor: [20,50]
                 });
               layer.setIcon(myIcon);
             }
-          });        
+          });
           map.fitBounds(featureLayer.getBounds());
           var hash = L.hash(map);
           markers.addLayer(featureLayer);
