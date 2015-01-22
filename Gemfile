@@ -23,6 +23,7 @@ gem "mail"
 gem "geocoder"
 gem "delayed_job_active_record"
 gem "delayed_job_web"
+gem "hirefire-resource"
 gem 'rack-cors',
   :require => 'rack/cors'
 gem 'devise'
@@ -32,8 +33,8 @@ group :production, :staging do
   gem 'rails_12factor'
 end
 
-group :development do      
-  gem 'sqlite3' 
+group :development do
+  gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_20]
   gem 'guard-bundler'
