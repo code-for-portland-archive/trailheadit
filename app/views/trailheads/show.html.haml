@@ -3,15 +3,15 @@
   = ['Trail Editor : Trailhead',trailhead.name,trailhead.address].compact().join(" : ")
 
 .row
-  .col-md-8.col-md-offset-2    
-    .trailhead-box 
+  .col-md-8.col-md-offset-2
+    .trailhead-box
       .row
         .col-sm-10.col-xs-12
           %h2=trailhead.display_name
           - if trailhead.user
             %h4
               = link_to trailheads_path(user_id:trailhead.user.id) do
-                = trailhead.user                
+                = trailhead.user
 
         .col-sm-2.col-xs-12.text-center
           :erb
@@ -27,13 +27,14 @@
 
       .trailhead-map(id="trailhead-map-#{trailhead.id}")
       :javascript
-        var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
+        L.mapbox.accessToken = 'pk.eyJ1IjoidHJhaWxoZWFkbGFicyIsImEiOiJRNEU4VWFNIn0.IT_1YvYqery8yDIQZFDQqw';
+        var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'trailheadlabs.63dd9d04')
         myMap.setView([#{trailhead.latitude}, #{trailhead.longitude}], 15);
         var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
       .row
         .col-sm-9.col.xs-12
           = trailhead.address
-          .text-muted                    
+          .text-muted
             = trailhead.latlng
           %br
 
@@ -87,10 +88,10 @@
       .row
         .col.sm-12.col-md-6.text-caps
           .text-muted
-            Added          
+            Added
             = time_ago_in_words trailhead.created_at
             ago
-    - if params[:debug]    
+    - if params[:debug]
       %h3
         Debug
       %pre

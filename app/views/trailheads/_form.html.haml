@@ -1,9 +1,9 @@
 .trailhead-map(id="trailhead-map-#{@trailhead.id}")
 %pre#coordinates.ui-coordinates
 %p
-  = link_to "Use My Current Location", '#', class: 'btn btn-lg btn-primary btn-block', id: 'geolocate'      
+  = link_to "Use My Current Location", '#', class: 'btn btn-lg btn-primary btn-block', id: 'geolocate'
 %p#geolocate-error
-  Geolocation failed. Check your privacy settings on your phone to make sure Location Services are enabled for this brower, then try again. 
+  Geolocation failed. Check your privacy settings on your phone to make sure Location Services are enabled for this brower, then try again.
 .white-box
   = simple_form_for(@trailhead, role: 'form') do |f|
     = f.error_notification
@@ -15,7 +15,7 @@
         = f.input :latitude
       .form-group
         = f.input :longitude
-      .form-group   
+      .form-group
         .photo-box
           = image_tag(@trailhead.photo.url(:small), class: "img-responsive img-polaroid") if @trailhead.photo?
 
@@ -33,7 +33,8 @@
       = link_to "Cancel", @trailhead, class: 'btn btn-lg btn-default btn-block'
 
 :javascript
-  var myMap = L.mapbox.map('trailhead-map-#{@trailhead.id}', 'jerememonteau.holfp9ah')
+  L.mapbox.accessToken = 'pk.eyJ1IjoidHJhaWxoZWFkbGFicyIsImEiOiJRNEU4VWFNIn0.IT_1YvYqery8yDIQZFDQqw';
+  var myMap = L.mapbox.map('trailhead-map-#{@trailhead.id}', 'trailheadlabs.63dd9d04')
   myMap.setView([#{@trailhead.latitude}, #{@trailhead.longitude}], 15);
   var marker = L.marker(
     new L.LatLng(#{@trailhead.latitude}, #{@trailhead.longitude}), {

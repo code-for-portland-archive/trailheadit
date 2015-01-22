@@ -5,7 +5,7 @@
 
   %div.col-md-12.dashboard.container-fix
     %div.btn-group.actions
-      = link_to "Download OpenTrails Data (GeoJSON)", trailheads_path(format: :json), class: 'btn btn-primary'      
+      = link_to "Download OpenTrails Data (GeoJSON)", trailheads_path(format: :json), class: 'btn btn-primary'
       %div.btn.btn-primary Share Trailheads with Park Agencies
       %div.btn.btn-primary
         = link_to 'Document a new Trailhead', new_trailhead_path
@@ -26,7 +26,8 @@
       %div.col-md-4.location-box
         .trailhead-map(id="trailhead-map-#{trailhead.id}")
         :javascript
-          var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'jerememonteau.holfp9ah')
+          L.mapbox.accessToken = 'pk.eyJ1IjoidHJhaWxoZWFkbGFicyIsImEiOiJRNEU4VWFNIn0.IT_1YvYqery8yDIQZFDQqw';
+          var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'trailheadlabs.63dd9d04')
           myMap.setView([#{trailhead.latitude}, #{trailhead.longitude}], 18);
           var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
       %div.col-md-4.details-box
@@ -51,7 +52,7 @@
             - if trailhead.kiosk
               ="There is trail information present on site"
             - else
-              ="No information is available here"        
+              ="No information is available here"
         = link_to 'Edit', edit_trailhead_path(trailhead), class: "btn btn-primary btn-block"
         = link_to 'Delete', trailhead, :method => :delete, class: "btn btn-danger btn-block"
   %br
