@@ -38,7 +38,8 @@
         Step 2
       %hr
       %h1
-        Email it to new@traileditor.org
+        Email it to
+        = mail_to 'new@traileditor.org'
       %h4
         We'll convert the photo to a trailhead
   .col-md-4
@@ -50,11 +51,7 @@
         Find it here and add details
       %h4
         So that others can find the trailhead too
-%hr
-.row
-  .col-sm-12
-    .landing.text-center
-      = link_to "Or Click Here To Use a Sweet Form!", new_trailhead_path, class: 'btn btn-lg btn-primary'
+      = link_to "Or Click Here To Use a Sweet Form!", new_trailhead_path, class: 'btn btn-lg btn-primary btn-block'
 
 %hr
 .row
