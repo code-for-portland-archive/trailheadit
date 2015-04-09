@@ -97,3 +97,10 @@
       %pre
         = JSON.pretty_generate(JSON.parse(@trailhead.to_json))
       = link_to "Delete", trailhead, method: :delete, class: "btn btn-danger btn-block"
+
+:javascript
+  var currentTrailhead = {
+    latitude: #{@trailhead.latitude},
+    longitude: #{@trailhead.longitude},
+    id: #{@trailhead.id || 'null'}
+  };

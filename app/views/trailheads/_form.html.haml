@@ -43,7 +43,7 @@
       = link_to "Cancel", @trailhead, class: 'btn btn-lg btn-default btn-block'
 
 :javascript
-  currentTrailhead = {
+  var currentTrailhead = {
     latitude: #{@trailhead.latitude},
     longitude: #{@trailhead.longitude},
     id: #{@trailhead.id || 'null'}
