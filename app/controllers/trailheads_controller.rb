@@ -131,6 +131,6 @@ class TrailheadsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trailhead_params
-      params.require(:trailhead).permit(:name, :latitude, :longitude, :photo, :parking, :drinking_water, :restrooms, :kiosk, :user_id)
+      params.require(:trailhead).permit(:name, :latitude, :longitude, :photo, :parking, :drinking_water, :restrooms, :kiosk, :user_id, :remove_photo)
     end
 end

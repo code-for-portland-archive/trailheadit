@@ -1,11 +1,13 @@
-.trailhead-map(id="trailhead-map-#{@trailhead.id}")
-%pre#coordinates.ui-coordinates
-%p
-  = link_to "Use My Current Location", '#', class: 'btn btn-lg btn-primary btn-block', id: 'geolocate'
-%p#geolocate-error
-  Geolocation failed. Check your privacy settings on your phone to make sure Location Services are enabled for this brower, then try again.
+
 .white-box
-  = simple_form_for(@trailhead, role: 'form') do |f|
+  %h3 Location
+  .trailhead-map(id="trailhead-map-#{@trailhead.id || 'null'}")
+  %pre#coordinates.ui-coordinates
+  %p
+    = link_to "Use My Current Location", '#', class: 'btn btn-lg btn-primary btn-block', id: 'geolocate'
+  %p#geolocate-error
+    Geolocation failed. Check your privacy settings on your phone to make sure Location Services are enabled for this brower, then try again.
+  = simple_form_for(@trailhead, role: 'form', html: {multipart: true}) do |f|
     = f.error_notification
 
     .form-inputs.block
@@ -16,13 +18,21 @@
       .form-group
         = f.input :longitude
       .form-group
+        %h3
+          Photo
         .photo-box
           = image_tag(@trailhead.photo.url(:small), class: "img-responsive img-polaroid") if @trailhead.photo?
 
-        = f.input :photo, as: :file
+        %h4#photo-filename
+
+        = f.input :photo, as: :file, label: false
+
+        = link_to "Choose a photo", "", class: 'btn btn-lg btn-primary btn-block', id: 'photo-button'
+
         .attribute
           = f.input :remove_photo, as: :boolean, label: false, inline_label: true
       .form-group.attribute
+        %h3 Attributes
         = f.input :parking, inline_label: true, label: false
         = f.input :drinking_water, label: false, inline_label: true
         = f.input :restrooms, label: false, inline_label: true
@@ -33,42 +43,8 @@
       = link_to "Cancel", @trailhead, class: 'btn btn-lg btn-default btn-block'
 
 :javascript
-  L.mapbox.accessToken = 'pk.eyJ1IjoidHJhaWxoZWFkbGFicyIsImEiOiJRNEU4VWFNIn0.IT_1YvYqery8yDIQZFDQqw';
-  var myMap = L.mapbox.map('trailhead-map-#{@trailhead.id}', 'trailheadlabs.63dd9d04')
-  myMap.setView([#{@trailhead.latitude}, #{@trailhead.longitude}], 15);
-  var marker = L.marker(
-    new L.LatLng(#{@trailhead.latitude}, #{@trailhead.longitude}), {
-      icon: L.mapbox.marker.icon({'marker-color': 'ff8888'}),
-      draggable: true
-      });
-  marker.addTo(myMap);
-  var myLayer = L.mapbox.featureLayer().addTo(myMap);
-  var geolocate = document.getElementById('geolocate');
-  marker.on('drag', ondrag);
-  marker.on('dragend', set_gps_form);
-  ondrag();
-  function ondrag() {
-    var m = marker.getLatLng();
-    coordinates.innerHTML = 'Latitude: ' + m.lat + '<br/>Longitude: ' + m.lng;
+  currentTrailhead = {
+    latitude: #{@trailhead.latitude},
+    longitude: #{@trailhead.longitude},
+    id: #{@trailhead.id || 'null'}
   };
-  function set_gps_form() {
-    var m = marker.getLatLng();
-    $("#trailhead_latitude").val(m.lat);
-    $("#trailhead_longitude").val(m.lng);
-  };
-  geolocate.onclick = function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    myMap.locate();
-  };
-  myMap.on('locationfound', function(e) {
-    myMap.fitBounds(e.bounds);
-    marker.setLatLng([e.latlng.lat, e.latlng.lng]);
-    ondrag();
-    set_gps_form();
-  });
-
-  myMap.on('locationerror', function() {
-    geolocate.innerHTML = 'Geolocation failed';
-    $('#geolocate-error').show();
-  });

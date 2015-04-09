@@ -24,6 +24,7 @@ gem "geocoder"
 gem "delayed_job_active_record"
 gem "delayed_job_web"
 gem "hirefire-resource"
+gem 'jquery-turbolinks'
 gem 'rack-cors',
   :require => 'rack/cors'
 gem 'devise'

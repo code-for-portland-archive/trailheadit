@@ -18,19 +18,19 @@
   .col-sm-12
     .landing.text-center
       %h2
-        Help Locate Trailheads
+        Add a Trailhead
 
 %br
 
 .row
-  .col-md-4    
+  .col-md-4
     .white-box
       %h3
         Step 1
       %hr
       %h1
         Take a photo of a trailhead
-      %h4     
+      %h4
         Use your smartphone or other GPS enabled device
   .col-md-4
     .white-box
@@ -50,6 +50,11 @@
         Find it here and add details
       %h4
         So that others can find the trailhead too
+%hr
+.row
+  .col-sm-12
+    .landing.text-center
+      = link_to "Or Click Here To Use a Sweet Form!", new_trailhead_path, class: 'btn btn-lg btn-primary'
 
 %hr
 .row
@@ -59,11 +64,11 @@
         Latest Trailheads
 
 %br
-  
+
 - Trailhead.latest.limit(3).each_slice(3) do |slice|
-  .row    
-    - slice.each do |trailhead|           
-      = render "trailheads/trailhead_box", trailhead: trailhead          
+  .row
+    - slice.each do |trailhead|
+      = render "trailheads/trailhead_box", trailhead: trailhead
 
 .row
   .col-sm-12
