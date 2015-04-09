@@ -22,25 +22,25 @@ ProcessEmail = Struct.new(:params) do
     @trailheads = []
     @trailheads_nogps = []
 
-    attachments = JSON.parse params['attachments']    
+    attachments = JSON.parse params['attachments']
     if attachments.present?
       Rails.logger.info attachments.count
       attachments.each do |a|
         Rails.logger.info "ATTACHMENT #{a}"
-        
+
         api_key = ENV['MAILGUN_API_KEY']
         url = a['url']
         # url.gsub!('https://',"https://api:#{api_key}@")
         test = open(url,:http_basic_authentication=>['api',ENV['MAILGUN_API_KEY']])
 
         @trailhead = Trailhead.create(name:@subject,
-          email:@sender, 
+          email:@sender,
           photo:File.open(test.path),
           email_properties:params)
         @user.trailheads << @trailhead
         begin
           @exif = @trailhead.exifXtractr(test.path)
-                  
+
           @trailhead.update_attributes(
             latitude:@exif.gps.try(:latitude)||@trailhead.latitude||0.0,
             longitude:@exif.gps.try(:longitude)||@trailhead.longitude||0.0,
@@ -51,6 +51,9 @@ ProcessEmail = Struct.new(:params) do
             @trailheads_nogps << @trailhead
           else
             @trailheads << @trailhead
+          end
+          if Rails.env.production?
+            open("http://www.outerspatial.com/trailheads/#{@trailhead.id}/traileditor")
           end
         rescue
         end
@@ -65,7 +68,7 @@ ProcessEmail = Struct.new(:params) do
         UserMailer.welcome_email_nogps(@user, @trailheads_nogps).deliver
       end
     end
-    
+
   rescue Exception => e
     Rails.logger.error "ERROR"
     Rails.logger.error e.message
