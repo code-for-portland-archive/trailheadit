@@ -3,11 +3,12 @@ class Trailhead < ActiveRecord::Base
   belongs_to :user
 
   after_create :default_taken_at
+  after_create :outerspatial_import
 
   serialize :exif_properties, JSON
   serialize :email_properties, JSON
 
-  scope :latest, -> { order('id DESC') } 
+  scope :latest, -> { order('id DESC') }
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode  # auto-fetch address
@@ -17,7 +18,13 @@ class Trailhead < ActiveRecord::Base
   #Input: Image path for local JPG copy
   #Output: GPS.latitude, GPS.Longitude, Timestamp
   #Values may be "Nil" for cases missing Exif info in the JPG
-  
+
+  def outerspatial_import
+    if Rails.env.production?
+      open("http://www.outerspatial.com/trailheads/#{id}/traileditor")
+    end
+  end
+
   def default_taken_at
     self.taken_at ||= self.created_at
     self.save
@@ -27,7 +34,7 @@ class Trailhead < ActiveRecord::Base
     name || latlng || "Untitled"
   end
 
-  def latlng    
+  def latlng
     if latitude && longitude
       [latitude.round(7),longitude.round(7)].compact.join(', ')
     else
@@ -35,7 +42,7 @@ class Trailhead < ActiveRecord::Base
     end
   end
 
-  def exifXtractr(imgPath)   
+  def exifXtractr(imgPath)
     img_exif = EXIFR::JPEG.new(imgPath)
     return img_exif
   end
@@ -44,7 +51,7 @@ class Trailhead < ActiveRecord::Base
     if Rails.env.development?
       test_path = photo.path
     else
-      test_path = open(photo.url)        
+      test_path = open(photo.url)
     end
     img_exif = EXIFR::JPEG.new(test_path)
     return img_exif
@@ -56,7 +63,7 @@ class Trailhead < ActiveRecord::Base
 
   def save_exif
     update_attributes(exif_properties:exif_json)
-  end  
+  end
 
   def refresh
     photo.recreate_versions!
@@ -69,7 +76,7 @@ class Trailhead < ActiveRecord::Base
     properties = {
         # trailIds:c.trails.collect(&:plats_id).join("; "),
         id:id,
-        name:display_name,              
+        name:display_name,
         kiosk:kiosk || false,
         parking:parking || false,
         restrooms:restrooms || false,
@@ -80,7 +87,7 @@ class Trailhead < ActiveRecord::Base
           thumb: photo.url(:thumb),
           square: photo.url(:thumb_square)
         }
-        # address: address.to_s        
+        # address: address.to_s
     }
 
     geometry = {
@@ -88,23 +95,23 @@ class Trailhead < ActiveRecord::Base
       coordinates: [longitude,latitude]
     }
 
-    { 
+    {
       type:"Feature",
       properties:properties,
       geometry: geometry
     }
   end
 
-  def self.to_geojson    
-    features = self.all.select{|c| c.latitude && c.longitude}.collect do |c|                   
+  def self.to_geojson
+    features = self.all.select{|c| c.latitude && c.longitude}.collect do |c|
       c.to_geojson
     end
 
     geojson = {
-      type: "FeatureCollection", 
-      features: features 
+      type: "FeatureCollection",
+      features: features
     }
 
   end
-    
+
 end
