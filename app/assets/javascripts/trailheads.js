@@ -48,7 +48,4 @@ $(function(){
     $('#photo-filename').text($('#trailhead_photo').val());
     });
 
-  if(currentTrailhead.id) {
-    $.get('http://www.outerspatial.com/trailheads/' + currentTrailhead.id + '/traileditor' )
-  }
 });
