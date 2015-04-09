@@ -104,6 +104,9 @@
     longitude: #{@trailhead.longitude},
     id: #{@trailhead.id || 'null'}
   };
-  if(currentTrailhead.id) {
-    $.get('http://www.outerspatial.com/trailheads/' + currentTrailhead.id + '/traileditor' )
-  }
+
+- if Rails.env.production?
+  :javascript
+    if(currentTrailhead.id) {
+      $.get('http://www.outerspatial.com/trailheads/' + currentTrailhead.id + '/traileditor.js' )
+    }
