@@ -32,6 +32,8 @@
         Take a photo of a trailhead
       %h4
         Use your smartphone or other GPS enabled device
+      %i
+        Make sure you have location services enabled
   .col-md-4
     .white-box
       %h3
@@ -40,8 +42,11 @@
       %h1
         Email it to
         = mail_to 'new@traileditor.org'
+      
       %h4
         We'll convert the photo to a trailhead
+      %hr
+      = link_to "Or Click Here To Use a Sweet Form!", new_trailhead_path, class: 'btn btn-lg btn-primary btn-block'  
   .col-md-4
     .white-box
       %h3
@@ -51,7 +56,7 @@
         Find it here and add details
       %h4
         So that others can find the trailhead too
-      = link_to "Or Click Here To Use a Sweet Form!", new_trailhead_path, class: 'btn btn-lg btn-primary btn-block'
+      
 
 %hr
 .row
