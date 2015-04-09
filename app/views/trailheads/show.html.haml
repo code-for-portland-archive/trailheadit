@@ -7,13 +7,15 @@
     .trailhead-box
       .row
         .col-sm-10.col-xs-12
-          %h2=trailhead.display_name
+          %h2=trailhead.display_name.presence || "Unnamed Trailhead"
           - if trailhead.user
             %h4
               = link_to trailheads_path(user_id:trailhead.user.id) do
                 = trailhead.user
 
         .col-sm-2.col-xs-12.text-center
+          = link_to "OuterSpatial", "http://www.outerspatial.com/trailheads/#{trailhead.id}/traileditor", class: "btn btn-block btn-primary"
+          %br
           :erb
             <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out this trailhead!" data-size="large" data-count="none" data-hashtags="traileditor">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
