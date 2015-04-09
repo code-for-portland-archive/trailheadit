@@ -80,7 +80,13 @@ class TrailheadsController < ApplicationController
     respond_to do |format|
       if @trailhead.save
         begin
-          @exif = @trailhead.exifXtractr(@trailhead.photo.path)
+          if Rails.env.production?
+            photo_path = open(@trailhead.photo.url).path
+          else
+            photo_path = @trailhead.photo.path
+          end
+          @exif = @trailhead.exifXtractr(photo_path)
+          puts @exif.gps
           @trailhead.update_attributes(
             latitude:@exif.gps.try(:latitude)||@trailhead.latitude||0.0,
             longitude:@exif.gps.try(:longitude)||@trailhead.longitude||0.0,
