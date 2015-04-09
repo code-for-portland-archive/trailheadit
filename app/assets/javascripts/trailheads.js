@@ -1,5 +1,5 @@
 $(function(){
-  var currentTrailhead = currentTraild || {
+  var currentTrailhead = currentTrailhead || {
     latitude: 0.0,
     longitude: 0.1,
     id: null
