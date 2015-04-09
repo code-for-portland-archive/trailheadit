@@ -1,4 +1,5 @@
 Rails.application.configure do
+  config.assets.precompile += %w( trailheads.js )
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
