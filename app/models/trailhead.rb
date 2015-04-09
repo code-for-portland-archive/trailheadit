@@ -3,7 +3,7 @@ class Trailhead < ActiveRecord::Base
   belongs_to :user
 
   after_create :default_taken_at
-  after_create :outerspatial_import
+  # after_create :outerspatial_import
 
   serialize :exif_properties, JSON
   serialize :email_properties, JSON
