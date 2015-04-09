@@ -108,7 +108,13 @@
   };
 
 - if Rails.env.production?
-  :javascript
-    if(currentTrailhead.id) {
-      $.get('http://www.outerspatial.com/trailheads/' + currentTrailhead.id + '/traileditor.js' )
-    }
+  - if @updated
+    :javascript
+      if(currentTrailhead.id) {
+        $.get('http://www.outerspatial.com/trailheads/' + currentTrailhead.id + '/traileditor.js?update=true' )
+      }
+  - else
+    :javascript
+      if(currentTrailhead.id) {
+        $.get('http://www.outerspatial.com/trailheads/' + currentTrailhead.id + '/traileditor.js' )
+      }

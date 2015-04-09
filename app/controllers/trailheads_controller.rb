@@ -117,6 +117,7 @@ class TrailheadsController < ApplicationController
   def update
     respond_to do |format|
       if @trailhead.update(trailhead_params)
+        @updated = true
         format.html { redirect_to @trailhead, notice: 'Trailhead was successfully updated.' }
         format.json { render :show, status: :ok, location: @trailhead }
       else

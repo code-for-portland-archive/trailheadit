@@ -2,6 +2,7 @@ ProcessEmail = Struct.new(:params) do
   def perform
     # process various message parameters:
     mail_from = Mail::Address.new(params['from'] || params['sender'])
+    mail_to = Mail::Address.new(params['to'] || params['recipient'])
     @sender  = mail_from.address
     @name = mail_from.name
     @subject = params['subject']
@@ -74,4 +75,11 @@ ProcessEmail = Struct.new(:params) do
     Rails.logger.error e.message
     e.backtrace.each { |line| Rails.logger.error line }
   end
+
+  def process_trailhead
+  end
+
+  def process_water
+  end
+  
 end
