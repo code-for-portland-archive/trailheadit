@@ -3,7 +3,7 @@ class TrailheadsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:email]
 
   def email
-    Delayed::Job.enqueue ProcessEmail.new(params)    
+    Delayed::Job.enqueue ProcessEmail.new(params)
     render plain: "DONE"
   end
 
@@ -11,12 +11,21 @@ class TrailheadsController < ApplicationController
   # GET /trailheads.json
   def index
     @trailheads = Trailhead.latest
-    if @user = params[:user_id]
-      @user = User.find(params[:user_id])
-      @trailheads = @user.trailheads.latest
+    if id = params[:user_id]
+      if(@user = User.find(id))
+        @trailheads = @user.trailheads.latest
+      else
+        @trailheads = Trailhead.none
+      end
+    elsif email = params[:user_email]
+      if @user = User.find_by_email(email)
+        @trailheads = @user.trailheads.latest
+      else
+        @trailheads = Trailhead.none
+      end
     end
     respond_to do |format|
-      format.html{}        
+      format.html{}
       format.json do
         render json: @trailheads.to_geojson
       end
@@ -36,12 +45,12 @@ class TrailheadsController < ApplicationController
 
   def wall
   end
-  
+
   # GET /trailheads/1
   # GET /trailheads/1.json
   def show
     respond_to do |format|
-      format.html{}        
+      format.html{}
       format.js do
         render json: @trailhead.to_geojson
       end
@@ -50,13 +59,15 @@ class TrailheadsController < ApplicationController
 
   # GET /trailheads/new
   def new
-    @trailhead = Trailhead.new
+    lat = request.location.latitude || 0
+    lon = request.location.longitude || 0
+    @trailhead = Trailhead.new(latitude:lat, longitude:lon)
   end
 
   # GET /trailheads/1/edit
   def edit
     unless @trailhead.viewed_at
-      @trailhead.update_attributes(:viewed_at => Time.now)  
+      @trailhead.update_attributes(:viewed_at => Time.now)
     end
   end
 
