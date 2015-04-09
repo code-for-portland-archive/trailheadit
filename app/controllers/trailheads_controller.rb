@@ -29,6 +29,9 @@ class TrailheadsController < ApplicationController
       format.json do
         render json: @trailheads.to_geojson
       end
+      format.geojson do
+        render json: @trailheads.to_geojson
+      end
       format.js do
         render json: @trailheads.to_geojson
       end
@@ -51,6 +54,10 @@ class TrailheadsController < ApplicationController
   def show
     respond_to do |format|
       format.html{}
+      format.json{}
+      format.geojson do
+        render json: @trailhead.to_geojson
+      end
       format.js do
         render json: @trailhead.to_geojson
       end

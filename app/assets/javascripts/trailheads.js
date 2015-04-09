@@ -1,4 +1,9 @@
 $(function(){
+  var currentTrailhead = currentTraild || {
+    latitude: 0.0,
+    longitude: 0.1,
+    id: null
+  };
   L.mapbox.accessToken = 'pk.eyJ1IjoidHJhaWxoZWFkbGFicyIsImEiOiJRNEU4VWFNIn0.IT_1YvYqery8yDIQZFDQqw';
   var myMap = L.mapbox.map('trailhead-map-' + currentTrailhead.id, 'trailheadlabs.63dd9d04')
   myMap.setView([currentTrailhead.latitude, currentTrailhead.longitude], 15);
