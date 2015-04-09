@@ -108,7 +108,7 @@
   };
 
 - if Rails.env.production?
-  - if @updated
+  - if flash[:notice] == 'Trailhead was successfully updated.'
     :javascript
       if(currentTrailhead.id) {
         $.get('http://www.outerspatial.com/trailheads/' + currentTrailhead.id + '/traileditor.js?update=true' )
