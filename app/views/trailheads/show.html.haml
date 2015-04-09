@@ -26,11 +26,6 @@
       .share.text-center
 
       .trailhead-map(id="trailhead-map-#{trailhead.id}")
-      :javascript
-        L.mapbox.accessToken = 'pk.eyJ1IjoidHJhaWxoZWFkbGFicyIsImEiOiJRNEU4VWFNIn0.IT_1YvYqery8yDIQZFDQqw';
-        var myMap = L.mapbox.map('trailhead-map-#{trailhead.id}', 'trailheadlabs.63dd9d04')
-        myMap.setView([#{trailhead.latitude}, #{trailhead.longitude}], 15);
-        var marker = L.marker([#{trailhead.latitude}, #{trailhead.longitude}]).addTo(myMap);
       .row
         .col-sm-9.col.xs-12
           = trailhead.address
