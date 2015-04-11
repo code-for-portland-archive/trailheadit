@@ -17,14 +17,14 @@
 
     %hr
     %ul
+      - if trailhead.social
       %li
-        %h4
-          - if trailhead.social
-            This might be a social trail.
+        %h5 Warning
+        %h4 This might be a social trail.
       %li
         %h4
           - if trailhead.restrooms
-            Restrooms available on site.
+            Restrooms available on site
           - else
             .no="No restrooms available here"
       %li
