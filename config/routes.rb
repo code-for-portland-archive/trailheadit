@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   resources :users do
     resources :trailheads
   end
@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 
   root :to => "home#index"
 
+  get "bootleg", to: "home#bootleg"
+
   match "/dj" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 end
 
-  
