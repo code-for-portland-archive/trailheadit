@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140607214600) do
+ActiveRecord::Schema.define(version: 20150411215211) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -27,10 +30,34 @@ ActiveRecord::Schema.define(version: 20140607214600) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-# Could not dump table "trailheads" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "trailheads", force: true do |t|
+    t.string   "name"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "photo"
+    t.boolean  "parking"
+    t.boolean  "drinking_water"
+    t.boolean  "restrooms"
+    t.boolean  "kiosk"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email"
+    t.float    "heading"
+    t.datetime "taken_at"
+    t.float    "altitude"
+    t.datetime "viewed_at"
+    t.string   "email_url"
+    t.integer  "user_id"
+    t.json     "email_properties"
+    t.json     "exif_properties"
+    t.text     "address"
+    t.boolean  "social"
+    t.boolean  "gated"
+  end
+
+  add_index "trailheads", ["user_id"], name: "index_trailheads_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email"

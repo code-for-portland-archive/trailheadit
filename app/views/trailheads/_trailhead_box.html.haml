@@ -16,11 +16,11 @@
           No Photo Available
 
     %hr
+    - if trailhead.social
+      %h3.no.text-center Warning : This might be a social trail.
+      %hr
+
     %ul
-      - if trailhead.social
-      %li
-        %h5 Warning
-        %h4 This might be a social trail.
       %li
         %h4
           - if trailhead.restrooms
