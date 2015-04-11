@@ -34,10 +34,14 @@ ProcessEmail = Struct.new(:params) do
         # url.gsub!('https://',"https://api:#{api_key}@")
         test = open(url,:http_basic_authentication=>['api',ENV['MAILGUN_API_KEY']])
 
-        @trailhead = Trailhead.create(name:@subject,
+        @trailhead = Trailhead.new(name:@subject,
           email:@sender,
           photo:File.open(test.path),
           email_properties:params)
+        if(mail_to=='social@traileditor.org')
+          @trailhead.social = true
+        end
+        @trailhead.save
         @user.trailheads << @trailhead
         begin
           @exif = @trailhead.exifXtractr(test.path)
@@ -81,5 +85,5 @@ ProcessEmail = Struct.new(:params) do
 
   def process_water
   end
-  
+
 end
