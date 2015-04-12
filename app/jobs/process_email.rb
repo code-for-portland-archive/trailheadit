@@ -38,7 +38,7 @@ ProcessEmail = Struct.new(:params) do
           email:@sender,
           photo:File.open(test.path),
           email_properties:params)
-        logger.info("mail_to = #{mail_to}")
+        Rails.logger.info("mail_to = #{mail_to}")
         if(mail_to=='social@traileditor.org')
           @trailhead.social = true
         end
