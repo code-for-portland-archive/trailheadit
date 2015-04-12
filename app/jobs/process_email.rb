@@ -2,7 +2,7 @@ ProcessEmail = Struct.new(:params) do
   def perform
     # process various message parameters:
     mail_from = Mail::Address.new(params['from'] || params['sender'])
-    mail_to = Mail::Address.new(params['to'] || params['recipient'])
+    mail_to = Mail::Address.new(params['To'].presence || params['recipient'].presence)
     @sender  = mail_from.address
     @name = mail_from.name
     @subject = params['subject']
@@ -38,6 +38,7 @@ ProcessEmail = Struct.new(:params) do
           email:@sender,
           photo:File.open(test.path),
           email_properties:params)
+        logger.info("mail_to = #{mail_to}")
         if(mail_to=='social@traileditor.org')
           @trailhead.social = true
         end
