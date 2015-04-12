@@ -81,6 +81,8 @@ class Trailhead < ActiveRecord::Base
         parking:parking || false,
         restrooms:restrooms || false,
         drinkwater:drinking_water || false,
+        social:social || false,
+        gated:gated || false,
         photos: {
           large: photo.url(:oriented),
           small: photo.url(:small),
