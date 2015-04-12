@@ -42,7 +42,7 @@ ProcessEmail = Struct.new(:params) do
         @trailhead = Trailhead.new(name:@subject,
           email:@sender,
           photo:File.open(test.path),
-          social:social
+          social:social,
           email_properties:params)
         @user.trailheads << @trailhead
         begin
