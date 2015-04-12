@@ -34,7 +34,7 @@ ProcessEmail = Struct.new(:params) do
         # url.gsub!('https://',"https://api:#{api_key}@")
         test = open(url,:http_basic_authentication=>['api',ENV['MAILGUN_API_KEY']])
         social = nil
-        mail_to = mail_to.to_s.strip!
+        mail_to = mail_to.to_s.strip
         Rails.logger.info("mail_to = #{mail_to}")
         if(mail_to.starts_with? "social@")
           Rails.logger.info("SOCIAL!")
