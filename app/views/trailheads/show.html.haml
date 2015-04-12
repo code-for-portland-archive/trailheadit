@@ -22,7 +22,11 @@
 
       %hr
       - if trailhead.try(:social)
-        %h3.no.text-center Warning : This might be a social trail.
+        %h3.no.text-center
+          =link_to "/bootleg" do
+            %span.glyphicon.glyphicon-warning-sign
+            &nbsp;
+            Warning : This might be a social trail. Learn more!
         %hr
 
       -# %hr
