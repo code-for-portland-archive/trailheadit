@@ -33,16 +33,17 @@ ProcessEmail = Struct.new(:params) do
         url = a['url']
         # url.gsub!('https://',"https://api:#{api_key}@")
         test = open(url,:http_basic_authentication=>['api',ENV['MAILGUN_API_KEY']])
-
+        social = nil
+        if(mail_to == 'social@traileditor.org')
+          Rails.logger.info("SOCIAL!")
+          social = true
+        end
+        Rails.logger.info("mail_to = #{mail_to}")
         @trailhead = Trailhead.new(name:@subject,
           email:@sender,
           photo:File.open(test.path),
+          social:social
           email_properties:params)
-        Rails.logger.info("mail_to = #{mail_to}")
-        if(mail_to=='social@traileditor.org')
-          @trailhead.social = true
-        end
-        @trailhead.save
         @user.trailheads << @trailhead
         begin
           @exif = @trailhead.exifXtractr(test.path)
