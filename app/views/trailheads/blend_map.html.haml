@@ -1,0 +1,77 @@
+- content_for :pre_container do
+  :erb
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
+
+  #trailhead-map.fullpage-map
+
+  :javascript
+    var cartodbTileUrl;
+    var blendMode = 'multiply';
+    var ready = function(){
+      L.mapbox.accessToken = 'pk.eyJ1IjoidHJhaWxoZWFkbGFicyIsImEiOiJRNEU4VWFNIn0.IT_1YvYqery8yDIQZFDQqw';
+      var map = L.mapbox.map('trailhead-map', 'trailheadlabs.b9b3498e', {detectRetina: true});
+      // var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(map);
+      map.scrollWheelZoom.disable();
+      map.addControl(L.mapbox.geocoderControl('mapbox.places-v1'));
+      var layerData = {
+        user_name: 'trailheadlabs',
+        sublayers: [{
+          sql: "SELECT * FROM s_usa_trailnfs_publish",
+          cartocss: '#s_usa_trailnfs_publish{ line-color: #FF0000; line-width: 4; line-opacity: 1.0;}'
+        }]
+      };
+      cartodb.Tiles.getTiles(layerData, function(tiles, err) {
+        if(tiles == null) {
+          console.log("error: ", err.errors.join('\n'));
+          return;
+        }
+        console.log("url template is ", tiles.tiles[0]);
+        cartodbTileUrl = tiles.tiles[0];
+        var canvasTiles = L.tileLayer.canvas();
+
+        canvasTiles.drawTile = function(canvas, tilePoint, zoom) {
+          var ctx = canvas.getContext('2d');
+              ctx.globalAlpha = 1.0;
+              ctx.globalCompositeOperation = blendMode;
+
+              var cartoTileUrl = cartodbTileUrl.replace('{s}','a');
+              cartoTileUrl = cartoTileUrl.replace('{x}',tilePoint.x);
+              cartoTileUrl = cartoTileUrl.replace('{y}',tilePoint.y);
+              cartoTileUrl = cartoTileUrl.replace('{z}',zoom);
+              var cartoImage = new Image();
+              cartoImage.src = cartoTileUrl;
+              cartoImage.onload = function() {
+                ctx.drawImage(cartoImage, 0, 0, canvas.width, canvas.height);
+                var stravaUrl = getStravaUrl(tilePoint.x,tilePoint.y,zoom);
+                var stravaImage = new Image();
+                stravaImage.src = stravaUrl;
+                stravaImage.onload = function() {
+                  ctx.drawImage(stravaImage, 0, 0, canvas.width, canvas.height);
+                  var osmImage = new Image();
+                  osmImage.src = getOsmUrl(tilePoint.x,tilePoint.y,zoom);
+                  osmImage.onload = function() {
+                    ctx.drawImage(osmImage, 0, 0, canvas.width, canvas.height);
+                  };
+
+                };
+
+              };
+
+
+            };
+        canvasTiles.addTo(map);
+        var hash = L.hash(map);
+      });
+
+      function getStravaUrl(x,y,z){
+        return 'http://globalheat.strava.com/tiles/running/color3/' + z + '/' + x + '/' + y + '.png';
+      }
+
+      function getOsmUrl(x,y,z){
+        return 'http://b.tiles.mapbox.com/v3/trailheadlabs.a251ca50/' + z + '/' + x + '/' + y + '.png';
+      }
+    };
+    $(document).ready(ready);
+    $(document).on('page:load', ready);
+
+

@@ -6,7 +6,7 @@
       <meta name="apple-mobile-web-app-capable" content="yes">
       <meta name="apple-mobile-web-app-title" content="TrailEditor">
       <meta name='apple-mobile-web-app-status-bar-style' content='black'>
-    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui"}    
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0, user-scalable=no, minimal-ui"}
     %title= content_for?(:title) ? yield(:title) : 'Trail Editor : Help Locate Trailheads : Support Open Data'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Trail Editor'}"}
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
@@ -30,6 +30,9 @@
         ga('send', 'pageview');
 
       </script>
+
+      <!-- CARTODB -->
+      <script src="http://libs.cartocdn.com/cartodb.js/v3/3.13/cartodb.core.js"></script>
   %body
     = render 'layouts/navigation'
 
@@ -37,7 +40,7 @@
       = yield :pre_container
 
     .container.main
-      = render 'layouts/messages'    
+      = render 'layouts/messages'
       = yield
       #footer
         = render "layouts/footer"

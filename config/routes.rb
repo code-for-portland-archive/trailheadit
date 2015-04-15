@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     collection do
       post "email"
       get "map"
+      get "blend_map"
       get "wall"
     end
   end
