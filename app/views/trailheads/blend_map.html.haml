@@ -16,7 +16,7 @@
         user_name: 'trailheadlabs',
         sublayers: [{
           sql: "SELECT * FROM s_usa_trailnfs_publish",
-          cartocss: '#s_usa_trailnfs_publish{ line-color: #0000FF; line-width: 8; line-opacity: 1.0;}'
+          cartocss: '#s_usa_trailnfs_publish{ line-color: #0000FF; line-width: 4; line-opacity: 1.0;}'
         }]
       };
       cartodb.Tiles.getTiles(layerData, function(tiles, err) {
@@ -93,8 +93,7 @@
               layer.setIcon(myIcon);
             }
           });
-          map.fitBounds(featureLayer.getBounds());
-          var hash = L.hash(map);
+
           markers.addLayer(featureLayer);
           map.addLayer(markers);
         });
