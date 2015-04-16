@@ -15,8 +15,8 @@
       var layerData = {
         user_name: 'trailheadlabs',
         sublayers: [{
-          sql: "SELECT * FROM s_usa_trailnfs_publish",
-          cartocss: '#s_usa_trailnfs_publish{ line-color: #0000FF; line-width: 4; line-opacity: 1.0;}'
+          sql: "SELECT * FROM onetam_roads_trails_20140906;",
+          cartocss: '#onetam_roads_trails_20140906{ line-color: #0000FF; line-width: 4; line-opacity: 1.0;}'
         }]
       };
       cartodb.Tiles.getTiles(layerData, function(tiles, err) {
@@ -69,7 +69,7 @@
           'Strava Running' : L.tileLayer('http://globalheat.strava.com/tiles/running/color5/{z}/{x}/{y}.png'),
           'Strava Cycling' : L.tileLayer('http://globalheat.strava.com/tiles/cycling/color3/{z}/{x}/{y}.png'),
           'OSM' : L.tileLayer('http://{s}.tiles.mapbox.com/v3/trailheadlabs.a251ca50/{z}/{x}/{y}.png'),
-          'USFS' : L.tileLayer(cartodbTileUrl)
+          'Agency' : L.tileLayer(cartodbTileUrl)
         },{collapsed:false}).addTo(map);
 
         var hash = L.hash(map);
