@@ -4,122 +4,145 @@
 
   #trailhead-map.fullpage-map
 
-  :javascript
-    var cartodbTileUrl;
-    var blendMode = 'multiply';
-    var ready = function(){
-      L.mapbox.accessToken = 'pk.eyJ1IjoidHJhaWxoZWFkbGFicyIsImEiOiJRNEU4VWFNIn0.IT_1YvYqery8yDIQZFDQqw';
-      var map = L.mapbox.map('trailhead-map', 'trailheadlabs.b9b3498e', {detectRetina: true, zoomControl: false});
-      map.scrollWheelZoom.disable();
-      new L.Control.Zoom({ position: 'topright' }).addTo(map);
-      var layerData = {
-        user_name: 'trailheadlabs',
-        sublayers: [{
-          sql: "SELECT * FROM onetam_roads_trails_20140906;",
-          cartocss: '#onetam_roads_trails_20140906{ line-color: #0000FF; line-width: 4; line-opacity: 1.0;}'
-        }]
-      };
-      cartodb.Tiles.getTiles(layerData, function(tiles, err) {
-        if(tiles == null) {
-          console.log("error: ", err.errors.join('\n'));
-          return;
-        }
-        console.log("url template is ", tiles.tiles[0]);
-        cartodbTileUrl = tiles.tiles[0];
-        var canvasTiles = L.tileLayer.canvas();
+.row
+  .col-md-2.col-md-offset-1
+    .div
+      %h3.strong(style="color:blue;font-weight:600")
+        Agency
+  .col-md-2
+    .div
+      %h3.strong(style="color:green;font-weight:600")
+        OpenStreetMap Trail
+  .col-md-2
+    .div
+      %h3.strong(style="color:#a5a5a5;font-weight:600")
+        OpenStreetMap Road
+  .col-md-2
+    .div
+      %h3.strong(style="color:#FF3A1A;font-weight:600")
+        Strava
+  .col-md-2
+    .div
+      %h3.strong(style="color:black;font-weight:600")
+        Combined
 
-        canvasTiles.drawTile = function(canvas, tilePoint, zoom) {
-          var ctx = canvas.getContext('2d');
-              ctx.globalAlpha = 1.0;
-              ctx.globalCompositeOperation = blendMode;
 
-              var cartoTileUrl = cartodbTileUrl.replace('{s}','a');
-              cartoTileUrl = cartoTileUrl.replace('{x}',tilePoint.x);
-              cartoTileUrl = cartoTileUrl.replace('{y}',tilePoint.y);
-              cartoTileUrl = cartoTileUrl.replace('{z}',zoom);
-              var cartoImage = new Image();
-              cartoImage.src = cartoTileUrl;
-              cartoImage.onload = function() {
-                ctx.drawImage(cartoImage, 0, 0, canvas.width, canvas.height);
-                var stravaUrl = getStravaUrl(tilePoint.x,tilePoint.y,zoom);
-                var stravaImage = new Image();
-                stravaImage.src = stravaUrl;
-                stravaImage.onload = function() {
-                  ctx.drawImage(stravaImage, 0, 0, canvas.width, canvas.height);
-                  var osmImage = new Image();
-                  osmImage.src = getOsmUrl(tilePoint.x,tilePoint.y,zoom);
-                  osmImage.onload = function() {
-                    ctx.drawImage(osmImage, 0, 0, canvas.width, canvas.height);
-                  };
+:javascript
+  var cartodbTileUrl;
+  var blendMode = 'multiply';
+  var ready = function(){
+    L.mapbox.accessToken = 'pk.eyJ1IjoidHJhaWxoZWFkbGFicyIsImEiOiJRNEU4VWFNIn0.IT_1YvYqery8yDIQZFDQqw';
+    var map = L.mapbox.map('trailhead-map', 'trailheadlabs.b9b3498e', {detectRetina: true, zoomControl: false});
+    map.scrollWheelZoom.disable();
+    new L.Control.Zoom({ position: 'topright' }).addTo(map);
+    var layerData = {
+      user_name: 'trailheadlabs',
+      sublayers: [{
+        sql: "SELECT * FROM onetam_roads_trails_20140906;",
+        cartocss: '#onetam_roads_trails_20140906{ line-color: #0000FF; line-width: 4; line-opacity: 1.0;}'
+      }]
+    };
+    cartodb.Tiles.getTiles(layerData, function(tiles, err) {
+      if(tiles == null) {
+        console.log("error: ", err.errors.join('\n'));
+        return;
+      }
+      console.log("url template is ", tiles.tiles[0]);
+      cartodbTileUrl = tiles.tiles[0];
+      var canvasTiles = L.tileLayer.canvas();
 
+      canvasTiles.drawTile = function(canvas, tilePoint, zoom) {
+        var ctx = canvas.getContext('2d');
+            ctx.globalAlpha = 1.0;
+            ctx.globalCompositeOperation = blendMode;
+
+            var cartoTileUrl = cartodbTileUrl.replace('{s}','a');
+            cartoTileUrl = cartoTileUrl.replace('{x}',tilePoint.x);
+            cartoTileUrl = cartoTileUrl.replace('{y}',tilePoint.y);
+            cartoTileUrl = cartoTileUrl.replace('{z}',zoom);
+            var cartoImage = new Image();
+            cartoImage.src = cartoTileUrl;
+            cartoImage.onload = function() {
+              ctx.drawImage(cartoImage, 0, 0, canvas.width, canvas.height);
+              var stravaUrl = getStravaUrl(tilePoint.x,tilePoint.y,zoom);
+              var stravaImage = new Image();
+              stravaImage.src = stravaUrl;
+              stravaImage.onload = function() {
+                ctx.drawImage(stravaImage, 0, 0, canvas.width, canvas.height);
+                var osmImage = new Image();
+                osmImage.src = getOsmUrl(tilePoint.x,tilePoint.y,zoom);
+                osmImage.onload = function() {
+                  ctx.drawImage(osmImage, 0, 0, canvas.width, canvas.height);
                 };
 
               };
 
-
             };
-        canvasTiles.addTo(map);
-        L.control.layers({
-          'Topo': L.mapbox.tileLayer('trailheadlabs.b9b3498e').addTo(map),
-          'Satellite': L.mapbox.tileLayer('trailheadlabs.jih1cig0'),
-          'Dark': L.mapbox.tileLayer('trailheadlabs.6f187686')
-        },{
-          'Fusion' : canvasTiles,
-          'Strava' : L.tileLayer('http://globalheat.strava.com/tiles/both/color5/{z}/{x}/{y}.png'),
-          'Strava Running' : L.tileLayer('http://globalheat.strava.com/tiles/running/color5/{z}/{x}/{y}.png'),
-          'Strava Cycling' : L.tileLayer('http://globalheat.strava.com/tiles/cycling/color3/{z}/{x}/{y}.png'),
-          'OSM' : L.tileLayer('http://{s}.tiles.mapbox.com/v3/trailheadlabs.a251ca50/{z}/{x}/{y}.png'),
-          'Agency' : L.tileLayer(cartodbTileUrl)
-        },{collapsed:false}).addTo(map);
 
-        var hash = L.hash(map);
-      });
 
-      var markers = new L.MarkerClusterGroup({
-        showCoverageOnHover: false,
-        maxClusterRadius:20,
-        spiderfyOnMaxZoom:true,
-        animateAddingMarkers:true,
-        spiderfyDistanceMultiplier:4
-      });
+          };
+      canvasTiles.addTo(map);
+      L.control.layers({
+        'Topo': L.mapbox.tileLayer('trailheadlabs.b9b3498e').addTo(map),
+        'Satellite': L.mapbox.tileLayer('trailheadlabs.jih1cig0'),
+        'Dark': L.mapbox.tileLayer('trailheadlabs.6f187686')
+      },{
+        'Fusion' : canvasTiles,
+        'Strava' : L.tileLayer('http://globalheat.strava.com/tiles/both/color5/{z}/{x}/{y}.png'),
+        'Strava Running' : L.tileLayer('http://globalheat.strava.com/tiles/running/color5/{z}/{x}/{y}.png'),
+        'Strava Cycling' : L.tileLayer('http://globalheat.strava.com/tiles/cycling/color3/{z}/{x}/{y}.png'),
+        'OSM' : L.tileLayer('http://{s}.tiles.mapbox.com/v3/trailheadlabs.a251ca50/{z}/{x}/{y}.png'),
+        'Agency' : L.tileLayer(cartodbTileUrl)
+      },{collapsed:false}).addTo(map);
 
-      $.getJSON('/trailheads.json', function(data){
-          var featureLayer = L.geoJson(data, {
-            filter: function(feature,layer){
-              return feature.properties['social'];
-            },
-            onEachFeature: function(feature,layer){
-              var content = '<div><h3><a href="/trailheads/' + feature.properties.id + '">' + feature.properties.name + '</h3><img style="width:300px" src="' + feature.properties.photos['small'] + '"/></a></div>';
-              var iconContent = '<div><img src="' + feature.properties.photos['square'] + '"/></div><div class="marker-pointer"></div>';
-              layer.bindPopup(content,{
-                minWidth:200,
-                minHeight:200,
-                autoPan:true,
-                autoPanPadding:[80,80]});
-              var myIcon = L.divIcon(
-                {
-                  iconSize:null,
-                  html: iconContent,
-                  className: 'trailhead-marker-icon social',
-                  iconAnchor: [20,50]
-                });
-              layer.setIcon(myIcon);
-            }
-          });
+      var hash = L.hash(map);
+    });
 
-          markers.addLayer(featureLayer);
-          map.addLayer(markers);
+    var markers = new L.MarkerClusterGroup({
+      showCoverageOnHover: false,
+      maxClusterRadius:20,
+      spiderfyOnMaxZoom:true,
+      animateAddingMarkers:true,
+      spiderfyDistanceMultiplier:4
+    });
+
+    $.getJSON('/trailheads.json', function(data){
+        var featureLayer = L.geoJson(data, {
+          filter: function(feature,layer){
+            return feature.properties['social'];
+          },
+          onEachFeature: function(feature,layer){
+            var content = '<div><h3><a href="/trailheads/' + feature.properties.id + '">' + feature.properties.name + '</h3><img style="width:300px" src="' + feature.properties.photos['small'] + '"/></a></div>';
+            var iconContent = '<div><img src="' + feature.properties.photos['square'] + '"/></div><div class="marker-pointer"></div>';
+            layer.bindPopup(content,{
+              minWidth:200,
+              minHeight:200,
+              autoPan:true,
+              autoPanPadding:[80,80]});
+            var myIcon = L.divIcon(
+              {
+                iconSize:null,
+                html: iconContent,
+                className: 'trailhead-marker-icon social',
+                iconAnchor: [20,50]
+              });
+            layer.setIcon(myIcon);
+          }
         });
 
-      function getStravaUrl(x,y,z){
-        return 'http://globalheat.strava.com/tiles/both/color5/' + z + '/' + x + '/' + y + '.png';
-      }
+        markers.addLayer(featureLayer);
+        map.addLayer(markers);
+      });
 
-      function getOsmUrl(x,y,z){
-        return 'http://b.tiles.mapbox.com/v3/trailheadlabs.a251ca50/' + z + '/' + x + '/' + y + '.png';
-      }
-    };
-    $(document).ready(ready);
-    $(document).on('page:load', ready);
+    function getStravaUrl(x,y,z){
+      return 'http://globalheat.strava.com/tiles/both/color5/' + z + '/' + x + '/' + y + '.png';
+    }
+
+    function getOsmUrl(x,y,z){
+      return 'http://b.tiles.mapbox.com/v3/trailheadlabs.a251ca50/' + z + '/' + x + '/' + y + '.png';
+    }
+  };
+  $(document).ready(ready);
+  $(document).on('page:load', ready);
 
 
