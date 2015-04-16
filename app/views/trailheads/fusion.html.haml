@@ -67,7 +67,7 @@
           'Strava' : L.tileLayer('http://globalheat.strava.com/tiles/running/color5/{z}/{x}/{y}.png'),
           'OSM' : L.tileLayer('http://{s}.tiles.mapbox.com/v3/trailheadlabs.a251ca50/{z}/{x}/{y}.png'),
           'USFS' : L.tileLayer(cartodbTileUrl)
-        }).addTo(map);
+        },{collapsed:false}).addTo(map);
 
         var hash = L.hash(map);
       });
