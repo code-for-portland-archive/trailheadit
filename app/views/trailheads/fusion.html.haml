@@ -9,14 +9,14 @@
     var blendMode = 'darker';
     var ready = function(){
       L.mapbox.accessToken = 'pk.eyJ1IjoidHJhaWxoZWFkbGFicyIsImEiOiJRNEU4VWFNIn0.IT_1YvYqery8yDIQZFDQqw';
-      var map = L.mapbox.map('trailhead-map', 'trailheadlabs.b9b3498e', {detectRetina: true});
+      var map = L.mapbox.map('trailhead-map', 'trailheadlabs.b9b3498e', {detectRetina: true, zoomControl: false});
       map.scrollWheelZoom.disable();
-      map.addControl(L.mapbox.geocoderControl('mapbox.places-v1'));
+      new L.Control.Zoom({ position: 'topright' }).addTo(map);
       var layerData = {
         user_name: 'trailheadlabs',
         sublayers: [{
           sql: "SELECT * FROM s_usa_trailnfs_publish",
-          cartocss: '#s_usa_trailnfs_publish{ line-color: #0000FF; line-width: 4; line-opacity: 1.0;}'
+          cartocss: '#s_usa_trailnfs_publish{ line-color: #0000FF; line-width: 2; line-opacity: 1.0;}'
         }]
       };
       cartodb.Tiles.getTiles(layerData, function(tiles, err) {
@@ -59,6 +59,16 @@
 
             };
         canvasTiles.addTo(map);
+        L.control.layers({
+          'Topo': L.mapbox.tileLayer('trailheadlabs.b9b3498e').addTo(map),
+          'Satellite': L.mapbox.tileLayer('trailheadlabs.jih1cig0')
+        },{
+          'Fusion' : canvasTiles,
+          'Strava' : L.tileLayer('http://globalheat.strava.com/tiles/running/color5/{z}/{x}/{y}.png'),
+          'OSM' : L.tileLayer('http://{s}.tiles.mapbox.com/v3/trailheadlabs.a251ca50/{z}/{x}/{y}.png'),
+          'USFS' : L.tileLayer(cartodbTileUrl)
+        }).addTo(map);
+
         var hash = L.hash(map);
       });
 
