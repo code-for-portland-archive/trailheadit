@@ -34,6 +34,7 @@
     L.mapbox.accessToken = 'pk.eyJ1IjoidHJhaWxoZWFkbGFicyIsImEiOiJRNEU4VWFNIn0.IT_1YvYqery8yDIQZFDQqw';
     var map = L.mapbox.map('trailhead-map', 'trailheadlabs.b9b3498e', {detectRetina: true, zoomControl: false});
     map.scrollWheelZoom.disable();
+    map.setView([37.9681,-122.6002],14);
     new L.Control.Zoom({ position: 'topright' }).addTo(map);
     var layerData = {
       user_name: 'trailheadlabs',
@@ -73,6 +74,8 @@
                 osmImage.src = getOsmUrl(tilePoint.x,tilePoint.y,zoom);
                 osmImage.onload = function() {
                   ctx.drawImage(osmImage, 0, 0, canvas.width, canvas.height);
+                  pixels = ctx.getImageData(ctx.getImageData(0,0,canvas.width,canvas.height));
+                  console.log(countColors(pixels));
                 };
 
               };
@@ -140,6 +143,17 @@
 
     function getOsmUrl(x,y,z){
       return 'http://b.tiles.mapbox.com/v3/trailheadlabs.a251ca50/' + z + '/' + x + '/' + y + '.png';
+    }
+
+    function countColors(imageData){
+      var sum = 0;
+      var d = imageData.data;
+      for (var i=0; i<d.length; i+=4) {
+        sum += d[i]
+        sum += d[i+1]
+        sum += d[i+2]
+      }
+      return sum;
     }
   };
   $(document).ready(ready);
