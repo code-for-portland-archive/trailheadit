@@ -70,6 +70,13 @@
               stravaImage.src = stravaUrl;
               stravaImage.onload = function() {
                 ctx.drawImage(stravaImage, 0, 0, canvas.width, canvas.height);
+
+                var osmImage = new Image();
+                osmImage.src = getOsmUrl(tilePoint.x,tilePoint.y,zoom);
+                osmImage.onload = function() {
+                  ctx.drawImage(osmImage, 0, 0, canvas.width, canvas.height);
+                };
+
               };
 
             };
