@@ -30,7 +30,6 @@
       %h3.strong(style="color:black;font-weight:600")
         Combined
 
-
 :javascript
   var cartodbTileUrl;
   var blendMode = 'multiply';
@@ -44,6 +43,10 @@
       user_name: 'trailheadlabs',
       sublayers: [{
         sql: "SELECT * FROM onetam_roads_trails_20140906;",
+        cartocss: '#onetam_roads_trails_20140906{ line-join:round;line-cap:round;line-dasharray: 8, 8;line-color: #0000FF; line-width: 4; line-opacity: 1.0;}'
+      },
+      {
+        sql: "SELECT * FROM s_usa_trailnfs_publish;",
         cartocss: '#onetam_roads_trails_20140906{ line-join:round;line-cap:round;line-dasharray: 8, 8;line-color: #0000FF; line-width: 4; line-opacity: 1.0;}'
       },
       {
